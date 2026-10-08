@@ -14,8 +14,7 @@ import '../../core/widgets/glass_card.dart';
 /// future: the UI is static after the route animation, which keeps
 /// `pumpAndSettle` in widget tests (and real devices) simple.
 class FlashcardReviewSheet extends ConsumerStatefulWidget {
-  const FlashcardReviewSheet._({required List<Flashcard> cards})
-      : _cards = cards;
+  const FlashcardReviewSheet._({required this._cards});
 
   /// Opens today's review session with [cards] as the queue.
   static Future<void> show(BuildContext context, List<Flashcard> cards) =>
