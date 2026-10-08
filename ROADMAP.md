@@ -6,7 +6,7 @@
 > منبع حقیقت قوانین پروژه: `AGENTS.md` (معماری) و `design.md` (طراحی).
 > `BUGS.md` حذف شد — هر سه باگ بسته شدند و با کد تطبیق داده شدند (بخش ۳).
 
-**آخرین به‌روزرسانی:** 2026-10-03 18:10 UTC
+**آخرین به‌روزرسانی:** 2026-10-08 18:20 UTC
 
 ---
 
@@ -17,87 +17,80 @@
 | راه‌اندازی محیط توسعه (Flutter 3.47.6 / Dart 3.13.5) | ✅ انجام شد |
 | دریافت وابستگی‌ها (`flutter pub get`) | ✅ انجام شد |
 | رفع باگ‌های `BUGS.md` (هر ۳ باگ) | ✅ انجام شد — `BUGS.md` حذف شد |
-| `flutter analyze` | ✅ No issues found |
-| `flutter test` (کل مجموعه) | ✅ ۳۱ تست، همه پاس |
-| ⚙️ CI اندروید (بیلد APK + انتشار Release) | ✅ راه‌اندازی شد — ۲ نسخه منتشرشده |
-| 🪟 CI ویندوز (setup.exe با Inno Setup) | ✅ راه‌اندازی شد — ۳ نسخه منتشرشده |
+| `flutter analyze` | ✅ از مسیر CI — سبز روی آخرین کامیت‌ها |
+| `flutter test` (کل مجموعه) | ✅ از مسیر CI — ۹ فایل، **۴۹ تست** (جزئیات: شمارش مستقیم HEAD) |
+| ⚙️ CI اندروید (بیلد APK + انتشار Release) | ✅ راه‌اندازی شد — **۵ نسخه منتشرشده** |
+| 🪟 CI ویندوز (setup.exe با Inno Setup) | ✅ راه‌اندازی شد — **۵ نسخه منتشرشده** |
 | ⏱️ پومودورو / تایمر تمرکز (AGENTS §44) | ✅ انجام شد |
-| 🔔 نوتیفیکیشن محلی (AGENTS §43.1) | ⏳ در نوبت |
-| 📝 یادداشت سریع (design §12.1) | 🔨 در دستِ کار (WIP غیرcommitted، بخش ۱.۱) |
+| 🔔 نوتیفیکیشن محلی (AGENTS §43.1) | ✅ انجام شد — ۹ کامیت، سبز در CI (بخش ۳.۲) |
+| 📝 یادداشت سریع (design §12.1) | ✅ انجام شد و کامیت شد (بخش ۳.۳) |
 | 🤖 AI بخش‌به‌بخش (AGENTS §7.A) | ⏳ در نوبت |
 | 🃏 فلش‌کارت و مرور (AGENTS §45) | ⏳ در نوبت |
 | تکمیل توسعه بخش‌ها | ⏳ در نوبت |
 
 **وضعیت مخزن (خوانده شد، نه حدس — در همین اجرا):**
-- کامیتِ مبنای این نسخه: `0afb2ad` — `feat(study): add Pomodoro focus timer (AGENTS.md §44)`؛ در لحظهٔ بررسی، `git ls-remote origin main` هم روی `0afb2ad` بود ⇒ همگام. (انتشارِ خودِ همین فایل، کامیتِ بعدی با پیشوند `chore: auto roadmap publish` است؛ HEAD واقعی را همیشه با `git log -1` ببینید.)
-- ۵ کامیتِ آخر پیش از این انتشار: `0afb2ad`، `ee238d0`، `1500a85`، `92574eb`، `7c23a7b`.
-- کامیت‌های تازه نسبت به آخرین انتشار رودمپ: `92574eb` (CI اندروید)، `1500a85` (CI ویندوز)، `ee238d0` (نصب‌کنندهٔ واقعی ویندوز)، `0afb2ad` (پومودورو).
-- `test/` شامل **۶ فایل رسمی** است (به `focus_timer_test.dart` اضافه شد)؛ `BUGS.md` نه در درخت کاری هست و نه در فهرست git (`git ls-files`)؛ `docs/known-issues.md` هم وجود ندارد.
-- **اجرای واقعی در این نوبت (روی کلون تمیز از همین HEAD، تا اثر کارِ موازی دخالت نکند):**
-  - `flutter analyze` → `No issues found!` (۱۱.۴ ثانیه)
-  - `flutter test` → **۳۱ تست، همه پاس** (۵۷ ثانیه)
-- درخت کاریِ اصلی در لحظهٔ انتشار تمیز **نبود** — بخش ۱.۱ را ببینید.
+- کامیتِ مبنای این نسخه: `cb0ee8a` — `feat(notifications): wire producers — today's task reminders, focus timer, session log`؛ `git ls-remote origin main` هم روی `cb0ee8a` ⇒ همگام؛ `git status --short` خالی است (درخت کاری تمیز؛ دیگر WIPِ غیرcommitted در کار نیست).
+- ⚠️ **تاریخچهٔ مخزن بازنویسی/واردات شده است:** اکنون فقط **۱۲ کامیت** دارد و پایه، `fe5f5d1` (`chore: import payayar snapshot for CI verification`، ۲۰۲۶-۱۰-۰۸) است. کامیت‌هایی که در نسخه‌های قبلیِ همین فایل آمده‌اند (`0afb2ad`، `92574eb`، `1500a85`، `ee238d0`، `d9f3bda`، `6a12ea8`، `3037e40` و…) دیگر در تاریخچه نیستند؛ ارجاع‌هایشان به‌عنوان **بایگانی تاریخی** بخوانید.
+- ۱۲ کامیت به ترتیب: `fe5f5d1` (واردات snapshot) ← `eb8d36c` (لوگو + بازنویسی README) ← `d39ef94` (workflow دستی drift codegen) ← `9bbd174` (جدول نوتیفیکیشن، migration نسخهٔ ۲، repository، providerها) ← `7a6a41d` (بازتولید کد drift) ← `660e7df`، `1620d9a`، `f3f4b94` (رفع‌های نوتیفیکیشن) ← `5135297`، `741c53c`، `b7d32a1` (زنگ + پنل تاریخچه + تست‌ها) ← `cb0ee8a` (تولیدکننده‌های نوتیفیکیشن).
+- شمارش مستقیم از HEAD: **۴۵ فایل `.dart` در `lib/`**، **۹ پوشه در `lib/features/`**، **۸ کلاس `*Page`**، **۹ فایل تست با مجموع ۴۹ تست**، **۳۱۷ کلید پیام** در هر فایل arb (مجموعهٔ کلیدهای fa و en یکسان).
+- **در این نوبت اجرای محلی ممکن نبود و CI جایگزین شد:** `flutter analyze` با `analysis server exited with code -9` و `flutter test` با «The Dart compiler exited unexpectedly» مردند؛ ریشه، سقف حافظهٔ همین کانتینر است (`/sys/fs/cgroup/memory.max` ≈ **۱ گیگابایت** و `memory.peak` از آن گذشته ⇒ OOM). طبق روالِ ثبت‌شده، دروازهٔ کیفیت همان CI است: روی همین HEAD، هر دو بیلد پلهٔ «Static analysis» و پلهٔ «Run tests» را سبز دارند (بخش ۲.۱).
 
 ### ۱.۱. کارِ موازیِ در جریان (غیرcommitted)
 
-هنگام اجرای این نوبت، یک جلسهٔ موازی دیگر روی همین مخزن کار می‌کرد و این تغییرها را
-**هنوز commit نکرده** بود (وضعیت `git status` در ۱۸:۰۸ UTC):
-
-- `lib/features/home/quick_note.dart` (جدید، ۲۰۹ خط) + اتصال در `home_page.dart` (`QuickNoteCard` طبق `design.md §12.1`)
-- `test/quick_note_test.dart` (جدید)
-- ۱۰ کلید l10n جدید `home_quickNote_*` در `fa.arb`/`en.arb` + فایل‌های `generated/` بازتولیدشده
-
-این موارد در شمارش‌های این فایل **محسوب نشده‌اند** (شمارش‌ها از HEAD کامیت‌شده است).
-یک اجرای موقت `flutter test` روی این درختِ نیمه‌کاره ۳ شکست گذرا دید (هم‌زمانی هنگام
-بازنویسی فایل‌های l10n)؛ اجرای مجدد همان تست‌ها پاس شد و روی HEAD تمیز هم هیچ شکستی نیست.
+**دیگر موردی نیست:** `git status --short` در این نوبت خالی است. یادداشت سریع که قبلاً WIP بود،
+واردات `fe5f5d1` آن را کامیت کرد و اکنون در HEAD هست (بخش ۳.۳)؛ نوتیفیکیشن هم کامل کامیت شد.
 
 ---
 
 ## ۲. پیشرفت بخش‌های محصول
 
-اعداد از شمارش مستقیمِ کدِ کامیت‌شده (HEAD): **۴۲ فایل `.dart` در `lib/`**، **۱۳ فایل در
-`lib/features/`**، **۸ کلاس `*Page`**، **۶ فایل تست** با مجموع **۳۱ تست**، **۲۹۸ کلید پیام**
+اعداد از شمارش مستقیمِ کدِ کامیت‌شده (HEAD): **۴۵ فایل `.dart` در `lib/`**، **۹ پوشه در
+`lib/features/`**، **۸ کلاس `*Page`**، **۹ فایل تست** با مجموع **۴۹ تست**، **۳۱۷ کلید پیام**
 در هر فایل arb.
 
 | بخش | وضعیت | واقعیت کد |
 |---|---|---|
-| خانه (Dashboard) | ✅ موجود | `lib/features/home/home_page.dart` + `mini_calendar.dart` |
-| برنامه‌ریزی | ✅ موجود | `lib/features/planning/planning_page.dart` (+ `planning_dashboard`، `task_dialog`) |
+| خانه (Dashboard) | ✅ موجود + **یادداشت سریع** | `lib/features/home/home_page.dart`، `mini_calendar.dart`، `quick_note.dart` |
+| برنامه‌ریزی | ✅ موجود + اعلان وظیفهٔ امروز | `lib/features/planning/planning_page.dart` (+ `planning_dashboard`، `task_dialog`) |
 | مطالعه (درس/موضوع/جلسه) | ✅ موجود + **تایمر تمرکز/پومودورو** | `lib/features/study/study_page.dart`، `focus_timer.dart`، `focus_timer_card.dart` |
 | آزمون‌ها | ✅ موجود | `lib/features/exams/exams_page.dart` |
 | گزارش‌ها | ✅ ۸ کارت، ۳ تای آن نو (رفع باگ ۳) | `lib/features/reports/reports_page.dart` |
 | سبک زندگی | ✅ موجود | `lib/features/lifestyle/lifestyle_page.dart` |
 | مشاور AI | ✅ موجود | `lib/features/ai_advisor/ai_advisor_page.dart` |
 | تنظیمات | ✅ موجود | `lib/features/settings/settings_page.dart` |
+| 🔔 نوتیفیکیشن | ✅ موجود (بدون Page؛ در هدر پوسته) | `lib/features/notifications/bell_button.dart`، `notification_history_panel.dart` + `lib/app/shell.dart:107` |
 
 **جزئیات گزارش‌ها:** ۸ کارت در صفحه — مطالعه، خواب (خطی)، ورزش (میله‌ای)، تعداد تست (میله‌ای)،
 توزیع درس‌ها، برنامه‌ریزی، تسلط، روند نمرات آزمون. سه کارت اخیر نو هستند و هر سه روی
-`_TrendCard` مشترک ساخته شده‌اند (کامیت `6a12ea8`).
+`_TrendCard` مشترک ساخته شده‌اند.
 
-**ترجمه:** شمارش مستقیم در HEAD: **۲۹۸ کلید پیام** در `lib/core/l10n/fa.arb` و همان تعداد در
-`en.arb` (مجموعهٔ کلیدها یکسان است؛ به‌علاوهٔ `@@locale`). رشد کلیدها: ۲۷۴ (پایه) + ۲۴ (پومودورو)
-= ۲۹۸.
+**ترجمه:** شمارش مستقیم در HEAD: **۳۱۷ کلید پیام** در `lib/core/l10n/fa.arb` و همان تعداد در
+`en.arb` (مجموعهٔ کلیدها یکسان است؛ به‌علاوهٔ `@@locale`). رشد **خالص ۱۹ کلید** نسبت به
+پایهٔ قبلی (۲۹۸ → ۳۱۷): اکنون **۱۱ کلید `notif_*`** و **۱۰ کلید `home_quickNote_*`** هست؛
+یعنی ۲۱ کلید نو کمتر از این جمع، پس ظاهراً ۲ کلید قدیمی در مسیر حذف/ادغام شده‌اند.
 
-**تست‌ها (۶ فایل، ۳۱ تست):**
+**تست‌ها (۹ فایل، ۴۹ تست):**
 
 | فایل | تعداد |
 |---|---|
 | `test/database_test.dart` | ۸ |
 | `test/widget_test.dart` | ۹ |
 | `test/focus_timer_test.dart` | ۹ |
+| `test/notifications_test.dart` | ۹ |
+| `test/notifications_ui_test.dart` | ۴ |
+| `test/quick_note_test.dart` | ۵ |
 | `test/bug1_subject_dialog_test.dart` | ۱ |
 | `test/bug2_exam_dialog_test.dart` | ۲ |
 | `test/bug3_reports_charts_test.dart` | ۲ |
 
-اجرای واقعی این نوبت روی کلون تمیز HEAD: **۳۱/۳۱ پاس** و `flutter analyze` بدون مشکل.
+اجرا و تأیید این تست‌ها از مسیر **CI** می‌آید (پلهٔ «Run tests» در بیلدهای اندروید/ویندوز روی
+HEAD سبز است)؛ اجرای محلی زیر سقف ۱ گیگابایتی cgroup ممکن نیست (بخش ۱).
 
 ---
 
 ## ۲.۱. انتشار خودکار (GitHub Actions)
 
-دو workflow در `.github/workflows/`، هر دو با `paths`-filter تا فقط تغییرات مرتبط بیلد شوند و با
-`concurrency` تا بیلد هم‌پوشان کنسل شود؛ هر دو `flutter analyze` و `flutter test` را **قبل از**
-بیلد اجرا می‌کنند (یعنی CI خودش دروازهٔ کیفیت است):
+سه workflow در `.github/workflows/`:
 
 - **`android-build.yml`** — روی `ubuntu-latest`، Java 17، Flutter 3.47.6: `analyze` ← `test` ←
   `build apk --release` ← آپلود artifact ← انتشار روی Release با تگ `android-build-<sha7>`.
@@ -105,41 +98,43 @@
 - **`windows-build.yml`** — روی `windows-latest`: `analyze` ← `test` ← `build windows --release` ←
   کامپایل نصب‌کننده با **Inno Setup** (`windows/installer/payayar.iss`) ← `PAYAYAR-Setup-<sha7>.exe`
   + `PAYAYAR-windows-<sha7>.zip` ← انتشار روی Release با تگ `windows-build-<sha7>`.
+- **`codegen.yml`** (کامیت `d39ef94`) — بازتولید drift به‌صورت دستی (`workflow_dispatch`)؛
+  برای وقتی که شمای دیتابیس عوض شده و باید کدِ `.g.dart` محلی بازتولید شود.
 
-**شواهد واقعی از ریموت (`git ls-remote --tags origin` در این نوبت):**
-- تگ‌های اندروید: `android-build-92574eb`، `android-build-ee238d0` ← **۲ نسخه APK**
-- تگ‌های ویندوز: `windows-build-1500a85`، `windows-build-ee238d0`، `windows-build-0afb2ad` ← **۳ نسخه setup.exe**
-
-(تگ `android-build-0afb2ad` هنوز دیده نمی‌شد؛ یا در صف/اجرای CI است یا باید دوباره بررسی شود.)
+**شواهد واقعی در این نوبت:**
+- `git ls-remote --tags origin`: **۵ تگ `android-build-*`** (`fe5f5d1`، `eb8d36c`، `f3f4b94`، `b7d32a1`، `cb0ee8a`) و **۵ تگ `windows-build-*`** با همان کامیت‌ها ⇒ **۱۰ Release** (`gh release list` هم همین ۱۰ مورد را نشان می‌دهد؛ آخرین‌ها `PAYAYAR build cb0ee8a` و `PAYAYAR Windows cb0ee8a` در ۱۸:۰۱ و ۱۸:۰۰ UTC).
+- `gh run list --limit 5`: هر ۵ اجرای اخیر `completed / success` — Android Build و Windows Build روی `cb0ee8a` (۱۷:۵۲ UTC) و `b7d32a1`، به‌علاوهٔ یک اجرای سبز `Codegen` روی شاخهٔ `feat/notifications`.
+- جزئیات سطح پله‌ها روی `cb0ee8a` (`gh run view 37819944854 --job 113458086897`): `Static analysis ✓`، `Run tests ✓`، `Build release APK ✓`، `Publish to Release ✓`.
+- ⚠️ یک هشدار قدیمیِ CI: `actions/checkout@v4` و `setup-java@v4` روی Node.js 20 منسوخ شده‌اند (فقط هشدار است، اجرا را سبز نگه می‌دارد).
 
 ---
 
 ## ۳. باگ‌های رفع‌شده
 
-وضعیت با اجرای واقعی تست‌ها و خواندن کدِ پیاده‌سازی در همین نوبت تطبیق داده شد.
+وضعیت با اجرای واقعی تست‌ها و خواندن کدِ پیاده‌سازی تطبیق داده شده و اکنون از مسیر CI هم سبز است.
 
 ### باگ ۱ — ذخیره‌نشدن درس جدید ✅ رفع شد
 - **ریشه:** `onPressed: _name.text.isEmpty ? null : _save` بدون `onChanged`/`setState` → دکمهٔ ذخیره برای همیشه غیرفعال می‌ماند.
-- **رفع:** افزودن `onChanged: (_) => setState(() {})` به TextField و نمایش خطای دیتابیس با SnackBar به‌جای بلعیدن بی‌صدا (کامیت `d9f3bda`).
-- **تست:** `test/bug1_subject_dialog_test.dart` (۱ تست) — ✅ پاس در اجرای این نوبت.
+- **رفع:** افزودن `onChanged: (_) => setState(() {})` به TextField و نمایش خطای دیتابیس با SnackBar به‌جای بلعیدن بی‌صدا.
+- **تست:** `test/bug1_subject_dialog_test.dart` (۱ تست).
 
 ### باگ ۲ — ذخیره‌نشدن آزمون جدید ✅ رفع شد
 - **ریشه:** هم‌ریشه با باگ ۱ در چهار جا: `exams_page`، `planning_page` (`_MockExamDialog`)، `study_page` (`_SubjectDialog` + `_TopicDialog`).
-- **رفع کدی:** افزودن `onChanged` + نمایش خطا با SnackBar (کامیت‌های `d9f3bda` و `7a7a616`).
+- **رفع کدی:** افزودن `onChanged` + نمایش خطا با SnackBar.
 - **رفع تست:** دو مشکل در خودِ تست بود، نه در کد محصول:
   1. **هنگ:** `watchExams().first` (استریم) مانع از اتمام teardown می‌شد؛ با خواندن آینده‌ای `db.select(db.exams).get()` جایگزین شد.
   2. **پیدا نشدن دکمه:** صفحهٔ برنامه‌ریزی تب‌بندی است؛ تست اول تب «آزمون آزمایشی» را می‌زند تا `_MockExamView` رندر شود.
-- **تست:** `test/bug2_exam_dialog_test.dart` (۲ تست) — ✅ هر دو پاس در اجرای این نوبت.
+- **تست:** `test/bug2_exam_dialog_test.dart` (۲ تست).
 
 ### باگ ۳ — نمودارهای خواب/ورزش/تست در گزارش‌ها ✅ رفع شد
-- **کد:** سه کارت در `reports_page.dart`: `_SleepReport` (خطی)، `_ExerciseReport` (میله‌ای)، `_TestCountReport` (میله‌ای) + `_TrendCard` مشترک (کامیت `6a12ea8`).
-- **منبع داده واقعی (تصحیح حدس `BUGS.md`):** خواب ← `lifestyle_entries.sleep_minutes`؛ ورزش ← `lifestyle_entries.exercise_minutes`؛ تست ← `study_sessions.type == test`. ⚠️ جدول `test_sessions` که `BUGS.md` حدس زده بود در شمای فعلی وجود ندارد؛ شمارش، تعداد **جلسهٔ** تست است نه تعداد سؤال.
+- **کد:** سه کارت در `reports_page.dart`: `_SleepReport` (خطی)، `_ExerciseReport` (میله‌ای)، `_TestCountReport` (میله‌ای) + `_TrendCard` مشترک.
+- **منبع داده واقعی:** خواب ← `lifestyle_entries.sleep_minutes`؛ ورزش ← `lifestyle_entries.exercise_minutes`؛ تست ← `study_sessions.type == test`. ⚠️ جدول `test_sessions` در شمای فعلی وجود ندارد؛ شمارش، تعداد **جلسهٔ** تست است نه تعداد سؤال.
 - **ترجمه:** ۶ کلید به هر دو arb اضافه شد.
-- **تست:** `test/bug3_reports_charts_test.dart` (۲ تست) — ✅ هر دو پاس در اجرای این نوبت.
+- **تست:** `test/bug3_reports_charts_test.dart` (۲ تست).
 
 ### وضعیت نهایی
-> `BUGS.md` از مخزن **حذف شد** (کامیت `3037e40`) و در این نوبت دوباره بررسی شد: نه در درخت
-> کاری هست و نه در `git ls-files` ⇒ سه باگ واقعاً بسته شده‌اند و هر ۵ تستشان پاس است.
+> `BUGS.md` از مخزن **حذف شد** و در هر نوبت دوباره بررسی می‌شود: نه در درخت کاری هست و نه در
+> `git ls-files` ⇒ سه باگ واقعاً بسته‌اند و ۵ تستشان در میان ۴۹ تست HEAD است (کل مجموعه در CI سبز).
 >
 > **بازبینی KI-01:** در `lib/` هیچ فراخوانی `invoke(` نیست؛ رشته‌های snake_case فقط در فایل‌های
 > `.g.dart` (نام ستون‌های drift)، دو کد خطای رابط کاربری (`invalid_key`، `network`) و فیلد JSON
@@ -150,7 +145,7 @@
 
 ## ۳.۱. پومودورو / تایمر تمرکز (AGENTS.md §44) ✅
 
-**فایل‌ها:** `lib/features/study/focus_timer.dart` (منطق)، `lib/features/study/focus_timer_card.dart` (UI)، `test/focus_timer_test.dart` (۹ تست). کامیت `0afb2ad`.
+**فایل‌ها:** `lib/features/study/focus_timer.dart` (منطق)، `lib/features/study/focus_timer_card.dart` (UI)، `test/focus_timer_test.dart` (۹ تست).
 
 | قاعدهٔ AGENTS | پیاده‌سازی |
 |---|---|
@@ -164,24 +159,57 @@
 
 **نکتهٔ طراحی:** آیکون ۴۴×۴۴ با گوشهٔ ۱۴px از `design.md §15.1` بود که توکنش نبود → `AppRadius.icon` به `tokens.dart` اضافه شد (توکنِ جدید، نه مقدار hard-code).
 
-**تأیید (این نوبت، روی کلون تمیز HEAD):** `flutter analyze` → No issues found؛ `flutter test` → **۳۱ تست پاس**.
+**تأیید:** تست‌های `focus_timer_test.dart` (۹ تست) در میان اجرای سبز CI روی HEAD.
 
 **باقی‌ماندهٔ این قابلیت:** نمایشگر فشردهٔ زمان‌سنج در سایر صفحه‌ها (الان فقط کارت صفحهٔ مطالعه؛ خودِ وضعیت ولی در همه‌جا زنده است).
 
 ---
 
+## ۳.۲. نوتیفیکیشن محلی (AGENTS.md §43.1 / HANDOFF §43.1) ✅
+
+**۹ کامیت** از `9bbd174` تا `cb0ee8a` (۲۰۲۶-۱۰-۰۸) — همه در `main` و سبز در CI.
+
+| قاعده | پیاده‌سازی |
+|---|---|
+| جدول SQLite، نه push server | `Notifications` در `lib/core/database/tables.dart` (id, title 1..200, body nullable, `status`, `taskId` ← `PlanTasks`, createdAt/updatedAt) |
+| مهاجرت بدون از دست رفتن داده (§21) | `schemaVersion = 2` و `onUpgrade: if (from < 2) createTable(notifications)` در `app_database.dart` |
+| چرخهٔ وضعیت `created → unread → read → actioned/dismissed` | `enum AppNotificationStatus` + متد‌های `NotificationRepository` در `lib/core/data/repositories.dart`: `watchActive`، `watchHistory`، `addNotification`، `markRead`، `dismiss`، `markAllRead`، `actionTask` |
+| اکشن «انجام وظیفه» حتماً وضعیت فعلی task را دوباره چک کند | `actionTask(id)`: وظیفه را از نو می‌خواند؛ وظیفه ناموجود → `null`؛ انجام‌نشده → `unread`؛ انجام‌شده → `actioned` (بدون تغییر دروغین) |
+| آیکون زنگ در TopBar با badge + پنل تاریخچه | `lib/features/notifications/bell_button.dart` + `notification_history_panel.dart`، متصل در `lib/app/shell.dart` |
+| تولیدکننده‌ها (کامیت `cb0ee8a`) | `planning/task_dialog.dart` (یادآور وظیفهٔ امروز)، `study/focus_timer_card.dart` (پایان تایمر)، `study/study_page.dart` (ثبت جلسه) |
+| بدون وابستگی جدید | فقط drift/Riverpodِ موجود؛ `flutter_local_notifications` اضافه نشد |
+
+**تست:** `test/notifications_test.dart` (۹ تست: lifecycle + `actionTask`) و `test/notifications_ui_test.dart` (۴ تست: زنگ، پنل، نشانهٔ badge).
+**ترجمه:** کلیدهای `notif*` به هر دو arb اضافه شد (جمع کلیدها حالا ۳۱۷).
+**در CI:** بیلدهای `5135297` تا `cb0ee8a` سبزند؛ آخرین Releaseها `PAYAYAR build cb0ee8a` و `PAYAYAR Windows cb0ee8a`.
+
+---
+
+## ۳.۳. یادداشت سریع (design.md §12.1) ✅
+
+قبلاً WIPِ غیرcommitted بود؛ الان در HEAD است (وارد شده در `fe5f5d1`، درخت کاری تمیز).
+
+- **کد:** `lib/features/home/quick_note.dart` (۲۲۱ خط): `QuickNoteNotifier` (state app-scoped) + `QuickNoteCard` که در `home_page.dart:129` به‌عنوان کارت خانه رندر می‌شود.
+- **تست:** `test/quick_note_test.dart` (۵ تست).
+- **ترجمه:** ۱۰ کلید `home_quickNote_*` در `fa.arb`/`en.arb`.
+
+---
+
 ## ۴. مراحل بعدی
 
-1. 📝 یادداشت سریع (design §12.1) — 🔨 در جریان است (WIP غیرcommitted در درخت کاری؛ بخش ۱.۱). تمام کردنش و commit کردن اولویت اول نوبت بعدی است.
-2. 🔔 نوتیفیکیشن محلی (AGENTS §43.1) — نوار بالا + پنل تاریخچه.
-3. 🤖 AI بخش‌به‌بخش (AGENTS §7.A) — «کمک AI» در برنامه‌ریزی/مطالعه/آزمون/گزارش‌ها.
-4. 🃏 فلش‌کارت و مرور (AGENTS §45).
-5. نمایشگر فشردهٔ تایمر تمرکز در صفحه‌های دیگر (باقی‌ماندهٔ §44).
-6. بررسی CI: تأیید اینکه `android-build-0afb2ad` ساخته شد و تگ/Release آن ثبت شده است.
+1. 🤖 AI بخش‌به‌بخش (AGENTS §7.A) — «کمک AI» در برنامه‌ریزی/مطالعه/آزمون/گزارش‌ها.
+2. 🃏 فلش‌کارت و مرور (AGENTS §45).
+3. نمایشگر فشردهٔ تایمر تمرکز در صفحه‌های دیگر (باقی‌ماندهٔ §44).
+4. به‌روزرسانی `HANDOFF.md` — بخش ۳ آن هنوز می‌گوید «یادداشت سریع push نشده» که دیگر درست نیست.
+5. رفع هشدار منسوخ‌شدن `actions/checkout@v4` / `setup-java@v4` (Node.js 20) در workflowها.
+6. روال دوره‌ای: بعد از هر push، سبز بودن Android/Windows Build و ثبت Release را با `gh run list` چک کردن.
 
 ---
 
 ## ۵. لاگ به‌روزرسانی‌ها
+
+> ⚠️ تاریخچهٔ گیت در ۲۰۲۶-۱۰-۰۸ بازنویسی شد (پایه: `fe5f5d1`)؛ کامیت‌های این لاگ پیش از آن
+> تاریخ، دیگر در `git log` دیده نمی‌شوند و فقط به‌عنوان سابقهٔ کار هستند.
 
 - 2026-10-03 — راه‌اندازی محیط، نصب Flutter و وابستگی‌ها؛ شروع رفع باگ‌ها.
 - 2026-10-03 12:05 UTC — نصب `flutter/agent-plugins` (۲۵ مهارت + `dart mcp-server`)؛ پیاده‌سازی کد باگ ۳ + تست آن؛ `flutter analyze` پاک؛ تست باگ ۱ پاس؛ تست باگ ۲ hang شد و در ریشه‌یابی است.
@@ -189,4 +217,5 @@
 - 2026-10-03 16:40 UTC — **بستن هر سه باگ.** ریشه‌یابی کامل هنگ تست باگ ۲ (۵ فایل تشخیصی موقت ساخته و سپس حذف شد): عامل هنگ `watchExams().first` بود، نه کد محصول؛ با خواندن آینده‌ای جایگزین شد. مشکل دوم: دکمهٔ «ثبت آزمون آزمایشی» در تب چهارم صفحهٔ برنامه‌ریزی است و تست به تب نمی‌رفت. نتیجهٔ نهایی: `flutter test` → **۲۲ تست پاس**، `flutter analyze` → **No issues found**. `BUGS.md` از مخزن حذف شد.
 - 2026-10-03 16:50 UTC — راستی‌آزمایی قبلی: اجرای کامل (۲۲/۲۲ پاس)؛ آزمون A/B روی تست باگ ۲ تأیید کرد نسخهٔ قدیمی (`watchExams().first`) واقعاً hang می‌کند. شمارش مستقیم l10n: **۲۷۴** کلید در هر arb؛ بازبینی KI-01: صفر فراخوانی `invoke(` در `lib/`.
 - 2026-10-03 17:45 UTC — **پومودورو (AGENTS §44) اضافه شد.** `focus_timer.dart` (state اپ-اسکوپ، ثبت از طریق `study_sessions`) + `focus_timer_card.dart` (کارت در صفحهٔ مطالعه با `ProgressRing`) + ۹ تست در `focus_timer_test.dart`. ۲۴ کلید l10n در fa/en، `AppRadius.icon` به توکن‌ها اضافه شد، `AppSettings.focusMinutes` ذخیره می‌شود. نتیجه: `flutter analyze` → No issues found؛ `flutter test` → **۳۱ تست پاس**.
-- 2026-10-03 18:10 UTC — **به‌روزرسانی و انتشار رودمپ پس از ۴ کامیت جدید** (`92574eb` CI اندروید، `1500a85` CI ویندوز، `ee238d0` نصب‌کنندهٔ Inno Setup، `0afb2ad` پومودورو). راستی‌آزمایی روی کلون تمیز HEAD: `flutter analyze` → No issues found، `flutter test` → **۳۱/۳۱ پاس**؛ شمارش مستقیم کد: ۴۲ فایل dart در `lib/`، ۱۳ فایل در `lib/features/`، ۸ کلاس `*Page`، ۶ فایل تست/۳۱ تست، **۲۹۸** کلید l10n در هر arb (کلیدهای fa و en یکسان). تأیید شد `BUGS.md` نه در درخت هست نه در `git ls-files`. شواهد CI از ریموت: ۲ تگ `android-build-*` و ۳ تگ `windows-build-*` (۵ Release). ثبت شد که یک جلسهٔ موازی WIP یادداشت سریع (design §12.1) را غیرcommitted در درخت کاری گذاشته و در شمارش‌ها لحاظ نشده است.
+- 2026-10-03 18:10 UTC — **به‌روزرسانی و انتشار رودمپ پس از ۴ کامیت جدید** (`92574eb` CI اندروید، `1500a85` CI ویندوز، `ee238d0` نصب‌کنندهٔ Inno Setup، `0afb2ad` پومودورو). راستی‌آزمایی روی کلون تمیز HEAD: `flutter analyze` → No issues found، `flutter test` → **۳۱/۳۱ پاس**؛ شمارش مستقیم کد: ۴۲ فایل dart در `lib/`، ۱۳ فایل در `lib/features/`، ۸ کلاس `*Page`، ۶ فایل تست/۳۱ تست، **۲۹۸** کلید l10n در هر arb. تأیید شد `BUGS.md` نه در درخت است نه در `git ls-files`. شواهد CI از ریموت: ۲ تگ `android-build-*` و ۳ تگ `windows-build-*` (۵ Release). ثبت شد که یک جلسهٔ موازی WIP یادداشت سریع را غیرcommitted گذاشته است.
+- 2026-10-08 18:20 UTC — **بازخوانی واقعیت پس از بازنویسی تاریخچه + تکمیل نوتیفیکیشن.** خواندن `git log` (۱۲ کامیت، HEAD=`cb0ee8a` هم‌تراز `origin/main`، درخت تمیز)، `git status` (خالی)، `gh run list` (۵ اجرای اخیر همه `success`). شمارش مستقیم HEAD: ۴۵ فایل dart در `lib/`، ۹ پوشه `features`، ۸ `*Page`، **۹ فایل تست / ۴۹ تست**، **۳۱۷ کلید** l10n در هر arb (دو مجموعه یکسان). شواهد ریموت: **۵ تگ اندروید + ۵ تگ ویندوز = ۱۰ Release**؛ سطح پله‌ها روی `cb0ee8a`: `Static analysis ✓`، `Run tests ✓`. اجرای محلی `flutter analyze`/`flutter test` در این نوبت ممکن نشد: هر دو زیر سقف حافظهٔ کانتینر (`memory.max` ≈ ۱ گیگابایت، `memory.peak` از آن گذشت) با exit -9 / «compiler exited unexpectedly» مردند ⇒ طبق روال، CI دروازهٔ کیفیت است. بخش‌های نو: ۳.۲ نوتیفیکیشن، ۳.۳ یادداشت سریع؛ جدول وضعیت کلی همگام شد (نوتیفیکیشن و یادداشت سریع از «در نوبت» به ✅ رفتند).
