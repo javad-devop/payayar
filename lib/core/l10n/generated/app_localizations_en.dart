@@ -972,4 +972,61 @@ class AppLocalizationsEn extends AppLocalizations {
   String notif_sessionLogged(int minutes) {
     return 'Study session of $minutes min logged';
   }
+
+  @override
+  String get flashcard_title => 'Flashcards';
+
+  @override
+  String get flashcard_add => 'Add card';
+
+  @override
+  String get flashcard_front => 'Front';
+
+  @override
+  String get flashcard_back => 'Back';
+
+  @override
+  String flashcard_due(int count) {
+    return '$count cards due today';
+  }
+
+  @override
+  String get flashcard_dueNone => 'All caught up ✨';
+
+  @override
+  String get flashcard_review => 'Start review';
+
+  @override
+  String get flashcard_reveal => 'Show answer';
+
+  @override
+  String get flashcard_knew => 'I knew it';
+
+  @override
+  String get flashcard_forgot => 'Need to repeat';
+
+  @override
+  String flashcard_remaining(int count) {
+    return 'Remaining: $count';
+  }
+
+  @override
+  String get flashcard_done => 'Today\'s review is complete!';
+
+  @override
+  String get flashcard_empty_title => 'No cards yet';
+
+  @override
+  String get flashcard_empty_desc => 'Make a card from anything you study';
+
+  @override
+  String get flashcard_manage => 'My cards';
+
+  @override
+  String get flashcard_delete => 'Delete card';
+
+  @override
+  String flashcard_box(int box) {
+    return 'Box $box';
+  }
 }

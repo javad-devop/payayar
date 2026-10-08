@@ -1957,6 +1957,108 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'مطالعه {minutes} دقیقه ثبت شد'**
   String notif_sessionLogged(int minutes);
+
+  /// No description provided for @flashcard_title.
+  ///
+  /// In fa, this message translates to:
+  /// **'فلش‌کارت‌ها'**
+  String get flashcard_title;
+
+  /// No description provided for @flashcard_add.
+  ///
+  /// In fa, this message translates to:
+  /// **'افزودن کارت'**
+  String get flashcard_add;
+
+  /// No description provided for @flashcard_front.
+  ///
+  /// In fa, this message translates to:
+  /// **'روی کارت'**
+  String get flashcard_front;
+
+  /// No description provided for @flashcard_back.
+  ///
+  /// In fa, this message translates to:
+  /// **'پشت کارت'**
+  String get flashcard_back;
+
+  /// Number of flashcards due today
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} کارت برای امروز'**
+  String flashcard_due(int count);
+
+  /// No description provided for @flashcard_dueNone.
+  ///
+  /// In fa, this message translates to:
+  /// **'همه‌چیز مرور شد ✨'**
+  String get flashcard_dueNone;
+
+  /// No description provided for @flashcard_review.
+  ///
+  /// In fa, this message translates to:
+  /// **'شروع مرور'**
+  String get flashcard_review;
+
+  /// No description provided for @flashcard_reveal.
+  ///
+  /// In fa, this message translates to:
+  /// **'نمایش پاسخ'**
+  String get flashcard_reveal;
+
+  /// No description provided for @flashcard_knew.
+  ///
+  /// In fa, this message translates to:
+  /// **'بلد بودم'**
+  String get flashcard_knew;
+
+  /// No description provided for @flashcard_forgot.
+  ///
+  /// In fa, this message translates to:
+  /// **'نیاز به مرور'**
+  String get flashcard_forgot;
+
+  /// Cards left in the review session
+  ///
+  /// In fa, this message translates to:
+  /// **'باقی‌مانده: {count}'**
+  String flashcard_remaining(int count);
+
+  /// No description provided for @flashcard_done.
+  ///
+  /// In fa, this message translates to:
+  /// **'مرور امروز تمام شد!'**
+  String get flashcard_done;
+
+  /// No description provided for @flashcard_empty_title.
+  ///
+  /// In fa, this message translates to:
+  /// **'هنوز کارتی نداری'**
+  String get flashcard_empty_title;
+
+  /// No description provided for @flashcard_empty_desc.
+  ///
+  /// In fa, this message translates to:
+  /// **'از هر مفهومی که می‌خوانی یک کارت بساز'**
+  String get flashcard_empty_desc;
+
+  /// No description provided for @flashcard_manage.
+  ///
+  /// In fa, this message translates to:
+  /// **'کارت‌های من'**
+  String get flashcard_manage;
+
+  /// No description provided for @flashcard_delete.
+  ///
+  /// In fa, this message translates to:
+  /// **'حذف کارت'**
+  String get flashcard_delete;
+
+  /// Spaced-repetition box number 1..5
+  ///
+  /// In fa, this message translates to:
+  /// **'جعبه {box}'**
+  String flashcard_box(int box);
 }
 
 class _AppLocalizationsDelegate

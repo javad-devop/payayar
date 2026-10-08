@@ -970,4 +970,61 @@ class AppLocalizationsFa extends AppLocalizations {
   String notif_sessionLogged(int minutes) {
     return 'مطالعه $minutes دقیقه ثبت شد';
   }
+
+  @override
+  String get flashcard_title => 'فلش‌کارت‌ها';
+
+  @override
+  String get flashcard_add => 'افزودن کارت';
+
+  @override
+  String get flashcard_front => 'روی کارت';
+
+  @override
+  String get flashcard_back => 'پشت کارت';
+
+  @override
+  String flashcard_due(int count) {
+    return '$count کارت برای امروز';
+  }
+
+  @override
+  String get flashcard_dueNone => 'همه‌چیز مرور شد ✨';
+
+  @override
+  String get flashcard_review => 'شروع مرور';
+
+  @override
+  String get flashcard_reveal => 'نمایش پاسخ';
+
+  @override
+  String get flashcard_knew => 'بلد بودم';
+
+  @override
+  String get flashcard_forgot => 'نیاز به مرور';
+
+  @override
+  String flashcard_remaining(int count) {
+    return 'باقی‌مانده: $count';
+  }
+
+  @override
+  String get flashcard_done => 'مرور امروز تمام شد!';
+
+  @override
+  String get flashcard_empty_title => 'هنوز کارتی نداری';
+
+  @override
+  String get flashcard_empty_desc => 'از هر مفهومی که می‌خوانی یک کارت بساز';
+
+  @override
+  String get flashcard_manage => 'کارت‌های من';
+
+  @override
+  String get flashcard_delete => 'حذف کارت';
+
+  @override
+  String flashcard_box(int box) {
+    return 'جعبه $box';
+  }
 }

@@ -12,6 +12,8 @@ import '../../core/widgets/confirmation_dialog.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/page_header.dart';
 import '../../core/widgets/states.dart';
+import 'flashcard_dialog.dart';
+import 'flashcards_card.dart';
 import 'focus_timer_card.dart';
 
 /// Study section (AGENTS.md §13): subject tree with topics,
@@ -46,6 +48,9 @@ class StudyPage extends ConsumerWidget {
         // Focus / Pomodoro session (AGENTS.md §44). App-scoped state, so
         // leaving this page never interrupts a running session (§44.4).
         const FocusTimerCard(),
+        const SizedBox(height: AppSpacing.lg),
+        // Spaced-repetition queue + management (HANDOFF §45).
+        const FlashcardsCard(),
         const SizedBox(height: AppSpacing.lg),
         if (subjects.isEmpty)
           GlassCard(

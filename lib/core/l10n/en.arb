@@ -354,5 +354,46 @@
         "type": "int"
       }
     }
+  },
+  "flashcard_title": "Flashcards",
+  "flashcard_add": "Add card",
+  "flashcard_front": "Front",
+  "flashcard_back": "Back",
+  "flashcard_due": "{count} cards due today",
+  "@flashcard_due": {
+    "description": "Number of flashcards due today",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "flashcard_dueNone": "All caught up ✨",
+  "flashcard_review": "Start review",
+  "flashcard_reveal": "Show answer",
+  "flashcard_knew": "I knew it",
+  "flashcard_forgot": "Need to repeat",
+  "flashcard_remaining": "Remaining: {count}",
+  "@flashcard_remaining": {
+    "description": "Cards left in the review session",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "flashcard_done": "Today's review is complete!",
+  "flashcard_empty_title": "No cards yet",
+  "flashcard_empty_desc": "Make a card from anything you study",
+  "flashcard_manage": "My cards",
+  "flashcard_delete": "Delete card",
+  "flashcard_box": "Box {box}",
+  "@flashcard_box": {
+    "description": "Spaced-repetition box number 1..5",
+    "placeholders": {
+      "box": {
+        "type": "int"
+      }
+    }
   }
 }

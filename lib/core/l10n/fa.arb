@@ -354,5 +354,46 @@
         "type": "int"
       }
     }
+  },
+  "flashcard_title": "فلش‌کارت‌ها",
+  "flashcard_add": "افزودن کارت",
+  "flashcard_front": "روی کارت",
+  "flashcard_back": "پشت کارت",
+  "flashcard_due": "{count} کارت برای امروز",
+  "@flashcard_due": {
+    "description": "Number of flashcards due today",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "flashcard_dueNone": "همه‌چیز مرور شد ✨",
+  "flashcard_review": "شروع مرور",
+  "flashcard_reveal": "نمایش پاسخ",
+  "flashcard_knew": "بلد بودم",
+  "flashcard_forgot": "نیاز به مرور",
+  "flashcard_remaining": "باقی‌مانده: {count}",
+  "@flashcard_remaining": {
+    "description": "Cards left in the review session",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "flashcard_done": "مرور امروز تمام شد!",
+  "flashcard_empty_title": "هنوز کارتی نداری",
+  "flashcard_empty_desc": "از هر مفهومی که می‌خوانی یک کارت بساز",
+  "flashcard_manage": "کارت‌های من",
+  "flashcard_delete": "حذف کارت",
+  "flashcard_box": "جعبه {box}",
+  "@flashcard_box": {
+    "description": "Spaced-repetition box number 1..5",
+    "placeholders": {
+      "box": {
+        "type": "int"
+      }
+    }
   }
 }
