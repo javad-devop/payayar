@@ -23,6 +23,16 @@ class FocusTimerCard extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final timer = ref.watch(focusTimerProvider);
 
+    // A finished focus session becomes a local notification (§43.1).
+    ref.listen<FocusTimerState>(focusTimerProvider, (previous, next) {
+      if (previous?.phase != FocusPhase.finished &&
+          next.phase == FocusPhase.finished) {
+        ref.read(notificationRepositoryProvider).addNotification(
+              title: l10n.notif_focusDone(next.plannedMinutes),
+            );
+      }
+    });
+
     switch (timer.phase) {
       case FocusPhase.idle:
         return _IdleCard(l10n: l10n);

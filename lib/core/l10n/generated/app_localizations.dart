@@ -1939,6 +1939,24 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'نادیده گرفته شد'**
   String get notif_status_dismissed;
+
+  /// Reminder created when a task is scheduled for today
+  ///
+  /// In fa, this message translates to:
+  /// **'یادآوری: {title}'**
+  String notif_taskReminder(String title);
+
+  /// Focus timer finished
+  ///
+  /// In fa, this message translates to:
+  /// **'تمرکز {minutes} دقیقه ثبت شد'**
+  String notif_focusDone(int minutes);
+
+  /// Manual study session logged
+  ///
+  /// In fa, this message translates to:
+  /// **'مطالعه {minutes} دقیقه ثبت شد'**
+  String notif_sessionLogged(int minutes);
 }
 
 class _AppLocalizationsDelegate

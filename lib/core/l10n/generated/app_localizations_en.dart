@@ -957,4 +957,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notif_status_dismissed => 'Dismissed';
+
+  @override
+  String notif_taskReminder(String title) {
+    return 'Reminder: $title';
+  }
+
+  @override
+  String notif_focusDone(int minutes) {
+    return 'Focus of $minutes min logged';
+  }
+
+  @override
+  String notif_sessionLogged(int minutes) {
+    return 'Study session of $minutes min logged';
+  }
 }

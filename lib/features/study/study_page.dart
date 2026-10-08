@@ -672,6 +672,7 @@ class _SessionDialogState extends ConsumerState<_SessionDialog> {
 
   Future<void> _save() async {
     if (!_end.isAfter(_start)) return;
+    final l10n = AppLocalizations.of(context);
     final repo = ref.read(studyRepositoryProvider);
     await repo.addSession(
       subjectId: widget.subjectId,
@@ -680,6 +681,10 @@ class _SessionDialogState extends ConsumerState<_SessionDialog> {
       end: _end,
       type: _type,
     );
+    // Logged sessions are announced in the bell history (§43.1).
+    await ref.read(notificationRepositoryProvider).addNotification(
+          title: l10n.notif_sessionLogged(_end.difference(_start).inMinutes),
+        );
     if (mounted) Navigator.of(context).pop();
   }
 

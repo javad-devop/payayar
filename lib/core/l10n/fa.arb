@@ -327,5 +327,32 @@
   "notif_dismiss": "بی‌توجه",
   "notif_status_read": "خوانده شد",
   "notif_status_actioned": "انجام شد",
-  "notif_status_dismissed": "نادیده گرفته شد"
+  "notif_status_dismissed": "نادیده گرفته شد",
+  "notif_taskReminder": "یادآوری: {title}",
+  "@notif_taskReminder": {
+    "description": "Reminder created when a task is scheduled for today",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notif_focusDone": "تمرکز {minutes} دقیقه ثبت شد",
+  "@notif_focusDone": {
+    "description": "Focus timer finished",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "notif_sessionLogged": "مطالعه {minutes} دقیقه ثبت شد",
+  "@notif_sessionLogged": {
+    "description": "Manual study session logged",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  }
 }

@@ -69,6 +69,7 @@ class _TaskDialogState extends ConsumerState<TaskDialog> {
 
   Future<void> _save() async {
     if (!_isValid) return;
+    final l10n = AppLocalizations.of(context);
     final repo = ref.read(planningRepositoryProvider);
     final startMinutes = _start == null
         ? null
@@ -76,7 +77,7 @@ class _TaskDialogState extends ConsumerState<TaskDialog> {
     final duration = int.tryParse(_duration.text.trim());
 
     if (widget.task == null) {
-      await repo.addTask(PlanTasksCompanion.insert(
+      final taskId = await repo.addTask(PlanTasksCompanion.insert(
         title: _title.text.trim(),
         date: _date,
         subjectId: Value(_subjectId),
@@ -87,6 +88,18 @@ class _TaskDialogState extends ConsumerState<TaskDialog> {
         status: TaskStatus.notStarted,
         notes: Value(_notes.text.trim().isEmpty ? null : _notes.text.trim()),
       ));
+      // A task scheduled for today becomes a local reminder the bell
+      // can act on (HANDOFF §43.1 — action re-checks task status).
+      final now = DateTime.now();
+      final isToday = _date.year == now.year &&
+          _date.month == now.month &&
+          _date.day == now.day;
+      if (isToday) {
+        await ref.read(notificationRepositoryProvider).addNotification(
+              title: l10n.notif_taskReminder(_title.text.trim()),
+              taskId: taskId,
+            );
+      }
     } else {
       await repo.updateTask(widget.task!.copyWith(
         title: _title.text.trim(),

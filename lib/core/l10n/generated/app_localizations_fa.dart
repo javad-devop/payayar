@@ -955,4 +955,19 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get notif_status_dismissed => 'نادیده گرفته شد';
+
+  @override
+  String notif_taskReminder(String title) {
+    return 'یادآوری: $title';
+  }
+
+  @override
+  String notif_focusDone(int minutes) {
+    return 'تمرکز $minutes دقیقه ثبت شد';
+  }
+
+  @override
+  String notif_sessionLogged(int minutes) {
+    return 'مطالعه $minutes دقیقه ثبت شد';
+  }
 }

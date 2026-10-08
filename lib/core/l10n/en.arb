@@ -327,5 +327,32 @@
   "notif_dismiss": "Dismiss",
   "notif_status_read": "Read",
   "notif_status_actioned": "Done",
-  "notif_status_dismissed": "Dismissed"
+  "notif_status_dismissed": "Dismissed",
+  "notif_taskReminder": "Reminder: {title}",
+  "@notif_taskReminder": {
+    "description": "Reminder created when a task is scheduled for today",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notif_focusDone": "Focus of {minutes} min logged",
+  "@notif_focusDone": {
+    "description": "Focus timer finished",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "notif_sessionLogged": "Study session of {minutes} min logged",
+  "@notif_sessionLogged": {
+    "description": "Manual study session logged",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  }
 }
