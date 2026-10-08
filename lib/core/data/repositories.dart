@@ -423,13 +423,19 @@ class NotificationRepository {
   Stream<List<Notification>> watchActive() =>
       (_db.select(_db.notifications)
             ..where((n) => n.status.isNotIn(_settled.map((s) => s.index)))
-            ..orderBy([(n) => OrderingTerm.desc(n.createdAt)]))
+            ..orderBy([
+              (n) => OrderingTerm.desc(n.createdAt),
+              (n) => OrderingTerm.desc(n.id),
+            ]))
           .watch();
 
   /// Full history, newest first — history panel source.
   Stream<List<Notification>> watchHistory() =>
       (_db.select(_db.notifications)
-            ..orderBy([(n) => OrderingTerm.desc(n.createdAt)]))
+            ..orderBy([
+              (n) => OrderingTerm.desc(n.createdAt),
+              (n) => OrderingTerm.desc(n.id),
+            ]))
           .watch();
 
   Future<int> addNotification({
