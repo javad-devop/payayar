@@ -1,0 +1,92 @@
+name: Android Build
+
+# بیلد اندروید پایا‌یار روی runner گیت‌هاب.
+# خروجی APK به‌صورت artifact ذخیره و روی Release هم منتشر می‌شود.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lib/**'
+      - 'android/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - 'assets/**'
+      - 'l10n.yaml'
+      - '.github/workflows/android-build.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'   # هر ساعت (مکمل کرون ۳۰ دقیقه‌ای داخلی)
+
+# اگر push جدیدی هنگام اجرای قبلی بیاید، اجرای ناتمامِ همین workflow کنسل می‌شود
+# تا به‌جای دو بیلد موازی، آخرین نسخه ساخته شود.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref == 'refs/heads/main' }}
+
+permissions:
+  contents: write   # لازم برای انتشار روی Release
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.6'
+          channel: stable
+          cache: true
+
+      - name: Flutter version
+        run: flutter --version
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Static analysis
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Build release APK
+        run: flutter build apk --release
+
+      - name: Rename artifact
+        run: |
+          cp build/app/outputs/flutter-apk/app-release.apk PAYAYAR-${GITHUB_SHA::7}.apk
+          ls -lh PAYAYAR-*.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PAYAYAR-apk
+          path: PAYAYAR-*.apk
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Publish to Release (main only)
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="android-build-${GITHUB_SHA::7}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" PAYAYAR-*.apk --clobber
+          else
+            gh release create "$TAG" PAYAYAR-*.apk \
+              --title "PAYAYAR build ${GITHUB_SHA::7}" \
+              --notes "خودکار ساخته شده از کامیت ${GITHUB_SHA:0:7}. امضا: debug key (همان‌طور که در build.gradle.kts تنظیم شده)."
+          fi

@@ -1,0 +1,51 @@
+import 'dart:io';
+
+import 'package:drift/drift.dart';
+import 'package:drift/native.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
+
+import 'tables.dart';
+
+part 'app_database.g.dart';
+
+@DriftDatabase(
+  tables: [
+    StrategicPlans,
+    Milestones,
+    Subjects,
+    Topics,
+    PlanTasks,
+    StudySessions,
+    Exams,
+    ExamResults,
+    LifestyleEntries,
+    AIConversations,
+    AIMessages,
+  ],
+)
+class AppDatabase extends _$AppDatabase {
+  AppDatabase() : super(_openConnection());
+
+  /// Test-only constructor (in-memory database).
+  AppDatabase.forTesting(super.e);
+
+  @override
+  int get schemaVersion => 1;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onCreate: (m) => m.createAll(),
+        onUpgrade: (m, from, to) async {
+          // Future migrations must preserve user data (AGENTS.md §21).
+        },
+      );
+}
+
+LazyDatabase _openConnection() {
+  return LazyDatabase(() async {
+    final dir = await getApplicationSupportDirectory();
+    final file = File(p.join(dir.path, 'payayar.sqlite'));
+    return NativeDatabase.createInBackground(file);
+  });
+}
