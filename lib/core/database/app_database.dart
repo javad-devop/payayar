@@ -23,6 +23,8 @@ part 'app_database.g.dart';
     AIConversations,
     AIMessages,
     Notifications,
+    Flashcards,
+    ReviewItems,
   ],
 )
 class AppDatabase extends _$AppDatabase {
