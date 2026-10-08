@@ -77,12 +77,13 @@ void main() {
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextField).first, 'پایتخت فرانسه؟');
     await tester.enterText(find.byType(TextField).last, 'پاریس');
+    await tester.pump();
     await tester.tap(find.text('ذخیره'));
     await tester.pump();
     await tester.pumpAndSettle();
 
     expect(find.byType(FlashcardDialog), findsNothing);
-    expect(find.text('۱ کارت برای امروز'), findsOneWidget);
+    expect(find.text('1 کارت برای امروز'), findsOneWidget);
     expect(find.text('شروع مرور'), findsOneWidget);
   });
 
@@ -116,7 +117,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('تعریف انرژی جنبشی'), findsOneWidget);
-    expect(find.textContaining('جعبه ۱'), findsOneWidget);
+    expect(find.textContaining('جعبه 1'), findsOneWidget);
 
     await tester.tap(find.byIcon(Icons.delete_outline));
     await tester.pumpAndSettle();

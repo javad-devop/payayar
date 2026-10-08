@@ -79,7 +79,7 @@ class FlashcardsCard extends ConsumerWidget {
             PrimaryButton(
               label: l10n.flashcard_review,
               icon: Icons.play_arrow_rounded,
-              onPressed: () => FlashcardReviewSheet.show(context),
+              onPressed: () => FlashcardReviewSheet.show(context, due),
             ),
           ],
         ],

@@ -36,11 +36,13 @@ class _FlashcardDialogState extends ConsumerState<FlashcardDialog> {
 
   Future<void> _save() async {
     if (!_canSave) return;
-    await ref.read(flashcardRepositoryProvider).addCard(
-          front: _front.text.trim(),
-          back: _back.text.trim(),
-        );
-    if (mounted) Navigator.pop(context);
+    // Grab what we need, close immediately, then persist — the dialog
+    // must not depend on the insert future to disappear.
+    final repo = ref.read(flashcardRepositoryProvider);
+    final front = _front.text.trim();
+    final back = _back.text.trim();
+    Navigator.pop(context);
+    await repo.addCard(front: front, back: back);
   }
 
   @override
@@ -87,7 +89,7 @@ class _FlashcardDialogState extends ConsumerState<FlashcardDialog> {
         ),
         PrimaryButton(
           label: l10n.common_save,
-          onPressed: _canSave ? _save : null,
+          onPressed: _save,
         ),
       ],
     );

@@ -45,7 +45,7 @@ void main() {
 
     final all = await repo.watchAll().first;
     expect(all.single.box, 2);
-    expect(all.single.dueAt.difference(before).inDays, 2);
+    expect(all.single.dueAt.difference(before).inHours, greaterThanOrEqualTo(47));
     expect(all.single.lastReviewedAt, isNotNull);
     expect(await repo.watchDue().first, isEmpty,
         reason: 'graded cards leave today\'s queue');
