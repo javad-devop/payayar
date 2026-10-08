@@ -63,3 +63,16 @@ final allExamResultsProvider = StreamProvider((ref) {
   final db = ref.watch(databaseProvider);
   return (db.select(db.examResults)).watch();
 });
+
+// ---- Local notifications (HANDOFF §43.1) ----
+
+final notificationRepositoryProvider = Provider<NotificationRepository>(
+    (ref) => NotificationRepository(ref.watch(databaseProvider)));
+
+/// Pending rows for the bell badge (created/unread only).
+final activeNotificationsProvider = StreamProvider(
+    (ref) => ref.watch(notificationRepositoryProvider).watchActive());
+
+/// Full history for the panel.
+final notificationHistoryProvider = StreamProvider(
+    (ref) => ref.watch(notificationRepositoryProvider).watchHistory());

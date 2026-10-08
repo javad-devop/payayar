@@ -15,14 +15,16 @@ export '../database/app_database.dart'
         ExamResult,
         LifestyleEntry,
         AIConversation,
-        AIMessage;
+        AIMessage,
+        AppNotification;
 export '../database/tables.dart'
     show
         Priority,
         TaskStatus,
         TopicStatus,
         SessionType,
-        ExamType;
+        ExamType,
+        AppNotificationStatus;
 
 /// Study domain: subjects, topics, sessions.
 class StudyRepository {
@@ -400,5 +402,111 @@ class AIRepository {
         .go();
     return (_db.delete(_db.aIConversations)..where((c) => c.id.equals(id)))
         .go();
+  }
+}
+
+/// Local notifications (HANDOFF §43.1): SQLite rows — no push server.
+/// Drives the bell badge (pending rows) and the history panel, and
+/// implements the «انجام وظیفه» action which ALWAYS re-checks the
+/// linked task's *current* status before touching anything.
+class NotificationRepository {
+  NotificationRepository(this._db);
+  final AppDatabase _db;
+
+  static const _settled = [
+    AppNotificationStatus.read,
+    AppNotificationStatus.actioned,
+    AppNotificationStatus.dismissed,
+  ];
+
+  /// Pending rows (created/unread), newest first — bell badge source.
+  Stream<List<AppNotification>> watchActive() =>
+      (_db.select(_db.notifications)
+            ..where((n) => n.status.isNotIn(_settled))
+            ..orderBy([(n) => OrderingTerm.desc(n.createdAt)]))
+          .watch();
+
+  /// Full history, newest first — history panel source.
+  Stream<List<AppNotification>> watchHistory() =>
+      (_db.select(_db.notifications)
+            ..orderBy([(n) => OrderingTerm.desc(n.createdAt)]))
+          .watch();
+
+  Future<int> addNotification({
+    required String title,
+    String? body,
+    int? taskId,
+  }) {
+    return _db.into(_db.notifications).insert(
+          NotificationsCompanion.insert(
+            title: title,
+            body: Value(body),
+            taskId: Value(taskId),
+          ),
+        );
+  }
+
+  /// Panel opened: every pending row becomes `read`.
+  Future<void> markAllRead() {
+    return (_db.update(_db.notifications)
+          ..where((n) => n.status.isNotIn(_settled)))
+        .write(NotificationsCompanion(
+      status: const Value(AppNotificationStatus.read),
+      updatedAt: Value(DateTime.now()),
+    ));
+  }
+
+  Future<void> dismiss(int id) {
+    return (_db.update(_db.notifications)..where((n) => n.id.equals(id)))
+        .write(NotificationsCompanion(
+      status: const Value(AppNotificationStatus.dismissed),
+      updatedAt: Value(DateTime.now()),
+    ));
+  }
+
+  /// «انجام وظیفه» — the mandated live re-check (HANDOFF §43.1):
+  /// * notification missing        → null
+  /// * no linked task             → `read` (nothing to complete)
+  /// * task deleted meanwhile      → `dismissed`
+  /// * task already completed     → `actioned`, task untouched
+  /// * otherwise                  → complete the task → `actioned`
+  Future<AppNotificationStatus?> actionTask(int id) async {
+    final n = await (_db.select(_db.notifications)
+          ..where((x) => x.id.equals(id)))
+        .getSingleOrNull();
+    if (n == null) return null;
+    final now = DateTime.now();
+
+    if (n.taskId == null) {
+      await (_db.update(_db.notifications)..where((x) => x.id.equals(id)))
+          .write(NotificationsCompanion(
+        status: const Value(AppNotificationStatus.read),
+        updatedAt: Value(now),
+      ));
+      return AppNotificationStatus.read;
+    }
+
+    final task = await (_db.select(_db.planTasks)
+          ..where((t) => t.id.equals(n.taskId)))
+        .getSingleOrNull();
+    if (task == null) {
+      await dismiss(id);
+      return AppNotificationStatus.dismissed;
+    }
+
+    if (task.status != TaskStatus.completed) {
+      await (_db.update(_db.planTasks)..where((t) => t.id.equals(task.id)))
+          .write(PlanTasksCompanion(
+        status: const Value(TaskStatus.completed),
+        completedAt: Value(now),
+      ));
+    }
+
+    await (_db.update(_db.notifications)..where((x) => x.id.equals(id)))
+        .write(const NotificationsCompanion(
+      status: Value(AppNotificationStatus.actioned),
+      updatedAt: Value.forUpdate(),
+    ));
+    return AppNotificationStatus.actioned;
   }
 }

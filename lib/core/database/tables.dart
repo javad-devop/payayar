@@ -152,3 +152,21 @@ class AIMessages extends Table {
   TextColumn get content => text()();
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
 }
+
+/// Local notification lifecycle (HANDOFF §43.1):
+/// created → unread → read → actioned/dismissed.
+enum AppNotificationStatus { created, unread, read, actioned, dismissed }
+
+/// SQLite-backed local notifications — no push server (HANDOFF §43.1).
+/// [taskId] links to a plan task so the bell action can re-check the
+/// task's *current* status before completing it.
+class Notifications extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get title => text().withLength(min: 1, max: 200)();
+  TextColumn get body => text().nullable()();
+  IntColumn get status =>
+      intEnum<AppNotificationStatus>().withDefault(const Constant(0))();
+  IntColumn get taskId => integer().nullable().references(PlanTasks, #id)();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+  DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
+}
