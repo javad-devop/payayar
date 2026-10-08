@@ -43,6 +43,7 @@ flutter:
 
   assets:
     - assets/fonts/
+    - assets/images/
 
   # Vazirmatn — the maintained distribution of the Vazir family
   # (design.md §8: primary UI font; closest available weights).

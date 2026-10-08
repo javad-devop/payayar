@@ -1,17 +1,25 @@
-# payayar
+# پایا‌یار
 
-A new Flutter project.
+![لوگوی پایا‌یار](assets/images/logo.jpg)
 
-## Getting Started
+اپلیکیشن **برنامه‌ریزی درسی محلی** برای داوطلبان کنکور — Flutter، کاملاً آفلاین، بدون حساب کاربری؛ همه‌چیز روی دستگاه خودت می‌ماند.
 
-This project is a starting point for a Flutter application.
+## امکانات
 
-A few resources to get you started if this is your first Flutter project:
+- 🕐 تایمر پومودورو / تمرکز (AGENTS §44)
+- 📝 یادداشت سریع از صفحهٔ اصلی (design §12.1)
+- 🗓️ برنامهٔ روزانه/هفتگی، آمار و گزارش پیشرفت
+- 🔔 یادآور محلی — بدون سرور، بدون اینترنت (مسیر بعدی)
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## توسعه
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter `3.47.6` / Dart `3.13.5`
+- `flutter pub get` → `flutter analyze` → `flutter test`
+- CI خودکار روی push به `main`: بیلد APK اندروید + نصب‌کنندهٔ ویندوز + اجرای تحلیل و تست‌ها
+
+## مستندات
+
+- `AGENTS.md` — قوانین و معماری (منبع حقیقت)
+- `design.md` — سیستم طراحی
+- `ROADMAP.md` — راهنمای مسیر و وضعیت پیشرفت (هر ۳۰ دقیقه خودکار به‌روز می‌شود)
+- `HANDOFF.md` — تحویل وضعیت بین جلسه‌ها
