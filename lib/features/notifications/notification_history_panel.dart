@@ -56,7 +56,7 @@ class _NotificationHistoryPanelState
                     AppSpacing.lg,
                   ),
                   itemCount: items.length,
-                  separatorBuilder: (_, __) => const SizedBox(
+                  separatorBuilder: (_, _) => const SizedBox(
                     height: AppSpacing.md,
                   ),
                   itemBuilder: (context, i) => _NotificationTile(
