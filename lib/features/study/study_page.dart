@@ -12,7 +12,6 @@ import '../../core/widgets/confirmation_dialog.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/page_header.dart';
 import '../../core/widgets/states.dart';
-import 'flashcard_dialog.dart';
 import 'flashcards_card.dart';
 import 'focus_timer_card.dart';
 

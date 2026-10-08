@@ -109,7 +109,7 @@ void main() {
   });
 
   testWidgets('management list shows box and deletes a card', (tester) async {
-    final id = await flashcards.addCard(front: 'تعریف انرژی جنبشی', back: 'نصف × جرم × سرعت²');
+    await flashcards.addCard(front: 'تعریف انرژی جنبشی', back: 'نصف × جرم × سرعت²');
     await pumpCard(tester);
 
     await tester.tap(find.byIcon(Icons.style_outlined));

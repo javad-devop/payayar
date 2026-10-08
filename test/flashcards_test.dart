@@ -80,7 +80,7 @@ void main() {
 
     final all = await repo.watchAll().first;
     expect(all.map((c) => c.card.front), ['تازه', 'قدیمی']);
-    expect(all.every((c) => c.box == 1 && c.dueAt != null), isTrue);
+    expect(all.every((c) => c.box == 1), isTrue);
   });
 
   test('deleteCard removes the card and its review item', () async {
