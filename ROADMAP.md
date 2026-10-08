@@ -6,7 +6,7 @@
 > منبع حقیقت قوانین پروژه: `AGENTS.md` (معماری) و `design.md` (طراحی).
 > `BUGS.md` حذف شد — هر سه باگ بسته شدند و با کد تطبیق داده شدند (بخش ۳).
 
-**آخرین به‌روزرسانی:** 2026-10-08 18:20 UTC
+**آخرین به‌روزرسانی:** 2026-10-08 18:56 UTC
 
 ---
 
@@ -29,9 +29,9 @@
 | تکمیل توسعه بخش‌ها | ⏳ در نوبت |
 
 **وضعیت مخزن (خوانده شد، نه حدس — در همین اجرا):**
-- کامیتِ مبنای این نسخه: `cb0ee8a` — `feat(notifications): wire producers — today's task reminders, focus timer, session log`؛ `git ls-remote origin main` هم روی `cb0ee8a` ⇒ همگام؛ `git status --short` خالی است (درخت کاری تمیز؛ دیگر WIPِ غیرcommitted در کار نیست).
-- ⚠️ **تاریخچهٔ مخزن بازنویسی/واردات شده است:** اکنون فقط **۱۲ کامیت** دارد و پایه، `fe5f5d1` (`chore: import payayar snapshot for CI verification`، ۲۰۲۶-۱۰-۰۸) است. کامیت‌هایی که در نسخه‌های قبلیِ همین فایل آمده‌اند (`0afb2ad`، `92574eb`، `1500a85`، `ee238d0`، `d9f3bda`، `6a12ea8`، `3037e40` و…) دیگر در تاریخچه نیستند؛ ارجاع‌هایشان به‌عنوان **بایگانی تاریخی** بخوانید.
-- ۱۲ کامیت به ترتیب: `fe5f5d1` (واردات snapshot) ← `eb8d36c` (لوگو + بازنویسی README) ← `d39ef94` (workflow دستی drift codegen) ← `9bbd174` (جدول نوتیفیکیشن، migration نسخهٔ ۲، repository، providerها) ← `7a6a41d` (بازتولید کد drift) ← `660e7df`، `1620d9a`، `f3f4b94` (رفع‌های نوتیفیکیشن) ← `5135297`، `741c53c`، `b7d32a1` (زنگ + پنل تاریخچه + تست‌ها) ← `cb0ee8a` (تولیدکننده‌های نوتیفیکیشن).
+- کامیتِ مبنای این نسخه: `151bce0` — `chore: auto roadmap publish` (انتشار خودکار رودمپ)؛ `git ls-remote origin main` هم روی `151bce0` ⇒ همگام؛ `git status --short` خالی است (درخت کاری تمیز).
+- ⚠️ **تاریخچهٔ مخزن بازنویسی/واردات شده است:** اکنون فقط **۱۳ کامیت** دارد و پایه، `fe5f5d1` (`chore: import payayar snapshot for CI verification`، ۲۰۲۶-۱۰-۰۸) است. کامیت‌هایی که در نسخه‌های قبلیِ همین فایل آمده‌اند (`0afb2ad`، `92574eb`، `1500a85`، `ee238d0`، `d9f3bda`، `6a12ea8`، `3037e40` و…) دیگر در تاریخچه نیستند؛ ارجاع‌هایشان به‌عنوان **بایگانی تاریخی** بخوانید.
+- ۱۳ کامیت به ترتیب: `fe5f5d1` (واردات snapshot) ← `eb8d36c` (لوگو + بازنویسی README) ← `d39ef94` (workflow دستی drift codegen) ← `9bbd174` (جدول نوتیفیکیشن، migration نسخهٔ ۲، repository، providerها) ← `7a6a41d` (بازتولید کد drift) ← `660e7df`، `1620d9a`، `f3f4b94` (رفع‌های نوتیفیکیشن) ← `5135297`، `741c53c`، `b7d32a1` (زنگ + پنل تاریخچه + تست‌ها) ← `cb0ee8a` (تولیدکننده‌های نوتیفیکیشن) ← `151bce0` (انتشار خودکار رودمپ؛ فقط `ROADMAP.md`).
 - شمارش مستقیم از HEAD: **۴۵ فایل `.dart` در `lib/`**، **۹ پوشه در `lib/features/`**، **۸ کلاس `*Page`**، **۹ فایل تست با مجموع ۴۹ تست**، **۳۱۷ کلید پیام** در هر فایل arb (مجموعهٔ کلیدهای fa و en یکسان).
 - **در این نوبت اجرای محلی ممکن نبود و CI جایگزین شد:** `flutter analyze` با `analysis server exited with code -9` و `flutter test` با «The Dart compiler exited unexpectedly» مردند؛ ریشه، سقف حافظهٔ همین کانتینر است (`/sys/fs/cgroup/memory.max` ≈ **۱ گیگابایت** و `memory.peak` از آن گذشته ⇒ OOM). طبق روالِ ثبت‌شده، دروازهٔ کیفیت همان CI است: روی همین HEAD، هر دو بیلد پلهٔ «Static analysis» و پلهٔ «Run tests» را سبز دارند (بخش ۲.۱).
 
@@ -103,7 +103,7 @@ HEAD سبز است)؛ اجرای محلی زیر سقف ۱ گیگابایتی cg
 
 **شواهد واقعی در این نوبت:**
 - `git ls-remote --tags origin`: **۵ تگ `android-build-*`** (`fe5f5d1`، `eb8d36c`، `f3f4b94`، `b7d32a1`، `cb0ee8a`) و **۵ تگ `windows-build-*`** با همان کامیت‌ها ⇒ **۱۰ Release** (`gh release list` هم همین ۱۰ مورد را نشان می‌دهد؛ آخرین‌ها `PAYAYAR build cb0ee8a` و `PAYAYAR Windows cb0ee8a` در ۱۸:۰۱ و ۱۸:۰۰ UTC).
-- `gh run list --limit 5`: هر ۵ اجرای اخیر `completed / success` — Android Build و Windows Build روی `cb0ee8a` (۱۷:۵۲ UTC) و `b7d32a1`، به‌علاوهٔ یک اجرای سبز `Codegen` روی شاخهٔ `feat/notifications`.
+- `gh run list --limit 5`: هر ۵ اجرای اخیر `completed / success` — Android Build و Windows Build روی `cb0ee8a` (۱۷:۵۲ UTC) و `b7d32a1`، به‌علاوهٔ یک اجرای سبز `Codegen` روی شاخهٔ `feat/notifications`. برای `151bce0` (کامیت فقط-رودمپ، بدون تغییر کد) اجرایی ثبت نشده؛ کد از `cb0ee8a` به بعد تغییری نکرده است.
 - جزئیات سطح پله‌ها روی `cb0ee8a` (`gh run view 37819944854 --job 113458086897`): `Static analysis ✓`، `Run tests ✓`، `Build release APK ✓`، `Publish to Release ✓`.
 - ⚠️ یک هشدار قدیمیِ CI: `actions/checkout@v4` و `setup-java@v4` روی Node.js 20 منسوخ شده‌اند (فقط هشدار است، اجرا را سبز نگه می‌دارد).
 
@@ -219,3 +219,4 @@ HEAD سبز است)؛ اجرای محلی زیر سقف ۱ گیگابایتی cg
 - 2026-10-03 17:45 UTC — **پومودورو (AGENTS §44) اضافه شد.** `focus_timer.dart` (state اپ-اسکوپ، ثبت از طریق `study_sessions`) + `focus_timer_card.dart` (کارت در صفحهٔ مطالعه با `ProgressRing`) + ۹ تست در `focus_timer_test.dart`. ۲۴ کلید l10n در fa/en، `AppRadius.icon` به توکن‌ها اضافه شد، `AppSettings.focusMinutes` ذخیره می‌شود. نتیجه: `flutter analyze` → No issues found؛ `flutter test` → **۳۱ تست پاس**.
 - 2026-10-03 18:10 UTC — **به‌روزرسانی و انتشار رودمپ پس از ۴ کامیت جدید** (`92574eb` CI اندروید، `1500a85` CI ویندوز، `ee238d0` نصب‌کنندهٔ Inno Setup، `0afb2ad` پومودورو). راستی‌آزمایی روی کلون تمیز HEAD: `flutter analyze` → No issues found، `flutter test` → **۳۱/۳۱ پاس**؛ شمارش مستقیم کد: ۴۲ فایل dart در `lib/`، ۱۳ فایل در `lib/features/`، ۸ کلاس `*Page`، ۶ فایل تست/۳۱ تست، **۲۹۸** کلید l10n در هر arb. تأیید شد `BUGS.md` نه در درخت است نه در `git ls-files`. شواهد CI از ریموت: ۲ تگ `android-build-*` و ۳ تگ `windows-build-*` (۵ Release). ثبت شد که یک جلسهٔ موازی WIP یادداشت سریع را غیرcommitted گذاشته است.
 - 2026-10-08 18:20 UTC — **بازخوانی واقعیت پس از بازنویسی تاریخچه + تکمیل نوتیفیکیشن.** خواندن `git log` (۱۲ کامیت، HEAD=`cb0ee8a` هم‌تراز `origin/main`، درخت تمیز)، `git status` (خالی)، `gh run list` (۵ اجرای اخیر همه `success`). شمارش مستقیم HEAD: ۴۵ فایل dart در `lib/`، ۹ پوشه `features`، ۸ `*Page`، **۹ فایل تست / ۴۹ تست**، **۳۱۷ کلید** l10n در هر arb (دو مجموعه یکسان). شواهد ریموت: **۵ تگ اندروید + ۵ تگ ویندوز = ۱۰ Release**؛ سطح پله‌ها روی `cb0ee8a`: `Static analysis ✓`، `Run tests ✓`. اجرای محلی `flutter analyze`/`flutter test` در این نوبت ممکن نشد: هر دو زیر سقف حافظهٔ کانتینر (`memory.max` ≈ ۱ گیگابایت، `memory.peak` از آن گذشت) با exit -9 / «compiler exited unexpectedly» مردند ⇒ طبق روال، CI دروازهٔ کیفیت است. بخش‌های نو: ۳.۲ نوتیفیکیشن، ۳.۳ یادداشت سریع؛ جدول وضعیت کلی همگام شد (نوتیفیکیشن و یادداشت سریع از «در نوبت» به ✅ رفتند).
+- 2026-10-08 18:56 UTC — **به‌روزرسانی دوره‌ای رودمپ.** خواندن واقعیت: `git log --oneline -8` (HEAD=`151bce0` ← `cb0ee8a`، ۱۳ کامیت)، `git status --short` (خالی)، `gh run list --limit 5` (هر ۵ تا `completed/success`؛ آخرین‌ها Android/Windows Build روی `cb0ee8a` در ۱۷:۵۲ UTC)، `gh release list` + `git ls-remote --tags` (۱۰ Release، آخرین‌ها `PAYAYAR build/Windows cb0ee8a` در ۱۸:۰۱/۱۸:۰۰ UTC). `git ls-remote origin main` روی `151bce0` ⇒ همگام. تغییرات این نوبت: خط «آخرین به‌روزرسانی»، بولت‌های وضعیت مخزن (۱۳ کامیت + `151bce0`) و شواهد CI؛ جدول وضعیت کلی بدون تغییر (کدی از `cb0ee8a` به بعد عوض نشده). اجرای محلی لازم نبود چون کد تغییری نکرده است.
