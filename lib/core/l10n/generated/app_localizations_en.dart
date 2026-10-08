@@ -933,4 +933,28 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get home_quickNote_emptyDesc =>
       'The fastest way to capture a thought or tomorrow\'s task.';
+
+  @override
+  String get notif_title => 'Notifications';
+
+  @override
+  String get notif_emptyTitle => 'No notifications yet';
+
+  @override
+  String get notif_emptyDesc => 'Plan reminders will appear here.';
+
+  @override
+  String get notif_doTask => 'Do task';
+
+  @override
+  String get notif_dismiss => 'Dismiss';
+
+  @override
+  String get notif_status_read => 'Read';
+
+  @override
+  String get notif_status_actioned => 'Done';
+
+  @override
+  String get notif_status_dismissed => 'Dismissed';
 }

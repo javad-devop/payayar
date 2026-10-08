@@ -319,5 +319,13 @@
   "home_quickNote_clearDesc": "This note's text will be removed permanently.",
   "home_quickNote_cleared": "Note cleared",
   "home_quickNote_emptyTitle": "No note yet",
-  "home_quickNote_emptyDesc": "The fastest way to capture a thought or tomorrow's task."
+  "home_quickNote_emptyDesc": "The fastest way to capture a thought or tomorrow's task.",
+  "notif_title": "Notifications",
+  "notif_emptyTitle": "No notifications yet",
+  "notif_emptyDesc": "Plan reminders will appear here.",
+  "notif_doTask": "Do task",
+  "notif_dismiss": "Dismiss",
+  "notif_status_read": "Read",
+  "notif_status_actioned": "Done",
+  "notif_status_dismissed": "Dismissed"
 }

@@ -7,6 +7,7 @@ import '../features/ai_advisor/ai_advisor_page.dart';
 import '../features/exams/exams_page.dart';
 import '../features/home/home_page.dart';
 import '../features/lifestyle/lifestyle_page.dart';
+import '../features/notifications/bell_button.dart';
 import '../features/planning/planning_page.dart';
 import '../features/reports/reports_page.dart';
 import '../features/settings/settings_page.dart';
@@ -103,6 +104,7 @@ class _AppHeader extends ConsumerWidget {
               ],
             ),
             const Spacer(),
+            const BellButton(),
             IconButton(
               tooltip: isDark ? l10n.settings_theme_light : l10n.settings_theme_dark,
               onPressed: () => ref.read(appSettingsProvider.notifier).setThemeMode(

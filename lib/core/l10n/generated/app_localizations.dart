@@ -1891,6 +1891,54 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'سریع‌ترین راه برای ثبت یک فکر یا کار فردا.'**
   String get home_quickNote_emptyDesc;
+
+  /// No description provided for @notif_title.
+  ///
+  /// In fa, this message translates to:
+  /// **'اعلان‌ها'**
+  String get notif_title;
+
+  /// No description provided for @notif_emptyTitle.
+  ///
+  /// In fa, this message translates to:
+  /// **'اعلانی نداری'**
+  String get notif_emptyTitle;
+
+  /// No description provided for @notif_emptyDesc.
+  ///
+  /// In fa, this message translates to:
+  /// **'یادآورهای برنامه اینجا نمایش داده می‌شوند.'**
+  String get notif_emptyDesc;
+
+  /// No description provided for @notif_doTask.
+  ///
+  /// In fa, this message translates to:
+  /// **'انجام وظیفه'**
+  String get notif_doTask;
+
+  /// No description provided for @notif_dismiss.
+  ///
+  /// In fa, this message translates to:
+  /// **'بی‌توجه'**
+  String get notif_dismiss;
+
+  /// No description provided for @notif_status_read.
+  ///
+  /// In fa, this message translates to:
+  /// **'خوانده شد'**
+  String get notif_status_read;
+
+  /// No description provided for @notif_status_actioned.
+  ///
+  /// In fa, this message translates to:
+  /// **'انجام شد'**
+  String get notif_status_actioned;
+
+  /// No description provided for @notif_status_dismissed.
+  ///
+  /// In fa, this message translates to:
+  /// **'نادیده گرفته شد'**
+  String get notif_status_dismissed;
 }
 
 class _AppLocalizationsDelegate

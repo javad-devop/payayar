@@ -931,4 +931,28 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String get home_quickNote_emptyDesc =>
       'سریع‌ترین راه برای ثبت یک فکر یا کار فردا.';
+
+  @override
+  String get notif_title => 'اعلان‌ها';
+
+  @override
+  String get notif_emptyTitle => 'اعلانی نداری';
+
+  @override
+  String get notif_emptyDesc => 'یادآورهای برنامه اینجا نمایش داده می‌شوند.';
+
+  @override
+  String get notif_doTask => 'انجام وظیفه';
+
+  @override
+  String get notif_dismiss => 'بی‌توجه';
+
+  @override
+  String get notif_status_read => 'خوانده شد';
+
+  @override
+  String get notif_status_actioned => 'انجام شد';
+
+  @override
+  String get notif_status_dismissed => 'نادیده گرفته شد';
 }

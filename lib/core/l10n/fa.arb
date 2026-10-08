@@ -319,5 +319,13 @@
   "home_quickNote_clearDesc": "متن این یادداشت برای همیشه حذف می‌شود.",
   "home_quickNote_cleared": "یادداشت پاک شد",
   "home_quickNote_emptyTitle": "یادداشتی نداری",
-  "home_quickNote_emptyDesc": "سریع‌ترین راه برای ثبت یک فکر یا کار فردا."
+  "home_quickNote_emptyDesc": "سریع‌ترین راه برای ثبت یک فکر یا کار فردا.",
+  "notif_title": "اعلان‌ها",
+  "notif_emptyTitle": "اعلانی نداری",
+  "notif_emptyDesc": "یادآورهای برنامه اینجا نمایش داده می‌شوند.",
+  "notif_doTask": "انجام وظیفه",
+  "notif_dismiss": "بی‌توجه",
+  "notif_status_read": "خوانده شد",
+  "notif_status_actioned": "انجام شد",
+  "notif_status_dismissed": "نادیده گرفته شد"
 }
