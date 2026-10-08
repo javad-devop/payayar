@@ -16,7 +16,7 @@ export '../database/app_database.dart'
         LifestyleEntry,
         AIConversation,
         AIMessage,
-        AppNotification;
+        Notification;
 export '../database/tables.dart'
     show
         Priority,
@@ -420,14 +420,14 @@ class NotificationRepository {
   ];
 
   /// Pending rows (created/unread), newest first — bell badge source.
-  Stream<List<AppNotification>> watchActive() =>
+  Stream<List<Notification>> watchActive() =>
       (_db.select(_db.notifications)
-            ..where((n) => n.status.isNotIn(_settled))
+            ..where((n) => n.status.isNotIn(_settled.map((s) => s.index)))
             ..orderBy([(n) => OrderingTerm.desc(n.createdAt)]))
           .watch();
 
   /// Full history, newest first — history panel source.
-  Stream<List<AppNotification>> watchHistory() =>
+  Stream<List<Notification>> watchHistory() =>
       (_db.select(_db.notifications)
             ..orderBy([(n) => OrderingTerm.desc(n.createdAt)]))
           .watch();
@@ -449,7 +449,7 @@ class NotificationRepository {
   /// Panel opened: every pending row becomes `read`.
   Future<void> markAllRead() {
     return (_db.update(_db.notifications)
-          ..where((n) => n.status.isNotIn(_settled)))
+          ..where((n) => n.status.isNotIn(_settled.map((s) => s.index))))
         .write(NotificationsCompanion(
       status: const Value(AppNotificationStatus.read),
       updatedAt: Value(DateTime.now()),
@@ -476,8 +476,9 @@ class NotificationRepository {
         .getSingleOrNull();
     if (n == null) return null;
     final now = DateTime.now();
+    final taskId = n.taskId;
 
-    if (n.taskId == null) {
+    if (taskId == null) {
       await (_db.update(_db.notifications)..where((x) => x.id.equals(id)))
           .write(NotificationsCompanion(
         status: const Value(AppNotificationStatus.read),
@@ -487,7 +488,7 @@ class NotificationRepository {
     }
 
     final task = await (_db.select(_db.planTasks)
-          ..where((t) => t.id.equals(n.taskId)))
+          ..where((t) => t.id.equals(taskId)))
         .getSingleOrNull();
     if (task == null) {
       await dismiss(id);
@@ -503,9 +504,9 @@ class NotificationRepository {
     }
 
     await (_db.update(_db.notifications)..where((x) => x.id.equals(id)))
-        .write(const NotificationsCompanion(
-      status: Value(AppNotificationStatus.actioned),
-      updatedAt: Value.forUpdate(),
+        .write(NotificationsCompanion(
+      status: const Value(AppNotificationStatus.actioned),
+      updatedAt: Value(now),
     ));
     return AppNotificationStatus.actioned;
   }

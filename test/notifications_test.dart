@@ -1,4 +1,3 @@
-import 'package:drift/drift.dart' show Value;
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:payayar/core/database/app_database.dart';
@@ -33,7 +32,7 @@ void main() {
     ));
   }
 
-  Future<AppNotification> getNotification(int id) {
+  Future<Notification> getNotification(int id) {
     return (db.select(db.notifications)..where((n) => n.id.equals(id)))
         .getSingle();
   }
