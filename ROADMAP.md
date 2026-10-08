@@ -6,7 +6,7 @@
 > منبع حقیقت قوانین پروژه: `AGENTS.md` (معماری) و `design.md` (طراحی).
 > `BUGS.md` حذف شد — هر سه باگ بسته شدند و با کد تطبیق داده شدند (بخش ۳).
 
-**آخرین به‌روزرسانی:** 2026-10-08 18:56 UTC
+**آخرین به‌روزرسانی:** 2026-10-08 19:30 UTC
 
 ---
 
@@ -17,23 +17,23 @@
 | راه‌اندازی محیط توسعه (Flutter 3.47.6 / Dart 3.13.5) | ✅ انجام شد |
 | دریافت وابستگی‌ها (`flutter pub get`) | ✅ انجام شد |
 | رفع باگ‌های `BUGS.md` (هر ۳ باگ) | ✅ انجام شد — `BUGS.md` حذف شد |
-| `flutter analyze` | ✅ از مسیر CI — سبز روی آخرین کامیت‌ها |
-| `flutter test` (کل مجموعه) | ✅ از مسیر CI — ۹ فایل، **۴۹ تست** (جزئیات: شمارش مستقیم HEAD) |
-| ⚙️ CI اندروید (بیلد APK + انتشار Release) | ✅ راه‌اندازی شد — **۵ نسخه منتشرشده** |
-| 🪟 CI ویندوز (setup.exe با Inno Setup) | ✅ راه‌اندازی شد — **۵ نسخه منتشرشده** |
+| `flutter analyze` | ⚠️ روی `main` سبز (آخرین اجرای سبز: `cb0ee8a`)؛ روی شاخهٔ `feat/flashcards` **۳ هشدار** دارد و پلهٔ analyze در CI رد می‌شود |
+| `flutter test` (کل مجموعه) | ⚠️ **۱۱ فایل، ۶۰ تست** (شمارش مستقیم HEAD)؛ اجرای CI روی شاخهٔ فلش‌کارت هنوز ثبت نشده چون analyze قرمز است — آخرین اجرای سبز تست CI روی `cb0ee8a` (۴۹ تست) |
+| ⚙️ CI اندروید (بیلد APK + انتشار Release) | ✅ راه‌اندازی شد — **۵ نسخه منتشرشده**؛ آخرین اجرای سبز روی `main`/`cb0ee8a` (۱۷:۵۲ UTC) |
+| 🪟 CI ویندوز (setup.exe با Inno Setup) | ✅ راه‌اندازی شد — **۵ نسخه منتشرشده**؛ آخرین اجرای سبز روی `main`/`cb0ee8a` (۱۷:۵۲ UTC) |
 | ⏱️ پومودورو / تایمر تمرکز (AGENTS §44) | ✅ انجام شد |
 | 🔔 نوتیفیکیشن محلی (AGENTS §43.1) | ✅ انجام شد — ۹ کامیت، سبز در CI (بخش ۳.۲) |
 | 📝 یادداشت سریع (design §12.1) | ✅ انجام شد و کامیت شد (بخش ۳.۳) |
 | 🤖 AI بخش‌به‌بخش (AGENTS §7.A) | ⏳ در نوبت |
-| 🃏 فلش‌کارت و مرور (AGENTS §45) | ⏳ در نوبت |
+| 🃏 فلش‌کارت و مرور (AGENTS §45) | 🔄 در جریان روی شاخهٔ `feat/flashcards` — ۴ کامیت (۱۹:۱۳–۱۹:۲۲ UTC)؛ هنوز به `main` ادغام نشده (بخش ۳.۴) |
 | تکمیل توسعه بخش‌ها | ⏳ در نوبت |
 
 **وضعیت مخزن (خوانده شد، نه حدس — در همین اجرا):**
-- کامیتِ مبنای این نسخه: `151bce0` — `chore: auto roadmap publish` (انتشار خودکار رودمپ)؛ `git ls-remote origin main` هم روی `151bce0` ⇒ همگام؛ `git status --short` خالی است (درخت کاری تمیز).
-- ⚠️ **تاریخچهٔ مخزن بازنویسی/واردات شده است:** اکنون فقط **۱۳ کامیت** دارد و پایه، `fe5f5d1` (`chore: import payayar snapshot for CI verification`، ۲۰۲۶-۱۰-۰۸) است. کامیت‌هایی که در نسخه‌های قبلیِ همین فایل آمده‌اند (`0afb2ad`، `92574eb`، `1500a85`، `ee238d0`، `d9f3bda`، `6a12ea8`، `3037e40` و…) دیگر در تاریخچه نیستند؛ ارجاع‌هایشان به‌عنوان **بایگانی تاریخی** بخوانید.
-- ۱۳ کامیت به ترتیب: `fe5f5d1` (واردات snapshot) ← `eb8d36c` (لوگو + بازنویسی README) ← `d39ef94` (workflow دستی drift codegen) ← `9bbd174` (جدول نوتیفیکیشن، migration نسخهٔ ۲، repository، providerها) ← `7a6a41d` (بازتولید کد drift) ← `660e7df`، `1620d9a`، `f3f4b94` (رفع‌های نوتیفیکیشن) ← `5135297`، `741c53c`، `b7d32a1` (زنگ + پنل تاریخچه + تست‌ها) ← `cb0ee8a` (تولیدکننده‌های نوتیفیکیشن) ← `151bce0` (انتشار خودکار رودمپ؛ فقط `ROADMAP.md`).
-- شمارش مستقیم از HEAD: **۴۵ فایل `.dart` در `lib/`**، **۹ پوشه در `lib/features/`**، **۸ کلاس `*Page`**، **۹ فایل تست با مجموع ۴۹ تست**، **۳۱۷ کلید پیام** در هر فایل arb (مجموعهٔ کلیدهای fa و en یکسان).
-- **در این نوبت اجرای محلی ممکن نبود و CI جایگزین شد:** `flutter analyze` با `analysis server exited with code -9` و `flutter test` با «The Dart compiler exited unexpectedly» مردند؛ ریشه، سقف حافظهٔ همین کانتینر است (`/sys/fs/cgroup/memory.max` ≈ **۱ گیگابایت** و `memory.peak` از آن گذشته ⇒ OOM). طبق روالِ ثبت‌شده، دروازهٔ کیفیت همان CI است: روی همین HEAD، هر دو بیلد پلهٔ «Static analysis» و پلهٔ «Run tests» را سبز دارند (بخش ۲.۱).
+- شاخهٔ کاری اکنون `feat/flashcards` است: HEAD=`2abdb23` (۱۹:۲۲ UTC)؛ `origin/feat/flashcards` هم روی `2abdb23` ⇒ همگام؛ `origin/main` روی `d8315e2` (انتشار خودکار رودمپ نوبت پیش)؛ `git status --short` پیش از این نوبت خالی بود (درخت کاری تمیز).
+- مجموع **۱۹ کامیت** در HEAD. **۴ کامیت نو** پس از آخرین نوبت، همه روی همین شاخه و همه فلش‌کارت: `6a4d374` (لایهٔ دادهٔ مرور پراکنده، SM-2 lite) ← `08c93f2` (کارت صفحهٔ درس، جلسهٔ مرور، UI افزودن/مدیریت — HANDOFF §45) ← `e28b810` (ثبت `Flashcards`/`ReviewItems` در آنتیشن `@DriftDatabase`) ← `2abdb23` (نوع `orderBy` + `ListView` غیر-const در هارنس تست).
+- ⚠️ **تاریخچهٔ مخزن بازنویسی/واردات شده است:** پایه، `fe5f5d1` (`chore: import payayar snapshot for CI verification`، ۲۰۲۶-۱۰-۰۸) است. کامیت‌هایی که در نسخه‌های قبلیِ همین فایل آمده‌اند (`0afb2ad`، `92574eb`، `1500a85`، `ee238d0`، `d9f3bda`، `6a12ea8`، `3037e40` و…) دیگر در تاریخچه نیستند؛ ارجاع‌هایشان به‌عنوان **بایگانی تاریخی** بخوانید.
+- شمارش مستقیم از HEAD: **۴۸ فایل `.dart` در `lib/`** (۴۷ منبع + ۱ `.g.dart`)، **۹ پوشه در `lib/features/`** (فلش‌کارت زیر `study/` است، پوشهٔ جدا نساخت)، **۸ کلاس `*Page`**، **۱۱ فایل تست با مجموع ۶۰ تست**، **۳۳۷ کلید پیام** در هر فایل arb (هر دو مجموعه یکسان؛ `flashcard_*`).
+- **اجرا همچنان محلی ممکن نیست؛ دروازهٔ کیفیت CI است** — با این تفاوت که این نوبت CI هم روی شاخهٔ فلش‌کارت **سبز نیست**: ۴ اجرای `Codegen` (workflow دستی، ۱۹:۱۳ تا ۱۹:۲۲ UTC) همه در پلهٔ «Static analysis» شکستند با **۳ هشدار** `flutter analyze` (جزئیات: بخش ۲.۱). ریشهٔ ناتوانی محلی همچنان سقف حافظهٔ همین کانتینر است (`/sys/fs/cgroup/memory.max` ≈ **۱ گیگابایت** و `memory.peak` از آن گذشته ⇒ OOM با `analysis server exited with code -9` / «The Dart compiler exited unexpectedly»).
 
 ### ۱.۱. کارِ موازیِ در جریان (غیرcommitted)
 
@@ -44,8 +44,8 @@
 
 ## ۲. پیشرفت بخش‌های محصول
 
-اعداد از شمارش مستقیمِ کدِ کامیت‌شده (HEAD): **۴۵ فایل `.dart` در `lib/`**، **۹ پوشه در
-`lib/features/`**، **۸ کلاس `*Page`**، **۹ فایل تست** با مجموع **۴۹ تست**، **۳۱۷ کلید پیام**
+اعداد از شمارش مستقیمِ کدِ کامیت‌شده (HEAD): **۴۸ فایل `.dart` در `lib/`**، **۹ پوشه در
+`lib/features/`**، **۸ کلاس `*Page`**، **۱۱ فایل تست** با مجموع **۶۰ تست**، **۳۳۷ کلید پیام**
 در هر فایل arb.
 
 | بخش | وضعیت | واقعیت کد |
@@ -59,17 +59,18 @@
 | مشاور AI | ✅ موجود | `lib/features/ai_advisor/ai_advisor_page.dart` |
 | تنظیمات | ✅ موجود | `lib/features/settings/settings_page.dart` |
 | 🔔 نوتیفیکیشن | ✅ موجود (بدون Page؛ در هدر پوسته) | `lib/features/notifications/bell_button.dart`، `notification_history_panel.dart` + `lib/app/shell.dart:107` |
+| 🃏 فلش‌کارت و مرور | 🔄 کد نوشته و کامیت شده روی `feat/flashcards`؛ در `main` نیست | `lib/features/study/flashcards_card.dart`، `flashcard_dialog.dart`، `flashcard_review_sheet.dart` + جدول/پرسش‌ها در `tables.dart` و `repositories.dart` |
 
 **جزئیات گزارش‌ها:** ۸ کارت در صفحه — مطالعه، خواب (خطی)، ورزش (میله‌ای)، تعداد تست (میله‌ای)،
 توزیع درس‌ها، برنامه‌ریزی، تسلط، روند نمرات آزمون. سه کارت اخیر نو هستند و هر سه روی
 `_TrendCard` مشترک ساخته شده‌اند.
 
-**ترجمه:** شمارش مستقیم در HEAD: **۳۱۷ کلید پیام** در `lib/core/l10n/fa.arb` و همان تعداد در
-`en.arb` (مجموعهٔ کلیدها یکسان است؛ به‌علاوهٔ `@@locale`). رشد **خالص ۱۹ کلید** نسبت به
-پایهٔ قبلی (۲۹۸ → ۳۱۷): اکنون **۱۱ کلید `notif_*`** و **۱۰ کلید `home_quickNote_*`** هست؛
-یعنی ۲۱ کلید نو کمتر از این جمع، پس ظاهراً ۲ کلید قدیمی در مسیر حذف/ادغام شده‌اند.
+**ترجمه:** شمارش مستقیم در HEAD: **۳۳۷ کلید پیام** در `lib/core/l10n/fa.arb` و همان تعداد در
+`en.arb` (مجموعهٔ کلیدها یکسان است؛ به‌علاوهٔ `@@locale`). آخرین رشد: **۲۰ کلید `flashcard_*`**
+نو نسبت به `d8315e2` (۳۱۷ → ۳۳۷، هیچ کلیدی حذف/ادغام نشد). پیش‌ترها ۱۱ کلید `notif_*` و
+۱۰ کلید `home_quickNote_*` اضافه شده بود (پایهٔ قدیمی‌تر: ۲۹۸).
 
-**تست‌ها (۹ فایل، ۴۹ تست):**
+**تست‌ها (۱۱ فایل، ۶۰ تست):**
 
 | فایل | تعداد |
 |---|---|
@@ -79,12 +80,16 @@
 | `test/notifications_test.dart` | ۹ |
 | `test/notifications_ui_test.dart` | ۴ |
 | `test/quick_note_test.dart` | ۵ |
+| `test/flashcards_test.dart` | ۷ |
+| `test/flashcards_ui_test.dart` | ۴ |
 | `test/bug1_subject_dialog_test.dart` | ۱ |
 | `test/bug2_exam_dialog_test.dart` | ۲ |
 | `test/bug3_reports_charts_test.dart` | ۲ |
 
 اجرا و تأیید این تست‌ها از مسیر **CI** می‌آید (پلهٔ «Run tests» در بیلدهای اندروید/ویندوز روی
-HEAD سبز است)؛ اجرای محلی زیر سقف ۱ گیگابایتی cgroup ممکن نیست (بخش ۱).
+`main`/`cb0ee8a` سبز است؛ **۱۱ تست نوی فلش‌کارت هنوز در CI اجرا نشده‌اند** چون شاخهٔ
+`feat/flashcards` پلهٔ analyze را رد نمی‌کند)؛ اجرای محلی زیر سقف ۱ گیگابایتی cgroup ممکن
+نیست (بخش ۱).
 
 ---
 
@@ -102,10 +107,12 @@ HEAD سبز است)؛ اجرای محلی زیر سقف ۱ گیگابایتی cg
   برای وقتی که شمای دیتابیس عوض شده و باید کدِ `.g.dart` محلی بازتولید شود.
 
 **شواهد واقعی در این نوبت:**
-- `git ls-remote --tags origin`: **۵ تگ `android-build-*`** (`fe5f5d1`، `eb8d36c`، `f3f4b94`، `b7d32a1`، `cb0ee8a`) و **۵ تگ `windows-build-*`** با همان کامیت‌ها ⇒ **۱۰ Release** (`gh release list` هم همین ۱۰ مورد را نشان می‌دهد؛ آخرین‌ها `PAYAYAR build cb0ee8a` و `PAYAYAR Windows cb0ee8a` در ۱۸:۰۱ و ۱۸:۰۰ UTC).
-- `gh run list --limit 5`: هر ۵ اجرای اخیر `completed / success` — Android Build و Windows Build روی `cb0ee8a` (۱۷:۵۲ UTC) و `b7d32a1`، به‌علاوهٔ یک اجرای سبز `Codegen` روی شاخهٔ `feat/notifications`. برای `151bce0` (کامیت فقط-رودمپ، بدون تغییر کد) اجرایی ثبت نشده؛ کد از `cb0ee8a` به بعد تغییری نکرده است.
+- `git ls-remote --tags origin`: **۵ تگ `android-build-*`** (`fe5f5d1`، `eb8d36c`، `f3f4b94`، `b7d32a1`، `cb0ee8a`) و **۵ تگ `windows-build-*`** با همان کامیت‌ها ⇒ **۱۰ Release** (بدون تغییر نسبت به نوبت پیش؛ `gh release list` هم همین ۱۰ مورد را نشان می‌دهد).
+- `gh run list --limit 12`: **۴ اجرای اخیر `Codegen` روی `feat/flashcards` همه `completed/failure`** (۱۹:۱۳، ۱۹:۱۷، ۱۹:۱۸ و ۱۹:۲۲ UTC؛ workflow دستی/`workflow_dispatch`، آخرینی با run ID `37831499223`) — همه در پلهٔ «Static analysis» شکستند، پلهٔ «Tests» هم اصلاً اجرا نشد.
+- ریشهٔ شکست (از `gh run view --log-failed`): `flutter analyze` دقیقاً **۳ هشدار** می‌دهد و با exit 1 خارج می‌شود: `unused_import` در `lib/features/study/study_page.dart:15` (import کردن `flashcard_dialog.dart` بدون استفاده)، `unnecessary_null_comparison` در `test/flashcards_test.dart:83`، `unused_local_variable` در `test/flashcards_ui_test.dart:112`. ← تا وقتی این سه هشدار برطرف نشود، هیچ پلهٔ کیفیتی روی این شاخه سبز نمی‌شود.
+- بیلدهای اندروید/ویندوز فقط روی `push` به `main` (با `paths` محدود) + ساعتی + دستی اجرا می‌شوند؛ پس کامیت‌های `feat/flashcards` اصلاً بیلد نشده‌اند. آخرین اجرای سبز: `Android Build` و `Windows Build` روی `main`/`cb0ee8a` در **۱۷:۵۲ UTC** (هر دو `success`).
 - جزئیات سطح پله‌ها روی `cb0ee8a` (`gh run view 37819944854 --job 113458086897`): `Static analysis ✓`، `Run tests ✓`، `Build release APK ✓`، `Publish to Release ✓`.
-- ⚠️ یک هشدار قدیمیِ CI: `actions/checkout@v4` و `setup-java@v4` روی Node.js 20 منسوخ شده‌اند (فقط هشدار است، اجرا را سبز نگه می‌دارد).
+- ⚠️ دو هشدار قدیمیِ CI: `actions/checkout@v4` و `setup-java@v4` روی Node.js 20 منسوخ شده‌اند (فقط هشدار است)؛ و `ubuntu-latest` از ۲۰۲۶-۱۰-۱۹ به Ubuntu 26 مهاجرت می‌کند.
 
 ---
 
@@ -134,7 +141,7 @@ HEAD سبز است)؛ اجرای محلی زیر سقف ۱ گیگابایتی cg
 
 ### وضعیت نهایی
 > `BUGS.md` از مخزن **حذف شد** و در هر نوبت دوباره بررسی می‌شود: نه در درخت کاری هست و نه در
-> `git ls-files` ⇒ سه باگ واقعاً بسته‌اند و ۵ تستشان در میان ۴۹ تست HEAD است (کل مجموعه در CI سبز).
+> `git ls-files` ⇒ سه باگ واقعاً بسته‌اند و ۵ تستشان در میان ۶۰ تست HEAD است (اجرای کامل روی `main`/`cb0ee8a` سبز بود).
 >
 > **بازبینی KI-01:** در `lib/` هیچ فراخوانی `invoke(` نیست؛ رشته‌های snake_case فقط در فایل‌های
 > `.g.dart` (نام ستون‌های drift)، دو کد خطای رابط کاربری (`invalid_key`، `network`) و فیلد JSON
@@ -180,7 +187,7 @@ HEAD سبز است)؛ اجرای محلی زیر سقف ۱ گیگابایتی cg
 | بدون وابستگی جدید | فقط drift/Riverpodِ موجود؛ `flutter_local_notifications` اضافه نشد |
 
 **تست:** `test/notifications_test.dart` (۹ تست: lifecycle + `actionTask`) و `test/notifications_ui_test.dart` (۴ تست: زنگ، پنل، نشانهٔ badge).
-**ترجمه:** کلیدهای `notif*` به هر دو arb اضافه شد (جمع کلیدها حالا ۳۱۷).
+**ترجمه:** کلیدهای `notif*` به هر دو arb اضافه شد (در آن زمان جمع کلیدها ۳۱۷ بود؛ اکنون ۳۳۷).
 **در CI:** بیلدهای `5135297` تا `cb0ee8a` سبزند؛ آخرین Releaseها `PAYAYAR build cb0ee8a` و `PAYAYAR Windows cb0ee8a`.
 
 ---
@@ -195,10 +202,28 @@ HEAD سبز است)؛ اجرای محلی زیر سقف ۱ گیگابایتی cg
 
 ---
 
+## ۳.۴. فلش‌کارت و مرور (AGENTS.md §45) 🔄 در جریان
+
+**۴ کامیت روی شاخهٔ `feat/flashcards`** (۲۰۲۶-۱۰-۰۸، ۱۹:۱۳ تا ۱۹:۲۲ UTC) — هنوز به `main` ادغام نشده‌اند:
+
+| کامیت | محتوا |
+|---|---|
+| `6a4d374` | لایهٔ دادهٔ مرور پراکنده (SM-2 lite) |
+| `08c93f2` | کارت صفحهٔ درس، جلسهٔ مرور، UI افزودن/مدیریت (HANDOFF §45) |
+| `e28b810` | ثبت `Flashcards`/`ReviewItems` در آنتیشن `@DriftDatabase` |
+| `2abdb23` | نوع `orderBy` + `ListView` غیر-const در هارنس تست |
+
+**فایل‌ها:** `lib/features/study/flashcards_card.dart`، `flashcard_dialog.dart`، `flashcard_review_sheet.dart`؛ شمای جدول در `lib/core/database/tables.dart` و `app_database.dart`؛ منطق در `lib/core/data/repositories.dart` + `providers.dart`.
+**تست:** `test/flashcards_test.dart` (۷ تست) و `test/flashcards_ui_test.dart` (۴ تست) — در مجموع ۱۱ تست نو.
+**ترجمه:** ۲۰ کلید `flashcard_*` به هر دو arb اضافه شد (۳۱۷ → ۳۳۷).
+**وضعیت CI: 🔴** — ۴ اجرای `Codegen` روی این شاخه شکست خورده (۳ هشدار analyzer؛ جزئیات در بخش ۲.۱) و بیلد اندروید/ویندوز برای این شاخه اصلاً اجرا نشده است.
+
+---
+
 ## ۴. مراحل بعدی
 
 1. 🤖 AI بخش‌به‌بخش (AGENTS §7.A) — «کمک AI» در برنامه‌ریزی/مطالعه/آزمون/گزارش‌ها.
-2. 🃏 فلش‌کارت و مرور (AGENTS §45).
+2. 🃏 فلش‌کارت و مرور (AGENTS §45) — کد روی `feat/flashcards` هست؛ قدم بعدی: برطرف کردن ۳ هشدار `flutter analyze` (بخش ۲.۱)، سبز کردن CI روی شاخه، سپس ادغام به `main`.
 3. نمایشگر فشردهٔ تایمر تمرکز در صفحه‌های دیگر (باقی‌ماندهٔ §44).
 4. به‌روزرسانی `HANDOFF.md` — بخش ۳ آن هنوز می‌گوید «یادداشت سریع push نشده» که دیگر درست نیست.
 5. رفع هشدار منسوخ‌شدن `actions/checkout@v4` / `setup-java@v4` (Node.js 20) در workflowها.
@@ -220,3 +245,4 @@ HEAD سبز است)؛ اجرای محلی زیر سقف ۱ گیگابایتی cg
 - 2026-10-03 18:10 UTC — **به‌روزرسانی و انتشار رودمپ پس از ۴ کامیت جدید** (`92574eb` CI اندروید، `1500a85` CI ویندوز، `ee238d0` نصب‌کنندهٔ Inno Setup، `0afb2ad` پومودورو). راستی‌آزمایی روی کلون تمیز HEAD: `flutter analyze` → No issues found، `flutter test` → **۳۱/۳۱ پاس**؛ شمارش مستقیم کد: ۴۲ فایل dart در `lib/`، ۱۳ فایل در `lib/features/`، ۸ کلاس `*Page`، ۶ فایل تست/۳۱ تست، **۲۹۸** کلید l10n در هر arb. تأیید شد `BUGS.md` نه در درخت است نه در `git ls-files`. شواهد CI از ریموت: ۲ تگ `android-build-*` و ۳ تگ `windows-build-*` (۵ Release). ثبت شد که یک جلسهٔ موازی WIP یادداشت سریع را غیرcommitted گذاشته است.
 - 2026-10-08 18:20 UTC — **بازخوانی واقعیت پس از بازنویسی تاریخچه + تکمیل نوتیفیکیشن.** خواندن `git log` (۱۲ کامیت، HEAD=`cb0ee8a` هم‌تراز `origin/main`، درخت تمیز)، `git status` (خالی)، `gh run list` (۵ اجرای اخیر همه `success`). شمارش مستقیم HEAD: ۴۵ فایل dart در `lib/`، ۹ پوشه `features`، ۸ `*Page`، **۹ فایل تست / ۴۹ تست**، **۳۱۷ کلید** l10n در هر arb (دو مجموعه یکسان). شواهد ریموت: **۵ تگ اندروید + ۵ تگ ویندوز = ۱۰ Release**؛ سطح پله‌ها روی `cb0ee8a`: `Static analysis ✓`، `Run tests ✓`. اجرای محلی `flutter analyze`/`flutter test` در این نوبت ممکن نشد: هر دو زیر سقف حافظهٔ کانتینر (`memory.max` ≈ ۱ گیگابایت، `memory.peak` از آن گذشت) با exit -9 / «compiler exited unexpectedly» مردند ⇒ طبق روال، CI دروازهٔ کیفیت است. بخش‌های نو: ۳.۲ نوتیفیکیشن، ۳.۳ یادداشت سریع؛ جدول وضعیت کلی همگام شد (نوتیفیکیشن و یادداشت سریع از «در نوبت» به ✅ رفتند).
 - 2026-10-08 18:56 UTC — **به‌روزرسانی دوره‌ای رودمپ.** خواندن واقعیت: `git log --oneline -8` (HEAD=`151bce0` ← `cb0ee8a`، ۱۳ کامیت)، `git status --short` (خالی)، `gh run list --limit 5` (هر ۵ تا `completed/success`؛ آخرین‌ها Android/Windows Build روی `cb0ee8a` در ۱۷:۵۲ UTC)، `gh release list` + `git ls-remote --tags` (۱۰ Release، آخرین‌ها `PAYAYAR build/Windows cb0ee8a` در ۱۸:۰۱/۱۸:۰۰ UTC). `git ls-remote origin main` روی `151bce0` ⇒ همگام. تغییرات این نوبت: خط «آخرین به‌روزرسانی»، بولت‌های وضعیت مخزن (۱۳ کامیت + `151bce0`) و شواهد CI؛ جدول وضعیت کلی بدون تغییر (کدی از `cb0ee8a` به بعد عوض نشده). اجرای محلی لازم نبود چون کد تغییری نکرده است.
+- 2026-10-08 19:30 UTC — **شروع فلش‌کارت و قرمز شدن CI شاخه.** خواندن واقعیت: `git log --oneline -8` (HEAD=`2abdb23` روی شاخهٔ `feat/flashcards`، ۱۹ کامیت؛ `origin/feat/flashcards` همگام، `origin/main` روی `d8315e2`)، `git status --short` (خالی)، `gh run list --limit 12` (۴ اجرای اخیر `Codegen` روی `feat/flashcards` همه `failure`؛ آخرین بیلدهای سبز Android/Windows روی `main`/`cb0ee8a` در ۱۷:۵۲ UTC)، `gh run view --log-failed` (ریشه: ۳ هشدار `flutter analyze` در `study_page.dart:15`، `flashcards_test.dart:83`، `flashcards_ui_test.dart:112`). شمارش مستقیم HEAD: **۴۸ فایل dart در `lib/`**، ۹ پوشه `features`، ۸ `*Page`، **۱۱ فایل تست / ۶۰ تست**، **۳۳۷ کلید** l10n در هر arb (+۲۰ کلید `flashcard_*`). تگ‌ها/Releaseها بدون تغییر (۵ + ۵ = ۱۰). تغییرات این نوبت: خط «آخرین به‌روزرسانی»؛ جدول وضعیت کلی (analyze و test از ✅ به ⚠️، ردیف فلش‌کارت از «در نوبت» به 🔄، افزودن تاریخ بیلدها)؛ بولت‌های وضعیت مخزن؛ شمارش‌های بخش ۲، جدول محصول (ردیف فلش‌کارت)، جدول تست‌ها (+۲ فایل)، بخش ترجمه؛ شواهد CI (بخش ۲.۱)؛ بخش نوی ۳.۴؛ مراحل بعدی. اجرای محلی همچنان زیر سقف ۱ گیگابایتی cgroup ممکن نبود.
