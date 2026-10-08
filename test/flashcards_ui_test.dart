@@ -48,8 +48,8 @@ void main() {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          home: const Scaffold(
-            body: ListView(children: [FlashcardsCard()]),
+          home: Scaffold(
+            body: ListView(children: const [FlashcardsCard()]),
           ),
         ),
       ),

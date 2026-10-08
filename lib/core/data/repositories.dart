@@ -585,7 +585,7 @@ class FlashcardRepository {
           _db.reviewItems.cardId.equalsExp(_db.flashcards.id)),
     ])
       ..where(_db.reviewItems.dueAt.isSmallerOrEqualValue(now))
-      ..orderBy([(o) => OrderingTerm.asc(_db.reviewItems.dueAt)]);
+      ..orderBy([OrderingTerm.asc(_db.reviewItems.dueAt)]);
     return query.map((row) => row.readTable(_db.flashcards)).watch();
   }
 
