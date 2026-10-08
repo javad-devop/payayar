@@ -579,14 +579,23 @@ class FlashcardRepository {
 
   /// Cards whose review is due, oldest first — today's queue.
   Stream<List<Flashcard>> watchDue() {
-    final now = DateTime.now();
     final query = _db.select(_db.flashcards).join([
       innerJoin(_db.reviewItems,
           _db.reviewItems.cardId.equalsExp(_db.flashcards.id)),
     ])
-      ..where(_db.reviewItems.dueAt.isSmallerOrEqualValue(now))
       ..orderBy([OrderingTerm.asc(_db.reviewItems.dueAt)]);
-    return query.map((row) => row.readTable(_db.flashcards)).watch();
+    // Filter in Dart with a *fresh* now on every emission: baking
+    // DateTime.now() into the SQL freezes it at subscription time, so cards
+    // inserted after the stream was created would never match its re-queries.
+    return query
+        .map((row) {
+          final dueAt = row.readTable(_db.reviewItems).dueAt;
+          return dueAt.isAfter(DateTime.now())
+              ? null
+              : row.readTable(_db.flashcards);
+        })
+        .watch()
+        .map((rows) => rows.whereType<Flashcard>().toList());
   }
 
   /// Every card with box state, newest first — management list.

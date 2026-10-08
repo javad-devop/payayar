@@ -31,8 +31,17 @@ void main() {
   });
 
   tearDown(() async {
+    // ignore: avoid_print
+    print('T1-disposing');
     container.dispose();
-    await db.close();
+    // ignore: avoid_print
+    print('T2-closing-db');
+    await db.close().timeout(const Duration(seconds: 5), onTimeout: () {
+      // ignore: avoid_print
+      print('T3-DBCLOSE-TIMEOUT');
+    });
+    // ignore: avoid_print
+    print('T4-done');
   });
 
   Future<void> pumpCard(WidgetTester tester) async {
@@ -81,6 +90,8 @@ void main() {
     await tester.tap(find.text('ذخیره'));
     await tester.pump();
     await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 500));
+    await tester.pumpAndSettle();
 
     expect(find.byType(FlashcardDialog), findsNothing);
     expect(find.text('1 کارت برای امروز'), findsOneWidget);
@@ -110,23 +121,40 @@ void main() {
   });
 
   testWidgets('management list shows box and deletes a card', (tester) async {
+    // ignore: avoid_print
+    print('M1-start');
     await flashcards.addCard(front: 'تعریف انرژی جنبشی', back: 'نصف × جرم × سرعت²');
+    // ignore: avoid_print
+    print('M2-added');
     await pumpCard(tester);
-
+    // ignore: avoid_print
+    print('M3-pumped');
     await tester.tap(find.byIcon(Icons.style_outlined));
     await tester.pumpAndSettle();
+    // ignore: avoid_print
+    print('M4-sheet-open');
 
     expect(find.text('تعریف انرژی جنبشی'), findsOneWidget);
     expect(find.textContaining('جعبه 1'), findsOneWidget);
+    // ignore: avoid_print
+    print('M5-asserts-ok');
 
     await tester.tap(find.byIcon(Icons.delete_outline));
     await tester.pumpAndSettle();
-    // Confirm dialog: delete is the affirmative action.
+    // ignore: avoid_print
+    print('M6-confirm-open');
     await tester.tap(find.text('حذف').last);
     await tester.pump();
     await tester.pumpAndSettle();
+    // ignore: avoid_print
+    print('M7-deleted');
 
-    expect(await flashcards.watchAll().first, isEmpty);
+    final all = await container.read(allFlashcardsProvider.future);
+    expect(all, isEmpty);
     expect(find.text('هنوز کارتی نداری'), findsOneWidget);
+    final ctx = tester.element(find.byType(BottomSheet));
+    Navigator.of(ctx).pop();
+    await tester.pumpAndSettle();
+    await tester.pumpWidget(const SizedBox());
   });
 }
