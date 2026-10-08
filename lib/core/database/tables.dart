@@ -153,6 +153,27 @@ class AIMessages extends Table {
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
 }
 
+/// Flashcard (front/back), optionally linked to a subject/topic so a
+/// review record can point back at the curriculum (AGENTS.md §13).
+class Flashcards extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get subjectId => integer().nullable().references(Subjects, #id)();
+  IntColumn get topicId => integer().nullable().references(Topics, #id)();
+  TextColumn get front => text().withLength(min: 1, max: 500)();
+  TextColumn get back => text().withLength(min: 1, max: 2000)();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+}
+
+/// Spaced-repetition state per card — SM-2 lite (HANDOFF §45):
+/// box 1..5; [dueAt] drives the "due today" queue.
+class ReviewItems extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get cardId => integer().references(Flashcards, #id)();
+  IntColumn get box => integer().withDefault(const Constant(1))();
+  DateTimeColumn get dueAt => dateTime()();
+  DateTimeColumn get lastReviewedAt => dateTime().nullable()();
+}
+
 /// Local notification lifecycle (HANDOFF §43.1):
 /// created → unread → read → actioned/dismissed.
 enum AppNotificationStatus { created, unread, read, actioned, dismissed }

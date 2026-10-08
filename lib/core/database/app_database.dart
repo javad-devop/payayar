@@ -32,7 +32,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.e);
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -41,6 +41,10 @@ class AppDatabase extends _$AppDatabase {
           // Future migrations must preserve user data (AGENTS.md §21).
           if (from < 2) {
             await m.createTable(notifications);
+          }
+          if (from < 3) {
+            await m.createTable(flashcards);
+            await m.createTable(reviewItems);
           }
         },
       );

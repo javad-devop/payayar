@@ -76,3 +76,16 @@ final activeNotificationsProvider = StreamProvider(
 /// Full history for the panel.
 final notificationHistoryProvider = StreamProvider(
     (ref) => ref.watch(notificationRepositoryProvider).watchHistory());
+
+// ---- Flashcards (HANDOFF §45 — spaced repetition) ----
+
+final flashcardRepositoryProvider = Provider(
+    (ref) => FlashcardRepository(ref.watch(databaseProvider)));
+
+/// Cards currently due for review.
+final dueFlashcardsProvider = StreamProvider(
+    (ref) => ref.watch(flashcardRepositoryProvider).watchDue());
+
+/// Every card with its box state — management list.
+final allFlashcardsProvider = StreamProvider(
+    (ref) => ref.watch(flashcardRepositoryProvider).watchAll());

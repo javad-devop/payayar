@@ -16,7 +16,9 @@ export '../database/app_database.dart'
         LifestyleEntry,
         AIConversation,
         AIMessage,
-        Notification;
+        Notification,
+        Flashcard,
+        ReviewItem;
 export '../database/tables.dart'
     show
         Priority,
@@ -515,5 +517,127 @@ class NotificationRepository {
       updatedAt: Value(now),
     ));
     return AppNotificationStatus.actioned;
+  }
+}
+
+/// A flashcard together with its review state — management list item.
+class FlashcardWithBox {
+  const FlashcardWithBox({
+    required this.card,
+    required this.box,
+    required this.dueAt,
+    this.lastReviewedAt,
+  });
+
+  final Flashcard card;
+  final int box;
+  final DateTime dueAt;
+  final DateTime? lastReviewedAt;
+}
+
+/// Flashcards with SM-2-lite spaced repetition (HANDOFF §45, AGENTS §13):
+/// every card owns exactly one review item; grading advances/resets the
+/// box and schedules the next [ReviewItem.dueAt].
+///
+/// Box intervals: 1 → 1 day, 2 → 2, 3 → 4, 4 → 8, 5 → 16 days.
+/// "Forgot" always restarts at box 1 with a 10-minute re-queue.
+class FlashcardRepository {
+  FlashcardRepository(this._db);
+
+  final AppDatabase _db;
+
+  /// Days between reviews, indexed by box-1 (box 1..5).
+  static const _boxDays = [1, 2, 4, 8, 16];
+  static const _minBox = 1;
+  static const _maxBox = 5;
+
+  /// Registers a card that is due immediately (box 1).
+  Future<int> addCard({
+    required String front,
+    required String back,
+    int? subjectId,
+    int? topicId,
+  }) {
+    return _db.transaction(() async {
+      final cardId = await _db.into(_db.flashcards).insert(
+            FlashcardsCompanion.insert(
+              front: front,
+              back: back,
+              subjectId: Value(subjectId),
+              topicId: Value(topicId),
+            ),
+          );
+      await _db.into(_db.reviewItems).insert(
+            ReviewItemsCompanion.insert(
+              cardId: cardId,
+              dueAt: DateTime.now(),
+            ),
+          );
+      return cardId;
+    });
+  }
+
+  /// Cards whose review is due, oldest first — today's queue.
+  Stream<List<Flashcard>> watchDue() {
+    final now = DateTime.now();
+    final query = _db.select(_db.flashcards).join([
+      innerJoin(_db.reviewItems,
+          _db.reviewItems.cardId.equalsExp(_db.flashcards.id)),
+    ])
+      ..where(_db.reviewItems.dueAt.isSmallerOrEqualValue(now))
+      ..orderBy([(o) => OrderingTerm.asc(_db.reviewItems.dueAt)]);
+    return query.map((row) => row.readTable(_db.flashcards)).watch();
+  }
+
+  /// Every card with box state, newest first — management list.
+  Stream<List<FlashcardWithBox>> watchAll() {
+    final query = _db.select(_db.flashcards).join([
+      innerJoin(_db.reviewItems,
+          _db.reviewItems.cardId.equalsExp(_db.flashcards.id)),
+    ])
+      ..orderBy([OrderingTerm.desc(_db.flashcards.id)]);
+    return query.watch().map((rows) => rows
+        .map((row) => FlashcardWithBox(
+              card: row.readTable(_db.flashcards),
+              box: row.readTable(_db.reviewItems).box,
+              dueAt: row.readTable(_db.reviewItems).dueAt,
+              lastReviewedAt: row.readTable(_db.reviewItems).lastReviewedAt,
+            ))
+        .toList());
+  }
+
+  /// Records one review answer:
+  /// - `known` → box+1 (capped), due in the new box's interval;
+  /// - `!known` → box 1, due in 10 minutes.
+  Future<void> grade(int cardId, {required bool known}) async {
+    final item = await (_db.select(_db.reviewItems)
+          ..where((r) => r.cardId.equals(cardId)))
+        .getSingleOrNull();
+    if (item == null) return;
+
+    final now = DateTime.now();
+    final nextBox =
+        known ? (item.box + 1).clamp(_minBox, _maxBox) : _minBox;
+    final due = known
+        ? now.add(Duration(days: _boxDays[nextBox - 1]))
+        : now.add(const Duration(minutes: 10));
+
+    await (_db.update(_db.reviewItems)..where((r) => r.id.equals(item.id)))
+        .write(ReviewItemsCompanion(
+      box: Value(nextBox),
+      dueAt: Value(due),
+      lastReviewedAt: Value(now),
+    ));
+  }
+
+  /// Deletes a card and its review item (explicit: FK cascade may be off
+  /// on some platforms).
+  Future<void> deleteCard(int cardId) {
+    return _db.transaction(() async {
+      await (_db.delete(_db.reviewItems)..where((r) => r.cardId.equals(cardId)))
+          .go();
+      await (_db.delete(_db.flashcards)..where((c) => c.id.equals(cardId)))
+          .go();
+    });
   }
 }
