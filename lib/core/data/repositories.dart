@@ -666,7 +666,7 @@ class JournalRepository {
 
   Future<int> addEntry({required DateTime date, required String text}) {
     return _db.into(_db.journalEntries).insert(
-          JournalEntriesCompanion.insert(date: date, text: text),
+          JournalEntriesCompanion.insert(date: date, body: text),
         );
   }
 

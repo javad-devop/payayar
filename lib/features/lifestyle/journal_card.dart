@@ -137,7 +137,7 @@ class _JournalCardState extends ConsumerState<JournalCard> {
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
                       child: Text(
-                        entry.text,
+                        entry.body,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),

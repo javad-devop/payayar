@@ -164,7 +164,7 @@ class AIMessages extends Table {
 class JournalEntries extends Table {
   IntColumn get id => integer().autoIncrement()();
   DateTimeColumn get date => dateTime()();
-  TextColumn get text => text().withLength(min: 1, max: 5000)();
+  TextColumn get body => text().withLength(min: 1, max: 5000)();
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
 }
 
