@@ -172,12 +172,24 @@ class _AiConfigCard extends ConsumerStatefulWidget {
 
 class _AiConfigCardState extends ConsumerState<_AiConfigCard> {
   final _keyController = TextEditingController();
+  late final TextEditingController _baseUrlController;
+  late final TextEditingController _modelController;
   bool _testing = false;
   String? _testResult;
 
   @override
+  void initState() {
+    super.initState();
+    final ai = ref.read(aiSettingsProvider);
+    _baseUrlController = TextEditingController(text: ai.baseUrl);
+    _modelController = TextEditingController(text: ai.model);
+  }
+
+  @override
   void dispose() {
     _keyController.dispose();
+    _baseUrlController.dispose();
+    _modelController.dispose();
     super.dispose();
   }
 
@@ -281,16 +293,18 @@ class _AiConfigCardState extends ConsumerState<_AiConfigCard> {
               final current = ai.model;
               if (value == 'openai' && current.startsWith('gemini-')) {
                 await aiNotifier.setModel('gpt-4o-mini');
+                _modelController.text = 'gpt-4o-mini';
               } else if (value == 'gemini' &&
                   !current.startsWith('gemini-')) {
                 await aiNotifier.setModel('gemini-2.0-flash');
+                _modelController.text = 'gemini-2.0-flash';
               }
             },
           ),
           if (ai.providerId == 'openai') ...[
             const SizedBox(height: AppSpacing.lg),
             TextField(
-              initialValue: ai.baseUrl,
+              controller: _baseUrlController,
               keyboardType: TextInputType.url,
               decoration: InputDecoration(
                 labelText: l10n.settings_ai_baseUrl,
@@ -302,8 +316,7 @@ class _AiConfigCardState extends ConsumerState<_AiConfigCard> {
           ],
           const SizedBox(height: AppSpacing.lg),
           TextField(
-            key: ValueKey('ai_model_${ai.providerId}'),
-            initialValue: ai.model,
+            controller: _modelController,
             decoration: InputDecoration(
               labelText: l10n.settings_ai_model,
               hintText: l10n.settings_ai_model_hint,
