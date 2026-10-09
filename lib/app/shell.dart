@@ -42,12 +42,14 @@ class AppShell extends ConsumerStatefulWidget {
 
 class _AppShellState extends ConsumerState<AppShell>
     with SingleTickerProviderStateMixin {
-  /// Subtle fade whenever the section changes (phase 8 polish); pages
-  /// stay mounted inside the IndexedStack, so no state is lost.
+  /// Subtle fade + rise whenever the section changes (plan item 6);
+  /// pages stay mounted inside the IndexedStack, so no state is lost.
+  /// Duration sits in the skill's modern 200-300ms band, and is
+  /// skipped entirely when the OS asks for reduced motion.
   late final AnimationController _sectionFade = AnimationController(
     vsync: this,
-    duration: AppDurations.fast,
-    value: 1, // no fade on first paint
+    duration: const Duration(milliseconds: 220),
+    value: 1, // no motion on first paint
   );
   late final CurvedAnimation _fadeCurve = CurvedAnimation(
     parent: _sectionFade,
@@ -75,7 +77,10 @@ class _AppShellState extends ConsumerState<AppShell>
   Widget build(BuildContext context) {
     final section = ref.watch(sectionProvider);
     ref.listen(sectionProvider, (previous, next) {
-      if (previous != next) _sectionFade.forward(from: 0);
+      final reduceMotion = MediaQuery.disableAnimationsOf(context);
+      if (previous != next && !reduceMotion) {
+        _sectionFade.forward(from: 0);
+      }
     });
     final width = MediaQuery.sizeOf(context).width;
     final isDesktop = Breakpoints.isDesktop(width);
@@ -95,8 +100,18 @@ class _AppShellState extends ConsumerState<AppShell>
                   if (isDesktop) const _Sidebar(),
                   if (isDesktop) Container(width: 1, color: palette.outlineVariant),
                   Expanded(
-                    child: FadeTransition(
-                      opacity: _fadeCurve,
+                    child: AnimatedBuilder(
+                      animation: _fadeCurve,
+                      builder: (context, child) {
+                        final t = _fadeCurve.value.clamp(0.0, 1.0);
+                        return Opacity(
+                          opacity: t,
+                          child: Transform.translate(
+                            offset: Offset(0, 16 * (1 - t)),
+                            child: child,
+                          ),
+                        );
+                      },
                       child: IndexedStack(
                         index: section.index,
                         children: AppShell._pages,

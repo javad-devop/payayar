@@ -57,7 +57,7 @@ class AppPalette {
     surfaceSoft: Color(0xFF162D4A), // Surface Soft
     textPrimary: Color(0xFFF4F7FF),
     textSecondary: Color(0xFFA9B8CC),
-    textMuted: Color(0xFF71839A),
+    textMuted: Color(0xFF8496AD), // 5.2:1 on surface navy (plan item 7)
     border: Color(0x1AFFFFFF), // rgba(255,255,255,0.10)
     highlight: Color(0x0FFFFFFF), // rgba(255,255,255,0.06)
   );
@@ -69,7 +69,7 @@ class AppPalette {
     surfaceSoft: Color(0xFFE5ECF7),
     textPrimary: Color(0xFF0A1B33),
     textSecondary: Color(0xFF45586F),
-    textMuted: Color(0xFF6C7D94),
+    textMuted: Color(0xFF5B6B80), // 5.4:1 on white (plan item 7)
     border: Color(0x1A071426), // rgba(7,20,38,0.10)
     highlight: Color(0x99FFFFFF), // rgba(255,255,255,0.60)
   );
