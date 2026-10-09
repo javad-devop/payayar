@@ -1082,6 +1082,66 @@ abstract class AppLocalizations {
   /// **'آزمون‌ها'**
   String get exams_title;
 
+  /// No description provided for @common_confirm.
+  ///
+  /// In fa, this message translates to:
+  /// **'تأیید'**
+  String get common_confirm;
+
+  /// No description provided for @backup_title.
+  ///
+  /// In fa, this message translates to:
+  /// **'پشتیبان‌گیری'**
+  String get backup_title;
+
+  /// No description provided for @backup_desc.
+  ///
+  /// In fa, this message translates to:
+  /// **'یک فایل پشتیبان از تمام اطلاعاتت می‌سازد یا از فایل پشتیبان قبلی بازیابی می‌کند. فایل فقط روی همین دستگاه می‌ماند.'**
+  String get backup_desc;
+
+  /// No description provided for @backup_export.
+  ///
+  /// In fa, this message translates to:
+  /// **'ساخت پشتیبان'**
+  String get backup_export;
+
+  /// No description provided for @backup_exportDone.
+  ///
+  /// In fa, this message translates to:
+  /// **'پشتیبان ساخته شد:'**
+  String get backup_exportDone;
+
+  /// No description provided for @backup_import.
+  ///
+  /// In fa, this message translates to:
+  /// **'بازیابی'**
+  String get backup_import;
+
+  /// No description provided for @backup_importConfirm.
+  ///
+  /// In fa, this message translates to:
+  /// **'اطلاعات فعلی با محتوای فایل پشتیبان جایگزین می‌شود. ادامه می‌دهی؟'**
+  String get backup_importConfirm;
+
+  /// No description provided for @backup_importDone.
+  ///
+  /// In fa, this message translates to:
+  /// **'بازیابی انجام شد.'**
+  String get backup_importDone;
+
+  /// No description provided for @backup_none.
+  ///
+  /// In fa, this message translates to:
+  /// **'فایل پشتیبانی پیدا نشد.'**
+  String get backup_none;
+
+  /// No description provided for @backup_error.
+  ///
+  /// In fa, this message translates to:
+  /// **'انجام نشد؛ دوباره تلاش کن.'**
+  String get backup_error;
+
   /// No description provided for @ai_quizTitle.
   ///
   /// In fa, this message translates to:

@@ -518,6 +518,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exams_title => 'Exams';
 
   @override
+  String get common_confirm => 'OK';
+
+  @override
+  String get backup_title => 'Backup';
+
+  @override
+  String get backup_desc =>
+      'Creates a backup file of all your data, or restores the previous one. The file stays on this device.';
+
+  @override
+  String get backup_export => 'Create backup';
+
+  @override
+  String get backup_exportDone => 'Backup created:';
+
+  @override
+  String get backup_import => 'Restore';
+
+  @override
+  String get backup_importConfirm =>
+      'Current data will be replaced by the backup file. Continue?';
+
+  @override
+  String get backup_importDone => 'Restore complete.';
+
+  @override
+  String get backup_none => 'No backup file found.';
+
+  @override
+  String get backup_error => 'Could not complete; try again.';
+
+  @override
   String get ai_quizTitle => 'AI practice quiz';
 
   @override

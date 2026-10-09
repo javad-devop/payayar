@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:drift/drift.dart' show Value;
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
+
+import 'backup_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app/state/app_settings.dart';
@@ -127,6 +129,8 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
 
         // AI configuration
         _AiConfigCard(),
+        const SizedBox(height: AppSpacing.lg),
+        const BackupCard(),
         const SizedBox(height: AppSpacing.xl),
 
         // Data management

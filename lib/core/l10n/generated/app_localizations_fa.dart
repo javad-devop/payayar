@@ -518,6 +518,38 @@ class AppLocalizationsFa extends AppLocalizations {
   String get exams_title => 'آزمون‌ها';
 
   @override
+  String get common_confirm => 'تأیید';
+
+  @override
+  String get backup_title => 'پشتیبان‌گیری';
+
+  @override
+  String get backup_desc =>
+      'یک فایل پشتیبان از تمام اطلاعاتت می‌سازد یا از فایل پشتیبان قبلی بازیابی می‌کند. فایل فقط روی همین دستگاه می‌ماند.';
+
+  @override
+  String get backup_export => 'ساخت پشتیبان';
+
+  @override
+  String get backup_exportDone => 'پشتیبان ساخته شد:';
+
+  @override
+  String get backup_import => 'بازیابی';
+
+  @override
+  String get backup_importConfirm =>
+      'اطلاعات فعلی با محتوای فایل پشتیبان جایگزین می‌شود. ادامه می‌دهی؟';
+
+  @override
+  String get backup_importDone => 'بازیابی انجام شد.';
+
+  @override
+  String get backup_none => 'فایل پشتیبانی پیدا نشد.';
+
+  @override
+  String get backup_error => 'انجام نشد؛ دوباره تلاش کن.';
+
+  @override
   String get ai_quizTitle => 'آزمون تمرینی با هوش مصنوعی';
 
   @override
