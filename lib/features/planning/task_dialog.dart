@@ -7,6 +7,8 @@ import '../../core/database/app_database.dart';
 import '../../core/database/tables.dart';
 import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/theme/tokens.dart';
+import '../../core/util/shamsi.dart';
+import '../../core/widgets/app_date_picker.dart';
 import '../../core/widgets/app_buttons.dart';
 
 /// Add / edit a plan task. All fields are manual — the student owns
@@ -286,7 +288,7 @@ class _DateField extends StatelessWidget {
 
     return OutlinedButton(
       onPressed: () async {
-        final picked = await showDatePicker(
+        final picked = await showAppDatePicker(
           context: context,
           initialDate: date,
           firstDate: DateTime(date.year - 2),
@@ -295,7 +297,9 @@ class _DateField extends StatelessWidget {
         if (picked != null) onPicked(picked);
       },
       child: Text(
-        '$label: ${MaterialLocalizations.of(context).formatShortDate(date)}',
+        '$label: ${locale == 'fa'
+            ? shamsiLong(date)
+            : MaterialLocalizations.of(context).formatShortDate(date)}',
         overflow: TextOverflow.ellipsis,
         style: TextStyle(fontFamily: locale == 'fa' ? appFontFamily : null),
       ),

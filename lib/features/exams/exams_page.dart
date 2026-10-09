@@ -9,6 +9,7 @@ import '../../core/database/app_database.dart';
 import '../../core/database/tables.dart';
 import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/theme/tokens.dart';
+import '../../core/widgets/app_date_picker.dart';
 import '../../core/util/countdown.dart';
 import '../../core/util/shamsi.dart';
 import '../../core/widgets/app_buttons.dart';
@@ -643,7 +644,7 @@ class _ExamDialogState extends ConsumerState<_ExamDialog> {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () async {
-                      final picked = await showDatePicker(
+                      final picked = await showAppDatePicker(
                         context: context,
                         initialDate: _date,
                         firstDate: DateTime(_date.year - 2),

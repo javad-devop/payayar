@@ -56,8 +56,24 @@ class ShamsiDate {
   String get long => toFaDigits('$day $monthName $year');
 }
 
-/// Persian weekday name of a Gregorian date (week starts Saturday).
+/// Weekday name for a Gregorian date: شنبه (week starts Saturday).
 String shamsiWeekday(DateTime date) => _weekdays[(date.weekday + 1) % 7];
+
+/// Inverse of [toShamsi]: the Gregorian day matching a Jalali date.
+///
+/// A bounded day-by-day search around the expected year — conversion runs
+/// once per user pick, so correctness beats cleverness here.
+DateTime fromShamsi(int jy, int jm, int jd) {
+  var candidate = DateTime(jy + 620, 1, 1);
+  final end = DateTime(jy + 623, 1, 1);
+  while (candidate.isBefore(end)) {
+    final s = toShamsi(candidate);
+    if (s.year == jy && s.month == jm && s.day == jd) return candidate;
+    candidate = candidate.add(const Duration(days: 1));
+  }
+  // Unreachable for a valid Jalali date; Nowruz of the requested year.
+  return DateTime(jy + 621, 3, 21);
+}
 
 /// Gregorian → Jalali.
 ShamsiDate toShamsi(DateTime g) {

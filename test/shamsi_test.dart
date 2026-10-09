@@ -55,4 +55,24 @@ void main() {
       expect(toFaDigits('v2 plan 10'), 'v۲ plan ۱۰');
     });
   });
+
+  group('Inverse conversion (fromShamsi)', () {
+    test('round-trips representative dates', () {
+      for (final g in [
+        DateTime(2026, 3, 21),
+        DateTime(2026, 10, 9),
+        DateTime(2025, 3, 20),
+        DateTime(2026, 1, 1),
+        DateTime(2026, 12, 31),
+      ]) {
+        final s = toShamsi(g);
+        final back = fromShamsi(s.year, s.month, s.day);
+        expect(back, g, reason: '$g -> ${s.short} -> $back');
+      }
+    });
+
+    test('known pick: 1405/07/17 is 2026-10-09', () {
+      expect(fromShamsi(1405, 7, 17), DateTime(2026, 10, 9));
+    });
+  });
 }

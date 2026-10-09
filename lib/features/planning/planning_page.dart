@@ -7,6 +7,7 @@ import '../../core/database/app_database.dart';
 import '../../core/database/tables.dart';
 import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/theme/tokens.dart';
+import '../../core/widgets/app_date_picker.dart';
 import '../../core/util/countdown.dart';
 import '../../core/util/shamsi.dart';
 import '../../core/widgets/app_buttons.dart';
@@ -543,7 +544,7 @@ class _TaskCard extends ConsumerWidget {
       case 'skip':
         await repo.setStatus(task.id, TaskStatus.skipped);
       case 'move':
-        final picked = await showDatePicker(
+        final picked = await showAppDatePicker(
           context: context,
           initialDate: task.date,
           firstDate: DateTime(task.date.year - 1),
@@ -1123,7 +1124,7 @@ class _MockExamDialogState extends ConsumerState<_MockExamDialog> {
             const SizedBox(height: AppSpacing.lg),
             OutlinedButton(
               onPressed: () async {
-                final picked = await showDatePicker(
+                final picked = await showAppDatePicker(
                   context: context,
                   initialDate: _date,
                   firstDate: DateTime.now(),
