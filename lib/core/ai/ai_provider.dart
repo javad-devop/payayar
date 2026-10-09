@@ -2,6 +2,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'gemini_provider.dart';
+import 'openai_compatible_provider.dart';
+
 /// Minimum context sent with a request (AGENTS.md §24). The summary is
 /// built explicitly by the caller; never the full database.
 class AiContext {
@@ -53,12 +56,18 @@ class AiSettings {
   const AiSettings({
     this.providerId,
     this.model = 'gemini-2.0-flash',
+    this.baseUrl = defaultBaseUrl,
     this.hasKey = false,
     this.includePlanSummary = false,
   });
 
+  /// OpenAI-compatible default; any service speaking the
+  /// `/chat/completions` dialect can replace it (PLAN.md phase 2).
+  static const String defaultBaseUrl = 'https://api.openai.com/v1';
+
   final String? providerId;
   final String model;
+  final String baseUrl;
   final bool hasKey;
   final bool includePlanSummary;
 
@@ -67,12 +76,14 @@ class AiSettings {
   AiSettings copyWith({
     String? providerId,
     String? model,
+    String? baseUrl,
     bool? hasKey,
     bool? includePlanSummary,
   }) {
     return AiSettings(
       providerId: providerId ?? this.providerId,
       model: model ?? this.model,
+      baseUrl: baseUrl ?? this.baseUrl,
       hasKey: hasKey ?? this.hasKey,
       includePlanSummary: includePlanSummary ?? this.includePlanSummary,
     );
@@ -82,6 +93,7 @@ class AiSettings {
 class AiSettingsNotifier extends Notifier<AiSettings> {
   static const _kProvider = 'ai.provider';
   static const _kModel = 'ai.model';
+  static const _kBaseUrl = 'ai.base_url';
   static const _kConsent = 'ai.planSummaryConsent';
   static const _kKey = 'ai.api_key';
 
@@ -96,6 +108,7 @@ class AiSettingsNotifier extends Notifier<AiSettings> {
     state = AiSettings(
       providerId: prefs.getString(_kProvider),
       model: prefs.getString(_kModel) ?? 'gemini-2.0-flash',
+      baseUrl: prefs.getString(_kBaseUrl) ?? AiSettings.defaultBaseUrl,
       hasKey: hasKey,
       includePlanSummary: prefs.getBool(_kConsent) ?? false,
     );
@@ -119,9 +132,19 @@ class AiSettingsNotifier extends Notifier<AiSettings> {
   }
 
   Future<void> setModel(String model) async {
-    state = state.copyWith(model: model);
+    final trimmed = model.trim();
+    if (trimmed.isEmpty) return;
+    state = state.copyWith(model: trimmed);
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_kModel, model);
+    await prefs.setString(_kModel, trimmed);
+  }
+
+  Future<void> setBaseUrl(String url) async {
+    final trimmed = url.trim();
+    final safe = trimmed.isEmpty ? AiSettings.defaultBaseUrl : trimmed;
+    state = state.copyWith(baseUrl: safe);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_kBaseUrl, safe);
   }
 
   Future<void> setPlanSummaryConsent(bool consent) async {
@@ -134,9 +157,16 @@ class AiSettingsNotifier extends Notifier<AiSettings> {
 final aiSettingsProvider =
     NotifierProvider<AiSettingsNotifier, AiSettings>(AiSettingsNotifier.new);
 
-/// Registry of available providers. Add a new implementation here and
-/// the whole app can switch to it.
-final aiProvidersProvider = Provider<List<AIProvider>>((ref) => const []);
+/// Registry of available providers. Every provider receives the
+/// user's current model/base-url from settings, so the whole app can
+/// switch without touching call sites (PLAN.md phase 2).
+final aiProvidersProvider = Provider<List<AIProvider>>((ref) {
+  final settings = ref.watch(aiSettingsProvider);
+  return [
+    GeminiProvider(model: settings.model),
+    OpenAiCompatibleProvider(baseUrl: settings.baseUrl, model: settings.model),
+  ];
+});
 
 /// Resolved active provider (null when not configured).
 final activeAiProvider = Provider<AIProvider?>((ref) {

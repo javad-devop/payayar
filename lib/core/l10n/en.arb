@@ -407,5 +407,10 @@
   "settings_theme_color_purple": "Purple",
   "settings_theme_color_amber": "Amber",
   "settings_theme_color_pink": "Pink",
-  "settings_theme_color_teal": "Teal"
+  "settings_theme_color_teal": "Teal",
+  "ai_provider_openai": "OpenAI-compatible",
+  "settings_ai_baseUrl": "Base URL",
+  "settings_ai_baseUrl_hint": "https://api.openai.com/v1",
+  "settings_ai_model_hint": "gpt-4o-mini / gemini-2.0-flash / llama-3.3-70b",
+  "ai_errorBadUrl": "The service URL or model is not correct"
 }

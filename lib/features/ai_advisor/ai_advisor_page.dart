@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/ai/ai_provider.dart';
-import '../../core/ai/gemini_provider.dart';
 import '../../core/data/providers.dart';
 import '../../core/database/app_database.dart';
 import '../../core/database/tables.dart';
@@ -53,11 +52,12 @@ class _AiAdvisorPageState extends ConsumerState<AiAdvisorPage> {
     final settings = ref.read(aiSettingsProvider);
     final notifier = ref.read(aiSettingsProvider.notifier);
 
-    // Registry: Gemini is the first implementation (AGENTS.md §23).
-    const provider = GeminiProvider();
+    // Resolved provider: Gemini or any OpenAI-compatible service
+    // chosen in settings (AGENTS.md §23, PLAN.md phase 2).
+    final provider = ref.read(activeAiProvider);
     final apiKey = await notifier.readKey();
 
-    if (apiKey == null || apiKey.isEmpty) {
+    if (apiKey == null || apiKey.isEmpty || provider == null) {
       _showError(l10n.ai_errorNoKey);
       return;
     }
@@ -155,6 +155,7 @@ class _AiAdvisorPageState extends ConsumerState<AiAdvisorPage> {
       switch (code) {
         'invalid_key' => l10n.settings_ai_keyMissing,
         'network' || 'timeout' => l10n.ai_errorNetwork,
+        'bad_url' => l10n.ai_errorBadUrl,
         _ => l10n.ai_error,
       };
 

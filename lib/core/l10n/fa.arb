@@ -407,5 +407,10 @@
   "settings_theme_color_purple": "بنفش",
   "settings_theme_color_amber": "کهربایی",
   "settings_theme_color_pink": "صورتی",
-  "settings_theme_color_teal": "فیروزه‌ای"
+  "settings_theme_color_teal": "فیروزه‌ای",
+  "ai_provider_openai": "سازگار با OpenAI",
+  "settings_ai_baseUrl": "آدرس پایه (Base URL)",
+  "settings_ai_baseUrl_hint": "https://api.openai.com/v1",
+  "settings_ai_model_hint": "gpt-4o-mini / gemini-2.0-flash / llama-3.3-70b",
+  "ai_errorBadUrl": "آدرس سرویس‌دهنده یا مدل درست نیست"
 }

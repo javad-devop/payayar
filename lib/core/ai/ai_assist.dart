@@ -5,7 +5,6 @@ import '../l10n/generated/app_localizations.dart';
 import '../theme/tokens.dart';
 import '../widgets/app_buttons.dart';
 import 'ai_provider.dart';
-import 'gemini_provider.dart';
 
 /// Section-scoped AI action (AGENTS.md §7.A): the caller builds the
 /// minimum relevant context, so unrelated data never leaves the device.
@@ -19,7 +18,10 @@ Future<String> askSectionAi(
   if (apiKey == null || apiKey.isEmpty) {
     throw const AiException('no_key');
   }
-  const provider = GeminiProvider();
+  final provider = ref.read(activeAiProvider);
+  if (provider == null) {
+    throw const AiException('no_key');
+  }
   final response = await provider.send(
     AiRequest(
       prompt: prompt,
@@ -38,6 +40,7 @@ String friendlyAiError(AppLocalizations l10n, String code) => switch (code) {
       'no_key' => l10n.ai_errorNoKey,
       'invalid_key' => l10n.settings_ai_keyMissing,
       'network' || 'timeout' => l10n.ai_errorNetwork,
+      'bad_url' => l10n.ai_errorBadUrl,
       _ => l10n.ai_error,
     };
 

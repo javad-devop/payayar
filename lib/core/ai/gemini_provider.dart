@@ -8,7 +8,10 @@ import 'ai_provider.dart';
 /// user's own key (AGENTS.md §23). Uses dart:io HttpClient directly so
 /// no extra dependency is introduced.
 class GeminiProvider implements AIProvider {
-  const GeminiProvider();
+  const GeminiProvider({this.model});
+
+  /// Overrides the default model from settings (falls back to 2.0-flash).
+  final String? model;
 
   static const _endpoint =
       'https://generativelanguage.googleapis.com/v1beta/models';
@@ -82,7 +85,7 @@ class GeminiProvider implements AIProvider {
     }
   }
 
-  String _modelFor(AiRequest request) => 'gemini-2.0-flash';
+  String _modelFor(AiRequest request) => model ?? 'gemini-2.0-flash';
 
   String _buildPrompt(AiRequest request) {
     final buffer = StringBuffer();

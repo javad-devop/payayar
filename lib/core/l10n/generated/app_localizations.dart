@@ -2131,6 +2131,36 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'فیروزه‌ای'**
   String get settings_theme_color_teal;
+
+  /// No description provided for @ai_provider_openai.
+  ///
+  /// In fa, this message translates to:
+  /// **'سازگار با OpenAI'**
+  String get ai_provider_openai;
+
+  /// No description provided for @settings_ai_baseUrl.
+  ///
+  /// In fa, this message translates to:
+  /// **'آدرس پایه (Base URL)'**
+  String get settings_ai_baseUrl;
+
+  /// No description provided for @settings_ai_baseUrl_hint.
+  ///
+  /// In fa, this message translates to:
+  /// **'https://api.openai.com/v1'**
+  String get settings_ai_baseUrl_hint;
+
+  /// No description provided for @settings_ai_model_hint.
+  ///
+  /// In fa, this message translates to:
+  /// **'gpt-4o-mini / gemini-2.0-flash / llama-3.3-70b'**
+  String get settings_ai_model_hint;
+
+  /// No description provided for @ai_errorBadUrl.
+  ///
+  /// In fa, this message translates to:
+  /// **'آدرس سرویس‌دهنده یا مدل درست نیست'**
+  String get ai_errorBadUrl;
 }
 
 class _AppLocalizationsDelegate

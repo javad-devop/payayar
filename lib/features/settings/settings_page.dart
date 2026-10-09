@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../app/state/app_settings.dart';
 import '../../core/ai/ai_provider.dart';
 import '../../core/ai/gemini_provider.dart';
+import '../../core/ai/openai_compatible_provider.dart';
 import '../../core/data/providers.dart';
 import '../../core/data/repositories.dart'
     show Priority, TaskStatus, ExamType;
@@ -187,7 +188,21 @@ class _AiConfigCardState extends ConsumerState<_AiConfigCard> {
       _testResult = null;
     });
 
-    const provider = GeminiProvider();
+    final aiNow = ref.read(aiSettingsProvider);
+    final provider = ref
+        .read(aiProvidersProvider)
+        .where((p) =>
+            p.id == (aiNow.providerId ?? const GeminiProvider().id))
+        .firstOrNull;
+    if (provider == null) {
+      if (mounted) {
+        setState(() {
+          _testResult = l10n.ai_errorNoKey;
+          _testing = false;
+        });
+      }
+      return;
+    }
     final key = await ref.read(aiSettingsProvider.notifier).readKey() ??
         _keyController.text.trim();
 
@@ -216,6 +231,7 @@ class _AiConfigCardState extends ConsumerState<_AiConfigCard> {
   String _friendly(AppLocalizations l10n, String code) => switch (code) {
         'invalid_key' => l10n.settings_ai_keyMissing,
         'network' || 'timeout' => l10n.ai_errorNetwork,
+        'bad_url' => l10n.ai_errorBadUrl,
         _ => l10n.ai_error,
       };
 
@@ -254,8 +270,46 @@ class _AiConfigCardState extends ConsumerState<_AiConfigCard> {
                 value: const GeminiProvider().id,
                 child: Text(const GeminiProvider().displayName),
               ),
+              DropdownMenuItem(
+                value: const OpenAiCompatibleProvider().id,
+                child: Text(l10n.ai_provider_openai),
+              ),
             ],
-            onChanged: (value) => aiNotifier.setProvider(value),
+            onChanged: (value) async {
+              await aiNotifier.setProvider(value);
+              // Keep a sensible default model per provider dialect.
+              final current = ai.model;
+              if (value == 'openai' && current.startsWith('gemini-')) {
+                await aiNotifier.setModel('gpt-4o-mini');
+              } else if (value == 'gemini' &&
+                  !current.startsWith('gemini-')) {
+                await aiNotifier.setModel('gemini-2.0-flash');
+              }
+            },
+          ),
+          if (ai.providerId == 'openai') ...[
+            const SizedBox(height: AppSpacing.lg),
+            TextField(
+              initialValue: ai.baseUrl,
+              keyboardType: TextInputType.url,
+              decoration: InputDecoration(
+                labelText: l10n.settings_ai_baseUrl,
+                hintText: l10n.settings_ai_baseUrl_hint,
+                prefixIcon: const Icon(Icons.link_outlined, size: 20),
+              ),
+              onChanged: aiNotifier.setBaseUrl,
+            ),
+          ],
+          const SizedBox(height: AppSpacing.lg),
+          TextField(
+            key: ValueKey('ai_model_${ai.providerId}'),
+            initialValue: ai.model,
+            decoration: InputDecoration(
+              labelText: l10n.settings_ai_model,
+              hintText: l10n.settings_ai_model_hint,
+              prefixIcon: const Icon(Icons.memory_outlined, size: 20),
+            ),
+            onChanged: aiNotifier.setModel,
           ),
           const SizedBox(height: AppSpacing.lg),
 
@@ -284,7 +338,8 @@ class _AiConfigCardState extends ConsumerState<_AiConfigCard> {
                     return;
                   }
                   await aiNotifier.saveKey(_keyController.text.trim());
-                  await aiNotifier.setProvider(const GeminiProvider().id);
+                  await aiNotifier.setProvider(
+                      ai.providerId ?? const GeminiProvider().id);
                   _keyController.clear();
                   if (mounted) setState(() {});
                 },

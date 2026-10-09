@@ -1069,4 +1069,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settings_theme_color_teal => 'Teal';
+
+  @override
+  String get ai_provider_openai => 'OpenAI-compatible';
+
+  @override
+  String get settings_ai_baseUrl => 'Base URL';
+
+  @override
+  String get settings_ai_baseUrl_hint => 'https://api.openai.com/v1';
+
+  @override
+  String get settings_ai_model_hint =>
+      'gpt-4o-mini / gemini-2.0-flash / llama-3.3-70b';
+
+  @override
+  String get ai_errorBadUrl => 'The service URL or model is not correct';
 }
