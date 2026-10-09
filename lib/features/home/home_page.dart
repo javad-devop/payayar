@@ -10,6 +10,7 @@ import '../../core/database/app_database.dart';
 import '../../core/database/tables.dart' show TaskStatus, SessionType;
 import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/theme/tokens.dart';
+import '../../core/util/shamsi.dart';
 import '../../core/widgets/metric_card.dart';
 import '../../core/widgets/page_header.dart';
 import '../../core/widgets/progress_ring.dart';
@@ -234,7 +235,7 @@ class _MetricsRow extends ConsumerWidget {
 
     final examValue = nextExam == null
         ? '—'
-        : '${nextExam.date.year}/${nextExam.date.month}/${nextExam.date.day}';
+        : shamsiShort(nextExam.date);
 
     final metrics = [
       (
@@ -753,7 +754,7 @@ class _RecentExamsCard extends ConsumerWidget {
                       ),
                     ),
                     Text(
-                      '${exam.date.year}/${exam.date.month}/${exam.date.day}',
+                      shamsiShort(exam.date),
                       style: Theme.of(context).textTheme.labelSmall!.copyWith(
                             color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),

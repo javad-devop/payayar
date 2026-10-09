@@ -7,6 +7,7 @@ import '../../core/database/app_database.dart';
 import '../../core/database/tables.dart';
 import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/theme/tokens.dart';
+import '../../core/util/shamsi.dart';
 import '../../core/widgets/app_buttons.dart';
 import '../../core/widgets/confirmation_dialog.dart';
 import '../../core/widgets/glass_card.dart';
@@ -305,7 +306,7 @@ class _DayColumn extends ConsumerWidget {
               borderRadius: BorderRadius.circular(AppRadius.control),
             ),
             child: Text(
-              '${date.day}/${date.month}',
+              shamsiDayLabel(date),
               style: Theme.of(context).textTheme.labelLarge!.copyWith(
                     color: isToday ? scheme.primary : scheme.onSurfaceVariant,
                     fontWeight: AppFontWeight.semiBold,
@@ -984,7 +985,7 @@ class _MockExamCard extends ConsumerWidget {
               borderRadius: BorderRadius.circular(AppRadius.control),
             ),
             child: Text(
-              '${exam.date.day}',
+              toFaDigits('${toShamsi(exam.date).day}'),
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: scheme.primary,
                     fontWeight: AppFontWeight.bold,
@@ -1004,7 +1005,7 @@ class _MockExamCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSpacing.xs),
                 Text(
-                  '${exam.date.year}/${exam.date.month}/${exam.date.day}'
+                  shamsiShort(exam.date)
                   '${exam.description == null ? '' : ' · ${exam.description}'}',
                   style: Theme.of(context).textTheme.labelSmall!.copyWith(
                         color: scheme.onSurfaceVariant,
@@ -1121,7 +1122,7 @@ class _MockExamDialogState extends ConsumerState<_MockExamDialog> {
                 if (picked != null) setState(() => _date = picked);
               },
               child: Text(
-                  '${l10n.exams_date}: ${_date.year}/${_date.month}/${_date.day}'),
+                  '${l10n.exams_date}: ${shamsiLong(_date)}'),
             ),
             const SizedBox(height: AppSpacing.lg),
             TextField(

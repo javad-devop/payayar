@@ -7,6 +7,7 @@ import '../../core/data/providers.dart';
 import '../../core/database/app_database.dart';
 import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/theme/tokens.dart';
+import '../../core/util/shamsi.dart';
 import '../../core/widgets/app_buttons.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/page_header.dart';
@@ -372,7 +373,7 @@ class _HistorySection extends ConsumerWidget {
                     SizedBox(
                       width: 76,
                       child: Text(
-                        '${e.date.year}/${e.date.month}/${e.date.day}',
+                        shamsiShort(e.date),
                         style: Theme.of(context).textTheme.labelSmall!.copyWith(
                               color: scheme.onSurfaceVariant,
                             ),

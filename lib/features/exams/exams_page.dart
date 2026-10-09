@@ -9,6 +9,7 @@ import '../../core/database/app_database.dart';
 import '../../core/database/tables.dart';
 import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/theme/tokens.dart';
+import '../../core/util/shamsi.dart';
 import '../../core/widgets/app_buttons.dart';
 import '../../core/widgets/confirmation_dialog.dart';
 import '../../core/widgets/glass_card.dart';
@@ -155,7 +156,7 @@ class _ExamCardState extends ConsumerState<_ExamCard> {
                   borderRadius: BorderRadius.circular(AppRadius.control),
                 ),
                 child: Text(
-                  '${widget.exam.date.day}',
+                  toFaDigits('${toShamsi(widget.exam.date).day}'),
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         color: scheme.primary,
                         fontWeight: AppFontWeight.bold,
@@ -175,7 +176,7 @@ class _ExamCardState extends ConsumerState<_ExamCard> {
                     ),
                     const SizedBox(height: AppSpacing.xs),
                     Text(
-                      '${_typeLabel(l10n, widget.exam.type)} · ${widget.exam.date.year}/${widget.exam.date.month}/${widget.exam.date.day}',
+                      '${_typeLabel(l10n, widget.exam.type)} · ${shamsiShort(widget.exam.date)}',
                       style: Theme.of(context).textTheme.labelSmall!.copyWith(
                             color: scheme.onSurfaceVariant,
                           ),
@@ -635,7 +636,7 @@ class _ExamDialogState extends ConsumerState<_ExamDialog> {
                       if (picked != null) setState(() => _date = picked);
                     },
                     child: Text(
-                        '${l10n.exams_date}: ${_date.year}/${_date.month}/${_date.day}'),
+                        '${l10n.exams_date}: ${shamsiLong(_date)}'),
                   ),
                 ),
                 const SizedBox(width: AppSpacing.md),

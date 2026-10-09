@@ -8,6 +8,7 @@ import '../../core/data/repositories.dart'
 import '../../core/database/app_database.dart';
 import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/theme/tokens.dart';
+import '../../core/util/shamsi.dart';
 import '../../core/widgets/app_buttons.dart';
 import '../../core/widgets/confirmation_dialog.dart';
 import '../../core/widgets/glass_card.dart';
@@ -812,7 +813,7 @@ class _DateTimeField extends StatelessWidget {
         onChanged(DateTime(date.year, date.month, date.day, time.hour, time.minute));
       },
       child: Text(
-        '$label: ${value.year}/${value.month}/${value.day} ${value.hour}:${value.minute.toString().padLeft(2, '0')}',
+        '$label: ${shamsiShort(value)} ${toFaDigits('${value.hour}:${value.minute.toString().padLeft(2, '0')}')}',
         overflow: TextOverflow.ellipsis,
       ),
     );
