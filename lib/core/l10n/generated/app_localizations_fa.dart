@@ -518,6 +518,14 @@ class AppLocalizationsFa extends AppLocalizations {
   String get exams_title => 'آزمون‌ها';
 
   @override
+  String get ai_weeklySummary => 'خلاصهٔ هوشمند هفته';
+
+  @override
+  String ai_weeklySummaryPrompt(Object range) {
+    return 'عملکرد $range من را خلاصه کن: چه چیزی خوب پیش رفت، کجا عقب ماندم و برای هفتهٔ آینده چه برنامه‌ای پیشنهاد می‌دهی؟ کوتاه و به فارسی ساده بنویس.';
+  }
+
+  @override
   String get calc_title => 'ماشین‌حساب نمره';
 
   @override

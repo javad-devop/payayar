@@ -178,6 +178,8 @@
   "study_topicNotes": "Topic notes",
   "study_sessionsTotal": "Total study",
   "exams_title": "Exams",
+  "ai_weeklySummary": "AI weekly summary",
+  "ai_weeklySummaryPrompt": "Summarize my {range}: what went well, where I fell behind, and what you suggest for next week. Keep it short.",
   "calc_title": "Grade calculator",
   "calc_score": "Score",
   "calc_weight": "Weight",

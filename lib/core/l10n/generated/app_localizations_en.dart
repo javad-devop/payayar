@@ -518,6 +518,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exams_title => 'Exams';
 
   @override
+  String get ai_weeklySummary => 'AI weekly summary';
+
+  @override
+  String ai_weeklySummaryPrompt(Object range) {
+    return 'Summarize my $range: what went well, where I fell behind, and what you suggest for next week. Keep it short.';
+  }
+
+  @override
   String get calc_title => 'Grade calculator';
 
   @override

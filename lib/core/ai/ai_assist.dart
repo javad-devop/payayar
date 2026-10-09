@@ -48,9 +48,12 @@ String friendlyAiError(AppLocalizations l10n, String code) => switch (code) {
 /// shown read-only: AI output is untrusted proposal data and never
 /// mutates local state on its own (AGENTS.md §9).
 class AiAssistAction extends ConsumerStatefulWidget {
-  const AiAssistAction({super.key, required this.ask});
+  const AiAssistAction({super.key, required this.ask, this.label});
 
   final Future<String> Function(WidgetRef ref) ask;
+
+  /// Button text override (default: the generic assist label).
+  final String? label;
 
   @override
   ConsumerState<AiAssistAction> createState() => _AiAssistActionState();
@@ -141,7 +144,7 @@ class _AiAssistActionState extends ConsumerState<AiAssistAction> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return AIButton(
-      label: _busy ? l10n.ai_thinking : l10n.ai_assist,
+      label: _busy ? l10n.ai_thinking : (widget.label ?? l10n.ai_assist),
       compact: true,
       onPressed: _busy ? null : _run,
     );

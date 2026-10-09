@@ -43,34 +43,33 @@ class _ReportsPageState extends ConsumerState<ReportsPage> {
           title: l10n.reports_title,
           // Contextual AI over the shown report data (AGENTS.md §7.A).
           actions: [
-            AiAssistAction(
-              ask: (aiRef) {
-                final study = aiRef.read(studySummaryProvider);
-                final sessions =
-                    aiRef.read(studySessionsProvider).value ?? const [];
-                final tasks =
-                    aiRef.read(planTasksProvider).value ?? const <PlanTask>[];
-                final results =
-                    aiRef.read(allExamResultsProvider).value ?? const [];
-                final summary = [
-                  'today study minutes: ${study.todayMinutes}, streak days: ${study.streakDays}',
-                  'study sessions: ${sessions.length}',
-                  'plan tasks done/total: ${tasks.where((t) => t.completedAt != null).length}/${tasks.length}',
-                  'exam results: ${results.length}',
-                ].join('\n');
-                return askSectionAi(
-                  aiRef,
-                  prompt: l10n.ai_promptReports,
-                  summary: summary,
-                );
-              },
-            ),
+            AiAssistAction(ask: (aiRef) {
+              return askSectionAi(
+                aiRef,
+                prompt: l10n.ai_promptReports,
+                summary: _reportSummary(aiRef, l10n),
+              );
+            }),
           ],
         ),
         _Segmented(
           labels: [l10n.reports_range_week, l10n.reports_range_month],
           index: _isWeek ? 0 : 1,
           onChanged: (i) => setState(() => _isWeek = i == 0),
+        ),
+        const SizedBox(height: AppSpacing.lg),
+        // One-shot AI summary of the selected range (phase 10).
+        Center(
+          child: AiAssistAction(
+            label: l10n.ai_weeklySummary,
+            ask: (aiRef) => askSectionAi(
+              aiRef,
+              prompt: l10n.ai_weeklySummaryPrompt(
+                _isWeek ? l10n.reports_range_week : l10n.reports_range_month,
+              ),
+              summary: _reportSummary(aiRef, l10n),
+            ),
+          ),
         ),
         const SizedBox(height: AppSpacing.xl),
         _StudyReport(isWeek: _isWeek),
@@ -107,6 +106,21 @@ class _ReportsPageState extends ConsumerState<ReportsPage> {
         ),
       ],
     );
+  }
+
+  /// Shared data snapshot handed to the AI: today's study, streak,
+  /// sessions, plan progress and exam results (AGENTS.md §24 minimal).
+  String _reportSummary(WidgetRef aiRef, AppLocalizations l10n) {
+    final study = aiRef.read(studySummaryProvider);
+    final sessions = aiRef.read(studySessionsProvider).value ?? const [];
+    final tasks = aiRef.read(planTasksProvider).value ?? const <PlanTask>[];
+    final results = aiRef.read(allExamResultsProvider).value ?? const [];
+    return [
+      'today study minutes: ${study.todayMinutes}, streak days: ${study.streakDays}',
+      'study sessions: ${sessions.length}',
+      'plan tasks done/total: ${tasks.where((t) => t.completedAt != null).length}/${tasks.length}',
+      'exam results: ${results.length}',
+    ].join('\n');
   }
 }
 

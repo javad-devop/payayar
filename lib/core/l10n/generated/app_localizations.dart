@@ -1082,6 +1082,18 @@ abstract class AppLocalizations {
   /// **'آزمون‌ها'**
   String get exams_title;
 
+  /// No description provided for @ai_weeklySummary.
+  ///
+  /// In fa, this message translates to:
+  /// **'خلاصهٔ هوشمند هفته'**
+  String get ai_weeklySummary;
+
+  /// No description provided for @ai_weeklySummaryPrompt.
+  ///
+  /// In fa, this message translates to:
+  /// **'عملکرد {range} من را خلاصه کن: چه چیزی خوب پیش رفت، کجا عقب ماندم و برای هفتهٔ آینده چه برنامه‌ای پیشنهاد می‌دهی؟ کوتاه و به فارسی ساده بنویس.'**
+  String ai_weeklySummaryPrompt(Object range);
+
   /// No description provided for @calc_title.
   ///
   /// In fa, this message translates to:

@@ -178,6 +178,8 @@
   "study_topicNotes": "یادداشت مبحث",
   "study_sessionsTotal": "مجموع مطالعه",
   "exams_title": "آزمون‌ها",
+  "ai_weeklySummary": "خلاصهٔ هوشمند هفته",
+  "ai_weeklySummaryPrompt": "عملکرد {range} من را خلاصه کن: چه چیزی خوب پیش رفت، کجا عقب ماندم و برای هفتهٔ آینده چه برنامه‌ای پیشنهاد می‌دهی؟ کوتاه و به فارسی ساده بنویس.",
   "calc_title": "ماشین‌حساب نمره",
   "calc_score": "نمره",
   "calc_weight": "ضریب",
