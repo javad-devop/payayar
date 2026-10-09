@@ -810,7 +810,7 @@ class _AccentChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final onAccent = accent.seed.computeLuminance() > 0.4
-        ? const Color(0xFF071426)
+        ? AppPalette.dark.background
         : Colors.white;
     return Tooltip(
       message: label,

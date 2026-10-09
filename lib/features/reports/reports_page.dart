@@ -682,8 +682,9 @@ class _SleepReport extends ConsumerWidget {
           LineChartData(
             gridData: FlGridData(
               show: true,
-              getDrawingHorizontalLine: (v) => const FlLine(
-                color: Color(0x1AFFFFFF),
+              getDrawingHorizontalLine: (v) => FlLine(
+                // Theme-aware gridline: white-10 was invisible on light cards.
+                color: Theme.of(context).colorScheme.outlineVariant,
                 strokeWidth: 1,
               ),
             ),
