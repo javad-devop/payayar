@@ -515,6 +515,11 @@ class _AnalysisBox extends StatelessWidget {
 // Dialogs
 // ---------------------------------------------------------------------
 
+/// Opens the exam editor from anywhere in the app (quick-add sheet in
+/// the shell header).
+Future<bool?> showExamDialog(BuildContext context, {Exam? exam}) =>
+    _ExamDialog.show(context, exam: exam);
+
 class _ExamDialog extends ConsumerStatefulWidget {
   const _ExamDialog({this.exam});
 

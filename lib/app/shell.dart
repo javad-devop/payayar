@@ -9,6 +9,7 @@ import '../features/home/home_page.dart';
 import '../features/lifestyle/lifestyle_page.dart';
 import '../features/notifications/bell_button.dart';
 import '../features/planning/planning_page.dart';
+import '../features/planning/task_dialog.dart';
 import '../features/reports/reports_page.dart';
 import '../features/settings/settings_page.dart';
 import '../features/study/focus_timer_hud.dart';
@@ -108,6 +109,17 @@ class _AppHeader extends ConsumerWidget {
               ],
             ),
             const Spacer(),
+            // Quick add (phase 3): one tap to create a task/exam or jump
+            // to a logging section from anywhere.
+            IconButton(
+              tooltip: l10n.common_add,
+              onPressed: () => _openQuickAddSheet(context, ref),
+              icon: Icon(
+                Icons.add_circle_outline,
+                size: 22,
+                color: scheme.primary,
+              ),
+            ),
             const BellButton(),
             IconButton(
               tooltip: isDark ? l10n.settings_theme_light : l10n.settings_theme_dark,
@@ -129,6 +141,106 @@ class _AppHeader extends ConsumerWidget {
                 size: 20,
                 color: scheme.onSurfaceVariant,
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Quick-add sheet: create a task/exam directly or jump to a logging
+  /// section — the "+" entry promised by PLAN.md phase 3.
+  Future<void> _openQuickAddSheet(BuildContext context, WidgetRef ref) async {
+    final l10n = AppLocalizations.of(context);
+    final scheme = Theme.of(context).colorScheme;
+
+    await showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (sheetContext) => Container(
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.lg,
+          AppSpacing.lg,
+          AppSpacing.lg,
+          AppSpacing.xxl,
+        ),
+        decoration: BoxDecoration(
+          color: scheme.surface,
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(AppRadius.panel),
+          ),
+          border: Border.all(color: scheme.outlineVariant),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Container(
+                width: 36,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: scheme.outlineVariant,
+                  borderRadius: BorderRadius.circular(AppRadius.pill),
+                ),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.lg),
+            ListTile(
+              leading: Icon(Icons.task_outlined, size: 20, color: scheme.onSurfaceVariant),
+              title: Text(
+                l10n.planning_task_add,
+                style: Theme.of(sheetContext).textTheme.labelLarge,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppRadius.button),
+              ),
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                TaskDialog.show(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.assignment_outlined, size: 20, color: scheme.onSurfaceVariant),
+              title: Text(
+                l10n.exams_add,
+                style: Theme.of(sheetContext).textTheme.labelLarge,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppRadius.button),
+              ),
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                showExamDialog(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(AppSection.lifestyle.icon, size: 20, color: scheme.onSurfaceVariant),
+              title: Text(
+                l10n.nav_lifestyle,
+                style: Theme.of(sheetContext).textTheme.labelLarge,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppRadius.button),
+              ),
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                ref.read(sectionProvider.notifier).goTo(AppSection.lifestyle);
+              },
+            ),
+            ListTile(
+              leading: Icon(AppSection.aiAdvisor.icon, size: 20, color: scheme.onSurfaceVariant),
+              title: Text(
+                l10n.nav_aiAdvisor,
+                style: Theme.of(sheetContext).textTheme.labelLarge,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppRadius.button),
+              ),
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                ref.read(sectionProvider.notifier).goTo(AppSection.aiAdvisor);
+              },
             ),
           ],
         ),
