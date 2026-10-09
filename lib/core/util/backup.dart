@@ -31,8 +31,8 @@ Future<String> exportBackupTo(AppDatabase db, String destination) async {
   return destination;
 }
 
-Future<String> exportBackup(AppDatabase db) =>
-    exportBackupTo(db, backupFilePath());
+Future<String> exportBackup(AppDatabase db) async =>
+    exportBackupTo(db, await backupFilePath());
 
 /// Replaces every application table's contents with the rows found in
 /// the backup at [source]. Same-version schema assumed; columns are
