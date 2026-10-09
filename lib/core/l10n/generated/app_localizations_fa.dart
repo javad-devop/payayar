@@ -1122,4 +1122,43 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String get ai_promptHome =>
       'با توجه به برنامه و وضعیت امروزم بگو الان اولویت‌ترین کارم چیست و یک قدم مشخص برای امروز پیشنهاد بده.';
+
+  @override
+  String get lifestyle_exerciseType => 'نوع ورزش';
+
+  @override
+  String get lifestyle_nutrition => 'تغذیه';
+
+  @override
+  String get lifestyle_rest => 'استراحت (دقیقه)';
+
+  @override
+  String get lifestyle_sleepQuality => 'کیفیت خواب';
+
+  @override
+  String get lifestyle_none => 'بدون انتخاب';
+
+  @override
+  String get lifestyle_exWalking => 'پیاده‌روی';
+
+  @override
+  String get lifestyle_exRunning => 'دویدن';
+
+  @override
+  String get lifestyle_exWeights => 'وزنه';
+
+  @override
+  String get lifestyle_exSwimming => 'شنا';
+
+  @override
+  String get lifestyle_exGroup => 'ورزش گروهی';
+
+  @override
+  String get lifestyle_food_good => 'خوب';
+
+  @override
+  String get lifestyle_food_fair => 'متوسط';
+
+  @override
+  String get lifestyle_food_poor => 'ضعیف';
 }

@@ -1123,4 +1123,43 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get ai_promptHome =>
       'Given my plan and today\'s status, tell me the single most important thing to do now and suggest one concrete step for today.';
+
+  @override
+  String get lifestyle_exerciseType => 'Exercise type';
+
+  @override
+  String get lifestyle_nutrition => 'Nutrition';
+
+  @override
+  String get lifestyle_rest => 'Rest (min)';
+
+  @override
+  String get lifestyle_sleepQuality => 'Sleep quality';
+
+  @override
+  String get lifestyle_none => 'None';
+
+  @override
+  String get lifestyle_exWalking => 'Walking';
+
+  @override
+  String get lifestyle_exRunning => 'Running';
+
+  @override
+  String get lifestyle_exWeights => 'Weights';
+
+  @override
+  String get lifestyle_exSwimming => 'Swimming';
+
+  @override
+  String get lifestyle_exGroup => 'Team sport';
+
+  @override
+  String get lifestyle_food_good => 'Good';
+
+  @override
+  String get lifestyle_food_fair => 'Fair';
+
+  @override
+  String get lifestyle_food_poor => 'Poor';
 }

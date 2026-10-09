@@ -131,6 +131,11 @@ class LifestyleEntries extends Table {
   IntColumn get mood => integer().nullable()(); // 1..5
   IntColumn get energy => integer().nullable()(); // 1..5
   IntColumn get screenTimeMinutes => integer().nullable()();
+  // Optional fields added from the lifestyle form screenshot (phase 3).
+  TextColumn get exerciseType => text().nullable()();
+  RealColumn get sleepQuality => real().nullable()(); // 0..1
+  TextColumn get nutrition => text().nullable()();
+  IntColumn get restMinutes => integer().nullable()();
   TextColumn get notes => text().nullable()();
 
   @override

@@ -2227,6 +2227,84 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'با توجه به برنامه و وضعیت امروزم بگو الان اولویت‌ترین کارم چیست و یک قدم مشخص برای امروز پیشنهاد بده.'**
   String get ai_promptHome;
+
+  /// No description provided for @lifestyle_exerciseType.
+  ///
+  /// In fa, this message translates to:
+  /// **'نوع ورزش'**
+  String get lifestyle_exerciseType;
+
+  /// No description provided for @lifestyle_nutrition.
+  ///
+  /// In fa, this message translates to:
+  /// **'تغذیه'**
+  String get lifestyle_nutrition;
+
+  /// No description provided for @lifestyle_rest.
+  ///
+  /// In fa, this message translates to:
+  /// **'استراحت (دقیقه)'**
+  String get lifestyle_rest;
+
+  /// No description provided for @lifestyle_sleepQuality.
+  ///
+  /// In fa, this message translates to:
+  /// **'کیفیت خواب'**
+  String get lifestyle_sleepQuality;
+
+  /// No description provided for @lifestyle_none.
+  ///
+  /// In fa, this message translates to:
+  /// **'بدون انتخاب'**
+  String get lifestyle_none;
+
+  /// No description provided for @lifestyle_exWalking.
+  ///
+  /// In fa, this message translates to:
+  /// **'پیاده‌روی'**
+  String get lifestyle_exWalking;
+
+  /// No description provided for @lifestyle_exRunning.
+  ///
+  /// In fa, this message translates to:
+  /// **'دویدن'**
+  String get lifestyle_exRunning;
+
+  /// No description provided for @lifestyle_exWeights.
+  ///
+  /// In fa, this message translates to:
+  /// **'وزنه'**
+  String get lifestyle_exWeights;
+
+  /// No description provided for @lifestyle_exSwimming.
+  ///
+  /// In fa, this message translates to:
+  /// **'شنا'**
+  String get lifestyle_exSwimming;
+
+  /// No description provided for @lifestyle_exGroup.
+  ///
+  /// In fa, this message translates to:
+  /// **'ورزش گروهی'**
+  String get lifestyle_exGroup;
+
+  /// No description provided for @lifestyle_food_good.
+  ///
+  /// In fa, this message translates to:
+  /// **'خوب'**
+  String get lifestyle_food_good;
+
+  /// No description provided for @lifestyle_food_fair.
+  ///
+  /// In fa, this message translates to:
+  /// **'متوسط'**
+  String get lifestyle_food_fair;
+
+  /// No description provided for @lifestyle_food_poor.
+  ///
+  /// In fa, this message translates to:
+  /// **'ضعیف'**
+  String get lifestyle_food_poor;
 }
 
 class _AppLocalizationsDelegate

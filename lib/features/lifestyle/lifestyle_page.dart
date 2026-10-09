@@ -91,15 +91,20 @@ class _TodayEditorState extends ConsumerState<_TodayEditor> {
   TimeOfDay? _wake;
   final _exercise = TextEditingController();
   final _screen = TextEditingController();
+  final _rest = TextEditingController();
   final _notes = TextEditingController();
   int _mood = 3;
   int _energy = 3;
+  String? _exerciseType;
+  double? _sleepQuality;
+  String? _nutrition;
   bool _loaded = false;
 
   @override
   void dispose() {
     _exercise.dispose();
     _screen.dispose();
+    _rest.dispose();
     _notes.dispose();
     super.dispose();
   }
@@ -128,6 +133,12 @@ class _TodayEditorState extends ConsumerState<_TodayEditor> {
       if (existing.mood != null) _mood = existing.mood!;
       if (existing.energy != null) _energy = existing.energy!;
       if (existing.notes != null) _notes.text = existing.notes!;
+      _exerciseType = existing.exerciseType;
+      _sleepQuality = existing.sleepQuality;
+      _nutrition = existing.nutrition;
+      if (existing.restMinutes != null) {
+        _rest.text = '${existing.restMinutes}';
+      }
     });
   }
 
@@ -151,6 +162,10 @@ class _TodayEditorState extends ConsumerState<_TodayEditor> {
       mood: Value(_mood),
       energy: Value(_energy),
       screenTimeMinutes: Value(int.tryParse(_screen.text.trim())),
+      exerciseType: Value(_exerciseType),
+      sleepQuality: Value(_sleepQuality),
+      nutrition: Value(_nutrition),
+      restMinutes: Value(int.tryParse(_rest.text.trim())),
       notes: Value(_notes.text.trim().isEmpty ? null : _notes.text.trim()),
     ));
 
@@ -259,6 +274,92 @@ class _TodayEditorState extends ConsumerState<_TodayEditor> {
               l10n.lifestyle_level_4,
               l10n.lifestyle_level_5,
             ],
+          ),
+          // New optional fields (lifestyle form screenshot): exercise type,
+          // nutrition, rest minutes, sleep quality.
+          const SizedBox(height: AppSpacing.lg),
+          Row(
+            children: [
+              Expanded(
+                child: DropdownButtonFormField<String>(
+                  initialValue: _exerciseType,
+                  decoration: InputDecoration(
+                    labelText: l10n.lifestyle_exerciseType,
+                  ),
+                  items: [
+                    DropdownMenuItem(
+                      value: null,
+                      child: Text(l10n.lifestyle_none),
+                    ),
+                    DropdownMenuItem(
+                      value: 'walking',
+                      child: Text(l10n.lifestyle_exWalking),
+                    ),
+                    DropdownMenuItem(
+                      value: 'running',
+                      child: Text(l10n.lifestyle_exRunning),
+                    ),
+                    DropdownMenuItem(
+                      value: 'weights',
+                      child: Text(l10n.lifestyle_exWeights),
+                    ),
+                    DropdownMenuItem(
+                      value: 'swimming',
+                      child: Text(l10n.lifestyle_exSwimming),
+                    ),
+                    DropdownMenuItem(
+                      value: 'group',
+                      child: Text(l10n.lifestyle_exGroup),
+                    ),
+                  ],
+                  onChanged: (v) => setState(() => _exerciseType = v),
+                ),
+              ),
+              const SizedBox(width: AppSpacing.md),
+              Expanded(
+                child: DropdownButtonFormField<String>(
+                  initialValue: _nutrition,
+                  decoration: InputDecoration(
+                    labelText: l10n.lifestyle_nutrition,
+                  ),
+                  items: [
+                    DropdownMenuItem(
+                      value: null,
+                      child: Text(l10n.lifestyle_none),
+                    ),
+                    DropdownMenuItem(
+                      value: 'good',
+                      child: Text(l10n.lifestyle_food_good),
+                    ),
+                    DropdownMenuItem(
+                      value: 'fair',
+                      child: Text(l10n.lifestyle_food_fair),
+                    ),
+                    DropdownMenuItem(
+                      value: 'poor',
+                      child: Text(l10n.lifestyle_food_poor),
+                    ),
+                  ],
+                  onChanged: (v) => setState(() => _nutrition = v),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          TextField(
+            controller: _rest,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(labelText: l10n.lifestyle_rest),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          Text(
+            '${l10n.lifestyle_sleepQuality}: '
+            '${_sleepQuality == null ? l10n.lifestyle_none : '${((_sleepQuality! * 100).round())}%'}',
+            style: Theme.of(context).textTheme.labelMedium,
+          ),
+          Slider(
+            value: _sleepQuality ?? 0.5,
+            onChanged: (v) => setState(() => _sleepQuality = v),
           ),
           const SizedBox(height: AppSpacing.lg),
           TextField(
