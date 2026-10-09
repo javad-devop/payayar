@@ -137,8 +137,18 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
         GlassCard(
           child: Row(
             children: [
-              Icon(Icons.info_outline,
-                  size: 18, color: Theme.of(context).colorScheme.primary),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(AppRadius.control),
+                child: Image.asset(
+                  'assets/images/logo.jpg',
+                  width: 32,
+                  height: 32,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, _, _) => Icon(Icons.info_outline,
+                      size: 18,
+                      color: Theme.of(context).colorScheme.primary),
+                ),
+              ),
               const SizedBox(width: AppSpacing.md),
               Text(
                 '${l10n.settings_about} — ${l10n.settings_about_version} 0.1.0',
