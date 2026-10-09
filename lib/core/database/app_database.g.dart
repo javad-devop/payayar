@@ -4064,6 +4064,50 @@ class $LifestyleEntriesTable extends LifestyleEntries
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _exerciseTypeMeta = const VerificationMeta(
+    'exerciseType',
+  );
+  @override
+  late final GeneratedColumn<String> exerciseType = GeneratedColumn<String>(
+    'exercise_type',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _sleepQualityMeta = const VerificationMeta(
+    'sleepQuality',
+  );
+  @override
+  late final GeneratedColumn<double> sleepQuality = GeneratedColumn<double>(
+    'sleep_quality',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _nutritionMeta = const VerificationMeta(
+    'nutrition',
+  );
+  @override
+  late final GeneratedColumn<String> nutrition = GeneratedColumn<String>(
+    'nutrition',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _restMinutesMeta = const VerificationMeta(
+    'restMinutes',
+  );
+  @override
+  late final GeneratedColumn<int> restMinutes = GeneratedColumn<int>(
+    'rest_minutes',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _notesMeta = const VerificationMeta('notes');
   @override
   late final GeneratedColumn<String> notes = GeneratedColumn<String>(
@@ -4083,6 +4127,10 @@ class $LifestyleEntriesTable extends LifestyleEntries
     mood,
     energy,
     screenTimeMinutes,
+    exerciseType,
+    sleepQuality,
+    nutrition,
+    restMinutes,
     notes,
   ];
   @override
@@ -4156,6 +4204,39 @@ class $LifestyleEntriesTable extends LifestyleEntries
         ),
       );
     }
+    if (data.containsKey('exercise_type')) {
+      context.handle(
+        _exerciseTypeMeta,
+        exerciseType.isAcceptableOrUnknown(
+          data['exercise_type']!,
+          _exerciseTypeMeta,
+        ),
+      );
+    }
+    if (data.containsKey('sleep_quality')) {
+      context.handle(
+        _sleepQualityMeta,
+        sleepQuality.isAcceptableOrUnknown(
+          data['sleep_quality']!,
+          _sleepQualityMeta,
+        ),
+      );
+    }
+    if (data.containsKey('nutrition')) {
+      context.handle(
+        _nutritionMeta,
+        nutrition.isAcceptableOrUnknown(data['nutrition']!, _nutritionMeta),
+      );
+    }
+    if (data.containsKey('rest_minutes')) {
+      context.handle(
+        _restMinutesMeta,
+        restMinutes.isAcceptableOrUnknown(
+          data['rest_minutes']!,
+          _restMinutesMeta,
+        ),
+      );
+    }
     if (data.containsKey('notes')) {
       context.handle(
         _notesMeta,
@@ -4207,6 +4288,22 @@ class $LifestyleEntriesTable extends LifestyleEntries
         DriftSqlType.int,
         data['${effectivePrefix}screen_time_minutes'],
       ),
+      exerciseType: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}exercise_type'],
+      ),
+      sleepQuality: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}sleep_quality'],
+      ),
+      nutrition: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}nutrition'],
+      ),
+      restMinutes: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}rest_minutes'],
+      ),
       notes: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}notes'],
@@ -4229,6 +4326,10 @@ class LifestyleEntry extends DataClass implements Insertable<LifestyleEntry> {
   final int? mood;
   final int? energy;
   final int? screenTimeMinutes;
+  final String? exerciseType;
+  final double? sleepQuality;
+  final String? nutrition;
+  final int? restMinutes;
   final String? notes;
   const LifestyleEntry({
     required this.id,
@@ -4239,6 +4340,10 @@ class LifestyleEntry extends DataClass implements Insertable<LifestyleEntry> {
     this.mood,
     this.energy,
     this.screenTimeMinutes,
+    this.exerciseType,
+    this.sleepQuality,
+    this.nutrition,
+    this.restMinutes,
     this.notes,
   });
   @override
@@ -4263,6 +4368,18 @@ class LifestyleEntry extends DataClass implements Insertable<LifestyleEntry> {
     }
     if (!nullToAbsent || screenTimeMinutes != null) {
       map['screen_time_minutes'] = Variable<int>(screenTimeMinutes);
+    }
+    if (!nullToAbsent || exerciseType != null) {
+      map['exercise_type'] = Variable<String>(exerciseType);
+    }
+    if (!nullToAbsent || sleepQuality != null) {
+      map['sleep_quality'] = Variable<double>(sleepQuality);
+    }
+    if (!nullToAbsent || nutrition != null) {
+      map['nutrition'] = Variable<String>(nutrition);
+    }
+    if (!nullToAbsent || restMinutes != null) {
+      map['rest_minutes'] = Variable<int>(restMinutes);
     }
     if (!nullToAbsent || notes != null) {
       map['notes'] = Variable<String>(notes);
@@ -4290,6 +4407,18 @@ class LifestyleEntry extends DataClass implements Insertable<LifestyleEntry> {
       screenTimeMinutes: screenTimeMinutes == null && nullToAbsent
           ? const Value.absent()
           : Value(screenTimeMinutes),
+      exerciseType: exerciseType == null && nullToAbsent
+          ? const Value.absent()
+          : Value(exerciseType),
+      sleepQuality: sleepQuality == null && nullToAbsent
+          ? const Value.absent()
+          : Value(sleepQuality),
+      nutrition: nutrition == null && nullToAbsent
+          ? const Value.absent()
+          : Value(nutrition),
+      restMinutes: restMinutes == null && nullToAbsent
+          ? const Value.absent()
+          : Value(restMinutes),
       notes: notes == null && nullToAbsent
           ? const Value.absent()
           : Value(notes),
@@ -4310,6 +4439,10 @@ class LifestyleEntry extends DataClass implements Insertable<LifestyleEntry> {
       mood: serializer.fromJson<int?>(json['mood']),
       energy: serializer.fromJson<int?>(json['energy']),
       screenTimeMinutes: serializer.fromJson<int?>(json['screenTimeMinutes']),
+      exerciseType: serializer.fromJson<String?>(json['exerciseType']),
+      sleepQuality: serializer.fromJson<double?>(json['sleepQuality']),
+      nutrition: serializer.fromJson<String?>(json['nutrition']),
+      restMinutes: serializer.fromJson<int?>(json['restMinutes']),
       notes: serializer.fromJson<String?>(json['notes']),
     );
   }
@@ -4325,6 +4458,10 @@ class LifestyleEntry extends DataClass implements Insertable<LifestyleEntry> {
       'mood': serializer.toJson<int?>(mood),
       'energy': serializer.toJson<int?>(energy),
       'screenTimeMinutes': serializer.toJson<int?>(screenTimeMinutes),
+      'exerciseType': serializer.toJson<String?>(exerciseType),
+      'sleepQuality': serializer.toJson<double?>(sleepQuality),
+      'nutrition': serializer.toJson<String?>(nutrition),
+      'restMinutes': serializer.toJson<int?>(restMinutes),
       'notes': serializer.toJson<String?>(notes),
     };
   }
@@ -4338,6 +4475,10 @@ class LifestyleEntry extends DataClass implements Insertable<LifestyleEntry> {
     Value<int?> mood = const Value.absent(),
     Value<int?> energy = const Value.absent(),
     Value<int?> screenTimeMinutes = const Value.absent(),
+    Value<String?> exerciseType = const Value.absent(),
+    Value<double?> sleepQuality = const Value.absent(),
+    Value<String?> nutrition = const Value.absent(),
+    Value<int?> restMinutes = const Value.absent(),
     Value<String?> notes = const Value.absent(),
   }) => LifestyleEntry(
     id: id ?? this.id,
@@ -4352,6 +4493,10 @@ class LifestyleEntry extends DataClass implements Insertable<LifestyleEntry> {
     screenTimeMinutes: screenTimeMinutes.present
         ? screenTimeMinutes.value
         : this.screenTimeMinutes,
+    exerciseType: exerciseType.present ? exerciseType.value : this.exerciseType,
+    sleepQuality: sleepQuality.present ? sleepQuality.value : this.sleepQuality,
+    nutrition: nutrition.present ? nutrition.value : this.nutrition,
+    restMinutes: restMinutes.present ? restMinutes.value : this.restMinutes,
     notes: notes.present ? notes.value : this.notes,
   );
   LifestyleEntry copyWithCompanion(LifestyleEntriesCompanion data) {
@@ -4372,6 +4517,16 @@ class LifestyleEntry extends DataClass implements Insertable<LifestyleEntry> {
       screenTimeMinutes: data.screenTimeMinutes.present
           ? data.screenTimeMinutes.value
           : this.screenTimeMinutes,
+      exerciseType: data.exerciseType.present
+          ? data.exerciseType.value
+          : this.exerciseType,
+      sleepQuality: data.sleepQuality.present
+          ? data.sleepQuality.value
+          : this.sleepQuality,
+      nutrition: data.nutrition.present ? data.nutrition.value : this.nutrition,
+      restMinutes: data.restMinutes.present
+          ? data.restMinutes.value
+          : this.restMinutes,
       notes: data.notes.present ? data.notes.value : this.notes,
     );
   }
@@ -4387,6 +4542,10 @@ class LifestyleEntry extends DataClass implements Insertable<LifestyleEntry> {
           ..write('mood: $mood, ')
           ..write('energy: $energy, ')
           ..write('screenTimeMinutes: $screenTimeMinutes, ')
+          ..write('exerciseType: $exerciseType, ')
+          ..write('sleepQuality: $sleepQuality, ')
+          ..write('nutrition: $nutrition, ')
+          ..write('restMinutes: $restMinutes, ')
           ..write('notes: $notes')
           ..write(')'))
         .toString();
@@ -4402,6 +4561,10 @@ class LifestyleEntry extends DataClass implements Insertable<LifestyleEntry> {
     mood,
     energy,
     screenTimeMinutes,
+    exerciseType,
+    sleepQuality,
+    nutrition,
+    restMinutes,
     notes,
   );
   @override
@@ -4416,6 +4579,10 @@ class LifestyleEntry extends DataClass implements Insertable<LifestyleEntry> {
           other.mood == this.mood &&
           other.energy == this.energy &&
           other.screenTimeMinutes == this.screenTimeMinutes &&
+          other.exerciseType == this.exerciseType &&
+          other.sleepQuality == this.sleepQuality &&
+          other.nutrition == this.nutrition &&
+          other.restMinutes == this.restMinutes &&
           other.notes == this.notes);
 }
 
@@ -4428,6 +4595,10 @@ class LifestyleEntriesCompanion extends UpdateCompanion<LifestyleEntry> {
   final Value<int?> mood;
   final Value<int?> energy;
   final Value<int?> screenTimeMinutes;
+  final Value<String?> exerciseType;
+  final Value<double?> sleepQuality;
+  final Value<String?> nutrition;
+  final Value<int?> restMinutes;
   final Value<String?> notes;
   const LifestyleEntriesCompanion({
     this.id = const Value.absent(),
@@ -4438,6 +4609,10 @@ class LifestyleEntriesCompanion extends UpdateCompanion<LifestyleEntry> {
     this.mood = const Value.absent(),
     this.energy = const Value.absent(),
     this.screenTimeMinutes = const Value.absent(),
+    this.exerciseType = const Value.absent(),
+    this.sleepQuality = const Value.absent(),
+    this.nutrition = const Value.absent(),
+    this.restMinutes = const Value.absent(),
     this.notes = const Value.absent(),
   });
   LifestyleEntriesCompanion.insert({
@@ -4449,6 +4624,10 @@ class LifestyleEntriesCompanion extends UpdateCompanion<LifestyleEntry> {
     this.mood = const Value.absent(),
     this.energy = const Value.absent(),
     this.screenTimeMinutes = const Value.absent(),
+    this.exerciseType = const Value.absent(),
+    this.sleepQuality = const Value.absent(),
+    this.nutrition = const Value.absent(),
+    this.restMinutes = const Value.absent(),
     this.notes = const Value.absent(),
   }) : date = Value(date);
   static Insertable<LifestyleEntry> custom({
@@ -4460,6 +4639,10 @@ class LifestyleEntriesCompanion extends UpdateCompanion<LifestyleEntry> {
     Expression<int>? mood,
     Expression<int>? energy,
     Expression<int>? screenTimeMinutes,
+    Expression<String>? exerciseType,
+    Expression<double>? sleepQuality,
+    Expression<String>? nutrition,
+    Expression<int>? restMinutes,
     Expression<String>? notes,
   }) {
     return RawValuesInsertable({
@@ -4471,6 +4654,10 @@ class LifestyleEntriesCompanion extends UpdateCompanion<LifestyleEntry> {
       if (mood != null) 'mood': mood,
       if (energy != null) 'energy': energy,
       if (screenTimeMinutes != null) 'screen_time_minutes': screenTimeMinutes,
+      if (exerciseType != null) 'exercise_type': exerciseType,
+      if (sleepQuality != null) 'sleep_quality': sleepQuality,
+      if (nutrition != null) 'nutrition': nutrition,
+      if (restMinutes != null) 'rest_minutes': restMinutes,
       if (notes != null) 'notes': notes,
     });
   }
@@ -4484,6 +4671,10 @@ class LifestyleEntriesCompanion extends UpdateCompanion<LifestyleEntry> {
     Value<int?>? mood,
     Value<int?>? energy,
     Value<int?>? screenTimeMinutes,
+    Value<String?>? exerciseType,
+    Value<double?>? sleepQuality,
+    Value<String?>? nutrition,
+    Value<int?>? restMinutes,
     Value<String?>? notes,
   }) {
     return LifestyleEntriesCompanion(
@@ -4495,6 +4686,10 @@ class LifestyleEntriesCompanion extends UpdateCompanion<LifestyleEntry> {
       mood: mood ?? this.mood,
       energy: energy ?? this.energy,
       screenTimeMinutes: screenTimeMinutes ?? this.screenTimeMinutes,
+      exerciseType: exerciseType ?? this.exerciseType,
+      sleepQuality: sleepQuality ?? this.sleepQuality,
+      nutrition: nutrition ?? this.nutrition,
+      restMinutes: restMinutes ?? this.restMinutes,
       notes: notes ?? this.notes,
     );
   }
@@ -4526,6 +4721,18 @@ class LifestyleEntriesCompanion extends UpdateCompanion<LifestyleEntry> {
     if (screenTimeMinutes.present) {
       map['screen_time_minutes'] = Variable<int>(screenTimeMinutes.value);
     }
+    if (exerciseType.present) {
+      map['exercise_type'] = Variable<String>(exerciseType.value);
+    }
+    if (sleepQuality.present) {
+      map['sleep_quality'] = Variable<double>(sleepQuality.value);
+    }
+    if (nutrition.present) {
+      map['nutrition'] = Variable<String>(nutrition.value);
+    }
+    if (restMinutes.present) {
+      map['rest_minutes'] = Variable<int>(restMinutes.value);
+    }
     if (notes.present) {
       map['notes'] = Variable<String>(notes.value);
     }
@@ -4543,6 +4750,10 @@ class LifestyleEntriesCompanion extends UpdateCompanion<LifestyleEntry> {
           ..write('mood: $mood, ')
           ..write('energy: $energy, ')
           ..write('screenTimeMinutes: $screenTimeMinutes, ')
+          ..write('exerciseType: $exerciseType, ')
+          ..write('sleepQuality: $sleepQuality, ')
+          ..write('nutrition: $nutrition, ')
+          ..write('restMinutes: $restMinutes, ')
           ..write('notes: $notes')
           ..write(')'))
         .toString();
@@ -10402,6 +10613,10 @@ typedef $$LifestyleEntriesTableCreateCompanionBuilder =
       Value<int?> mood,
       Value<int?> energy,
       Value<int?> screenTimeMinutes,
+      Value<String?> exerciseType,
+      Value<double?> sleepQuality,
+      Value<String?> nutrition,
+      Value<int?> restMinutes,
       Value<String?> notes,
     });
 typedef $$LifestyleEntriesTableUpdateCompanionBuilder =
@@ -10414,6 +10629,10 @@ typedef $$LifestyleEntriesTableUpdateCompanionBuilder =
       Value<int?> mood,
       Value<int?> energy,
       Value<int?> screenTimeMinutes,
+      Value<String?> exerciseType,
+      Value<double?> sleepQuality,
+      Value<String?> nutrition,
+      Value<int?> restMinutes,
       Value<String?> notes,
     });
 
@@ -10463,6 +10682,26 @@ class $$LifestyleEntriesTableFilterComposer
 
   ColumnFilters<int> get screenTimeMinutes => $composableBuilder(
     column: $table.screenTimeMinutes,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get exerciseType => $composableBuilder(
+    column: $table.exerciseType,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get sleepQuality => $composableBuilder(
+    column: $table.sleepQuality,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get nutrition => $composableBuilder(
+    column: $table.nutrition,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get restMinutes => $composableBuilder(
+    column: $table.restMinutes,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -10521,6 +10760,26 @@ class $$LifestyleEntriesTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get exerciseType => $composableBuilder(
+    column: $table.exerciseType,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get sleepQuality => $composableBuilder(
+    column: $table.sleepQuality,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get nutrition => $composableBuilder(
+    column: $table.nutrition,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get restMinutes => $composableBuilder(
+    column: $table.restMinutes,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<String> get notes => $composableBuilder(
     column: $table.notes,
     builder: (column) => ColumnOrderings(column),
@@ -10565,6 +10824,24 @@ class $$LifestyleEntriesTableAnnotationComposer
 
   GeneratedColumn<int> get screenTimeMinutes => $composableBuilder(
     column: $table.screenTimeMinutes,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get exerciseType => $composableBuilder(
+    column: $table.exerciseType,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get sleepQuality => $composableBuilder(
+    column: $table.sleepQuality,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get nutrition =>
+      $composableBuilder(column: $table.nutrition, builder: (column) => column);
+
+  GeneratedColumn<int> get restMinutes => $composableBuilder(
+    column: $table.restMinutes,
     builder: (column) => column,
   );
 
@@ -10617,6 +10894,10 @@ class $$LifestyleEntriesTableTableManager
                 Value<int?> mood = const Value.absent(),
                 Value<int?> energy = const Value.absent(),
                 Value<int?> screenTimeMinutes = const Value.absent(),
+                Value<String?> exerciseType = const Value.absent(),
+                Value<double?> sleepQuality = const Value.absent(),
+                Value<String?> nutrition = const Value.absent(),
+                Value<int?> restMinutes = const Value.absent(),
                 Value<String?> notes = const Value.absent(),
               }) => LifestyleEntriesCompanion(
                 id: id,
@@ -10627,6 +10908,10 @@ class $$LifestyleEntriesTableTableManager
                 mood: mood,
                 energy: energy,
                 screenTimeMinutes: screenTimeMinutes,
+                exerciseType: exerciseType,
+                sleepQuality: sleepQuality,
+                nutrition: nutrition,
+                restMinutes: restMinutes,
                 notes: notes,
               ),
           createCompanionCallback:
@@ -10639,6 +10924,10 @@ class $$LifestyleEntriesTableTableManager
                 Value<int?> mood = const Value.absent(),
                 Value<int?> energy = const Value.absent(),
                 Value<int?> screenTimeMinutes = const Value.absent(),
+                Value<String?> exerciseType = const Value.absent(),
+                Value<double?> sleepQuality = const Value.absent(),
+                Value<String?> nutrition = const Value.absent(),
+                Value<int?> restMinutes = const Value.absent(),
                 Value<String?> notes = const Value.absent(),
               }) => LifestyleEntriesCompanion.insert(
                 id: id,
@@ -10649,6 +10938,10 @@ class $$LifestyleEntriesTableTableManager
                 mood: mood,
                 energy: energy,
                 screenTimeMinutes: screenTimeMinutes,
+                exerciseType: exerciseType,
+                sleepQuality: sleepQuality,
+                nutrition: nutrition,
+                restMinutes: restMinutes,
                 notes: notes,
               ),
           withReferenceMapper: (p0) => p0
