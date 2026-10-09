@@ -304,18 +304,30 @@ class _BrandMark extends StatelessWidget {
     return Container(
       width: 38,
       height: 38,
-      alignment: Alignment.center,
       decoration: BoxDecoration(
         color: scheme.primary.withValues(alpha: 0.16),
         borderRadius: BorderRadius.circular(AppRadius.button),
         border: Border.all(color: scheme.primary.withValues(alpha: 0.42)),
       ),
-      child: Text(
-        'پ',
-        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-              color: scheme.primary,
-              fontWeight: AppFontWeight.bold,
+      // App logo in the top-left brand slot (user request: replace the
+      // bare letter with the logo; letter kept as asset-load fallback).
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppRadius.button - 1),
+        child: Image.asset(
+          'assets/images/logo.jpg',
+          width: 38,
+          height: 38,
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) => Center(
+            child: Text(
+              'پ',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: scheme.primary,
+                    fontWeight: AppFontWeight.bold,
+                  ),
             ),
+          ),
+        ),
       ),
     );
   }

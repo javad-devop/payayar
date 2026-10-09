@@ -155,7 +155,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
               ),
               const SizedBox(width: AppSpacing.md),
               Text(
-                '${l10n.settings_about} — ${l10n.settings_about_version} 0.1.0',
+                '${l10n.settings_about} — ${l10n.settings_about_version} 1.0.0',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const Spacer(),
