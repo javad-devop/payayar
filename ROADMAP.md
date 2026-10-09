@@ -25,7 +25,7 @@
 | 🔔 نوتیفیکیشن محلی (AGENTS §43.1) | ✅ انجام شد — ۹ کامیت، سبز در CI (بخش ۳.۲) |
 | 📝 یادداشت سریع (design §12.1) | ✅ انجام شد و کامیت شد (بخش ۳.۳) |
 | 🤖 AI بخش‌به‌بخش (AGENTS §7.A) | ⏳ در نوبت |
-| 🃏 فلش‌کارت و مرور (AGENTS §45) | 🔄 در جریان روی شاخهٔ `feat/flashcards` — **۸ کامیت کد + ۱ کامیت بازتولید `app_database.g.dart`** (۱۹:۱۳–۲۱:۱۷ UTC)؛ **CI شاخه اکنون 🟢 سبز** (analyze + ۶۰/۶۰ تست)؛ هنوز به `main` ادغام نشده (بخش ۳.۴) |
+| 🃏 فلش‌کارت و مرور (AGENTS §45) | ✅ **ادغام شده روی `main`** (`73c94dd`، ۲۰۲۶-۱۰-۰۸ ~۲۱:۱۵ UTC)؛ CI شاخه 🟢 سبز (analyze + ۶۰/۶۰ تست)؛ بیلدهای Android/Windows روی `main` در حال اجرا (بخش ۳.۴) |
 | تکمیل توسعه بخش‌ها | ⏳ در نوبت |
 
 **وضعیت مخزن (خوانده شد، نه حدس — در همین اجرا):**
@@ -59,7 +59,7 @@
 | مشاور AI | ✅ موجود | `lib/features/ai_advisor/ai_advisor_page.dart` |
 | تنظیمات | ✅ موجود | `lib/features/settings/settings_page.dart` |
 | 🔔 نوتیفیکیشن | ✅ موجود (بدون Page؛ در هدر پوسته) | `lib/features/notifications/bell_button.dart`، `notification_history_panel.dart` + `lib/app/shell.dart:107` |
-| 🃏 فلش‌کارت و مرور | 🔄 کد نوشته و کامیت شده روی `feat/flashcards`؛ در `main` نیست | `lib/features/study/flashcards_card.dart`، `flashcard_dialog.dart`، `flashcard_review_sheet.dart` + جدول/پرسش‌ها در `tables.dart` و `repositories.dart` |
+| 🃏 فلش‌کارت و مرور | ✅ در `main` ادغام شد | `lib/features/study/flashcards_card.dart`، `flashcard_dialog.dart`، `flashcard_review_sheet.dart` + جدول/پرسش‌ها در `tables.dart` و `repositories.dart` |
 
 **جزئیات گزارش‌ها:** ۸ کارت در صفحه — مطالعه، خواب (خطی)، ورزش (میله‌ای)، تعداد تست (میله‌ای)،
 توزیع درس‌ها، برنامه‌ریزی، تسلط، روند نمرات آزمون. سه کارت اخیر نو هستند و هر سه روی
@@ -207,7 +207,7 @@
 
 ---
 
-## ۳.۴. فلش‌کارت و مرور (AGENTS.md §45) 🔄 در جریان
+## ۳.۴. فلش‌کارت و مرور (AGENTS.md §45) ✅ تکمیل و ادغام شد
 
 **۸ کامیت کد + ۱ کامیت بازتولید خودکار روی شاخهٔ `feat/flashcards`** (۲۰۲۶-۱۰-۰۸، ۱۹:۱۳ تا ۲۱:۱۷ UTC) — هنوز به `main` ادغام نشده‌اند:
 
@@ -233,7 +233,7 @@
 ## ۴. مراحل بعدی
 
 1. 🤖 AI بخش‌به‌بخش (AGENTS §7.A) — «کمک AI» در برنامه‌ریزی/مطالعه/آزمون/گزارش‌ها.
-2. 🃏 فلش‌کارت و مرور (AGENTS §45) — کد روی `feat/flashcards` است و CI شاخه اکنون سبز شد (analyze پاک + ۶۰/۶۰ تست)؛ قدم بعدی: **ادغام به `main`**، سپس رفتن ردیف این قابلیت از 🔄 به ✅ و اجرای بیلدهای Android/Windows.
+2. 🃏 فلش‌کارت و مرور (AGENTS §45) — ✅ **انجام شد**: ادغام روی `main` (`73c94dd`)، CI سبز (analyze پاک + ۶۰/۶۰ تست)، بیلدهای Android/Windows در حال اجرا. قدم بعدی ردیف ۳.
 3. نمایشگر فشردهٔ تایمر تمرکز در صفحه‌های دیگر (باقی‌ماندهٔ §44).
 4. به‌روزرسانی `HANDOFF.md` — بخش ۳ آن هنوز می‌گوید «یادداشت سریع push نشده» که دیگر درست نیست.
 5. رفع هشدار منسوخ‌شدن `actions/checkout@v4` / `setup-java@v4` (Node.js 20) در workflowها.
