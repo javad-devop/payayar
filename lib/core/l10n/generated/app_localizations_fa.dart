@@ -518,6 +518,25 @@ class AppLocalizationsFa extends AppLocalizations {
   String get exams_title => 'آزمون‌ها';
 
   @override
+  String get ai_quizTitle => 'آزمون تمرینی با هوش مصنوعی';
+
+  @override
+  String ai_quizPrompt(Object topic) {
+    return 'برای موضوع «$topic» پنج سؤال چهارگزینه‌ای بساز. خروجی فقط یک آرایهٔ JSON باشد که هر عضو آن کلیدهای question و options (آرایهٔ رشته‌ها) و correct (شمارهٔ گزینهٔ درست از صفر) دارد؛ بدون هیچ متن اضافه.';
+  }
+
+  @override
+  String ai_quizScore(Object x) {
+    return 'نتیجه: $x';
+  }
+
+  @override
+  String get ai_quizNext => 'بعدی';
+
+  @override
+  String get ai_quizAgain => 'دوباره';
+
+  @override
   String get ai_makeCards => 'ساخت با هوش مصنوعی';
 
   @override

@@ -96,7 +96,7 @@
 | 🔔 نوتیفیکیشن | ✅ موجود (بدون Page؛ در هدر پوسته) | `lib/features/notifications/bell_button.dart`، `notification_history_panel.dart` + `lib/app/shell.dart:107` |
 | 🃏 فلش‌کارت و مرور | ✅ در `main` ادغام شد | `lib/features/study/flashcards_card.dart`، `flashcard_dialog.dart`، `flashcard_review_sheet.dart` + جدول/پرسش‌ها در `tables.dart` و `repositories.dart` |
 
-**نو (۰۸:۳۰ UTC):** از `db13f73` به بعد همهٔ تاریخ‌های قابل‌نمایش (خانه/برنامه‌ریزی/آزمون/سبک زندگی/مطالعه + هدر روزهای هفته + مینی‌تقویم) شمسی‌اند (`lib/core/util/shamsi.dart`).
+**نو (۰۸:۳۰ UTC):** از `db13f73` به بعد همهٔ تاریخ‌های قابل‌نمایش (خانه/برنامه‌ریزی/آزمون/سبک زندگی/مطالعه + هدر روزهای هفته + مینی‌تقویم) شمسی‌اند (`lib/core/util/shamsi.dart`). **نو (۰۹:۲۴ UTC):** با `64ea0c0` خودِ انتخابگرهای تاریخ هم شمسی شدند (`lib/core/widgets/app_date_picker.dart`) و همهٔ pickerها در locale فارسی از آن استفاده می‌کنند.
 
 **جزئیات گزارش‌ها:** ۸ کارت در صفحه — مطالعه، خواب (خطی)، ورزش (میله‌ای)، تعداد تست (میله‌ای)،
 توزیع درس‌ها، برنامه‌ریزی، تسلط، روند نمرات آزمون. سه کارت اخیر نو هستند و هر سه روی
@@ -126,7 +126,9 @@
 | `test/ai_assist_ui_test.dart` | ۳ |
 | `test/theme_accent_test.dart` | ۷ |
 | `test/openai_provider_test.dart` | ۶ |
-| `test/shamsi_test.dart` | ۱۰ |
+| `test/shamsi_test.dart` | ۱۲ |
+| `test/grade_calculator_test.dart` | ۱ |
+| `test/upcoming_reminders_test.dart` | ۱ |
 
 اجرا و تأیید این تست‌ها از مسیر **CI** می‌آید: **تازه‌ترین** بیلدهای سبزِ `main` (pushِ `b389fd1`: ویندوز `37907676011` و اندروید `37907675945`، هر دو از ۰۸:۵۲:۳۷ UTC) با پیام **«🎉 90 tests passed»** (۰۸:۵۶:۴۴ و ۰۸:۵۴:۲۷) و `No issues found!` (۰۸:۵۵:۱۵ و ۰۸:۵۳:۳۴) تمام شدند؛ pushِ `12eb7df` اما در پلهٔ `Static analysis` ایستاد و به تست نرسید (رفع با `b389fd1`). پیش از آن بیلد سبزِ `db81444` (`37904246242`، «🎉 90 tests passed» در ۰۸:۲۲:۵۰) همین ۹۰ تست را پاس کرده بود (۹۰ = ۸۰ پیشین + ۱۰ تست `shamsi_test`؛ ۶ تست `openai_provider_test` پیش‌تر سبز شده بود).
 `feat/timer-hud`/`c44deb7`، ۰۲:۵۴–۰۲:۵۷ UTC) با پیام **«🎉 67 tests passed»** و

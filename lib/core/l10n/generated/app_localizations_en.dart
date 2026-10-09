@@ -518,6 +518,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exams_title => 'Exams';
 
   @override
+  String get ai_quizTitle => 'AI practice quiz';
+
+  @override
+  String ai_quizPrompt(Object topic) {
+    return 'Build five multiple-choice questions for the topic \"$topic\". Output must be only a JSON array where each item has question, options (array of strings) and correct (zero-based index) keys, with no extra text.';
+  }
+
+  @override
+  String ai_quizScore(Object x) {
+    return 'Score: $x';
+  }
+
+  @override
+  String get ai_quizNext => 'Next';
+
+  @override
+  String get ai_quizAgain => 'Try again';
+
+  @override
   String get ai_makeCards => 'Generate with AI';
 
   @override

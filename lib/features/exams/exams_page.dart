@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 import '../../core/ai/ai_assist.dart';
+import 'ai_quiz_dialog.dart';
 import '../../core/data/providers.dart';
 import '../../core/database/app_database.dart';
 import '../../core/database/tables.dart';
@@ -73,6 +74,16 @@ class ExamsPage extends ConsumerWidget {
             ),
           ],
         ),
+        const SizedBox(height: AppSpacing.lg),
+        // Practice quiz generated on demand by the AI (phase 10).
+        Center(
+          child: SecondaryButton(
+            label: l10n.ai_quizTitle,
+            icon: Icons.quiz_outlined,
+            onPressed: () => AiQuizDialog.show(context),
+          ),
+        ),
+        const SizedBox(height: AppSpacing.lg),
         if (exams.isEmpty)
           GlassCard(
             child: EmptyState(

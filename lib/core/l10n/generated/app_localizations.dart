@@ -1082,6 +1082,36 @@ abstract class AppLocalizations {
   /// **'آزمون‌ها'**
   String get exams_title;
 
+  /// No description provided for @ai_quizTitle.
+  ///
+  /// In fa, this message translates to:
+  /// **'آزمون تمرینی با هوش مصنوعی'**
+  String get ai_quizTitle;
+
+  /// No description provided for @ai_quizPrompt.
+  ///
+  /// In fa, this message translates to:
+  /// **'برای موضوع «{topic}» پنج سؤال چهارگزینه‌ای بساز. خروجی فقط یک آرایهٔ JSON باشد که هر عضو آن کلیدهای question و options (آرایهٔ رشته‌ها) و correct (شمارهٔ گزینهٔ درست از صفر) دارد؛ بدون هیچ متن اضافه.'**
+  String ai_quizPrompt(Object topic);
+
+  /// No description provided for @ai_quizScore.
+  ///
+  /// In fa, this message translates to:
+  /// **'نتیجه: {x}'**
+  String ai_quizScore(Object x);
+
+  /// No description provided for @ai_quizNext.
+  ///
+  /// In fa, this message translates to:
+  /// **'بعدی'**
+  String get ai_quizNext;
+
+  /// No description provided for @ai_quizAgain.
+  ///
+  /// In fa, this message translates to:
+  /// **'دوباره'**
+  String get ai_quizAgain;
+
   /// No description provided for @ai_makeCards.
   ///
   /// In fa, this message translates to:
