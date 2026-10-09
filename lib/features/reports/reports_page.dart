@@ -6,6 +6,7 @@ import '../../core/ai/ai_assist.dart';
 import '../../core/data/providers.dart';
 import '../../core/data/repositories.dart' show SessionType;
 import '../../core/database/app_database.dart';
+import 'grade_calculator.dart';
 import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/theme/tokens.dart';
 import '../../core/widgets/glass_card.dart';
@@ -86,6 +87,8 @@ class _ReportsPageState extends ConsumerState<ReportsPage> {
         _PlanningReport(),
         const SizedBox(height: AppSpacing.lg),
         _MasteryReport(),
+        const SizedBox(height: AppSpacing.lg),
+        const GradeCalculatorCard(),
         const SizedBox(height: AppSpacing.lg),
         GlassCard(
           child: Column(

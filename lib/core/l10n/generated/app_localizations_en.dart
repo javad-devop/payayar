@@ -518,6 +518,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exams_title => 'Exams';
 
   @override
+  String get calc_title => 'Grade calculator';
+
+  @override
+  String get calc_score => 'Score';
+
+  @override
+  String get calc_weight => 'Weight';
+
+  @override
+  String get calc_add => 'Add row';
+
+  @override
+  String get calc_average => 'Weighted average';
+
+  @override
   String remind_examToday(Object title) {
     return '$title: exam today';
   }

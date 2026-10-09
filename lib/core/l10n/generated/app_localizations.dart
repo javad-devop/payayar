@@ -1082,6 +1082,36 @@ abstract class AppLocalizations {
   /// **'آزمون‌ها'**
   String get exams_title;
 
+  /// No description provided for @calc_title.
+  ///
+  /// In fa, this message translates to:
+  /// **'ماشین‌حساب نمره'**
+  String get calc_title;
+
+  /// No description provided for @calc_score.
+  ///
+  /// In fa, this message translates to:
+  /// **'نمره'**
+  String get calc_score;
+
+  /// No description provided for @calc_weight.
+  ///
+  /// In fa, this message translates to:
+  /// **'ضریب'**
+  String get calc_weight;
+
+  /// No description provided for @calc_add.
+  ///
+  /// In fa, this message translates to:
+  /// **'افزودن ردیف'**
+  String get calc_add;
+
+  /// No description provided for @calc_average.
+  ///
+  /// In fa, this message translates to:
+  /// **'میانگین وزنی'**
+  String get calc_average;
+
   /// No description provided for @remind_examToday.
   ///
   /// In fa, this message translates to:

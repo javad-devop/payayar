@@ -518,6 +518,21 @@ class AppLocalizationsFa extends AppLocalizations {
   String get exams_title => 'آزمون‌ها';
 
   @override
+  String get calc_title => 'ماشین‌حساب نمره';
+
+  @override
+  String get calc_score => 'نمره';
+
+  @override
+  String get calc_weight => 'ضریب';
+
+  @override
+  String get calc_add => 'افزودن ردیف';
+
+  @override
+  String get calc_average => 'میانگین وزنی';
+
+  @override
   String remind_examToday(Object title) {
     return '$title — امروز آزمون داری';
   }
