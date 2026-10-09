@@ -84,14 +84,13 @@ class _AppHeader extends ConsumerWidget {
     final text = Theme.of(context).textTheme;
     final scheme = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isMobile = Breakpoints.isMobile(MediaQuery.sizeOf(context).width);
 
     return SizedBox(
       height: 68,
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: Breakpoints.isMobile(MediaQuery.sizeOf(context).width)
-              ? AppSpacing.lg
-              : AppSpacing.xxl,
+          horizontal: isMobile ? AppSpacing.lg : AppSpacing.xxl,
         ),
         child: Row(
           children: [
@@ -121,27 +120,31 @@ class _AppHeader extends ConsumerWidget {
               ),
             ),
             const BellButton(),
-            IconButton(
-              tooltip: isDark ? l10n.settings_theme_light : l10n.settings_theme_dark,
-              onPressed: () => ref.read(appSettingsProvider.notifier).setThemeMode(
-                    isDark ? ThemeMode.light : ThemeMode.dark,
-                  ),
-              icon: Icon(
-                isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
-                size: 20,
-                color: scheme.onSurfaceVariant,
+            // Hidden on phones: the header stays one-line and both actions
+            // remain reachable via Settings / the "More" sheet.
+            if (!isMobile)
+              IconButton(
+                tooltip: isDark ? l10n.settings_theme_light : l10n.settings_theme_dark,
+                onPressed: () => ref.read(appSettingsProvider.notifier).setThemeMode(
+                      isDark ? ThemeMode.light : ThemeMode.dark,
+                    ),
+                icon: Icon(
+                  isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+                  size: 20,
+                  color: scheme.onSurfaceVariant,
+                ),
               ),
-            ),
-            IconButton(
-              tooltip: l10n.nav_settings,
-              onPressed: () =>
-                  ref.read(sectionProvider.notifier).goTo(AppSection.settings),
-              icon: Icon(
-                Icons.settings_outlined,
-                size: 20,
-                color: scheme.onSurfaceVariant,
+            if (!isMobile)
+              IconButton(
+                tooltip: l10n.nav_settings,
+                onPressed: () =>
+                    ref.read(sectionProvider.notifier).goTo(AppSection.settings),
+                icon: Icon(
+                  Icons.settings_outlined,
+                  size: 20,
+                  color: scheme.onSurfaceVariant,
+                ),
               ),
-            ),
           ],
         ),
       ),
