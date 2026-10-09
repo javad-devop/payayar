@@ -8,6 +8,7 @@ import '../../core/data/repositories.dart' show SessionType;
 import '../../core/database/app_database.dart';
 import 'grade_calculator.dart';
 import 'heatmap_report.dart';
+import 'xp_medals_card.dart';
 import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/theme/tokens.dart';
 import '../../core/widgets/glass_card.dart';
@@ -83,6 +84,8 @@ class _ReportsPageState extends ConsumerState<ReportsPage> {
         _TestCountReport(isWeek: _isWeek),
         const SizedBox(height: AppSpacing.lg),
         const HeatmapReport(),
+        const SizedBox(height: AppSpacing.lg),
+        const XpMedalsCard(),
         const SizedBox(height: AppSpacing.lg),
         _SubjectDistributionReport(isWeek: _isWeek),
         const SizedBox(height: AppSpacing.lg),

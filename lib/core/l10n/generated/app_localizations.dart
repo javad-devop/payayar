@@ -1082,6 +1082,60 @@ abstract class AppLocalizations {
   /// **'آزمون‌ها'**
   String get exams_title;
 
+  /// No description provided for @xp_title.
+  ///
+  /// In fa, this message translates to:
+  /// **'امتیاز و مدال‌ها'**
+  String get xp_title;
+
+  /// No description provided for @xp_level.
+  ///
+  /// In fa, this message translates to:
+  /// **'سطح'**
+  String get xp_level;
+
+  /// No description provided for @xp_xp.
+  ///
+  /// In fa, this message translates to:
+  /// **'امتیاز'**
+  String get xp_xp;
+
+  /// No description provided for @medal_first.
+  ///
+  /// In fa, this message translates to:
+  /// **'اولین قدم'**
+  String get medal_first;
+
+  /// No description provided for @medal_streak7.
+  ///
+  /// In fa, this message translates to:
+  /// **'۷ روز پیاپی'**
+  String get medal_streak7;
+
+  /// No description provided for @medal_sessions10.
+  ///
+  /// In fa, this message translates to:
+  /// **'۱۰ جلسه'**
+  String get medal_sessions10;
+
+  /// No description provided for @medal_hours10.
+  ///
+  /// In fa, this message translates to:
+  /// **'۱۰ ساعت مطالعه'**
+  String get medal_hours10;
+
+  /// No description provided for @medal_tasks20.
+  ///
+  /// In fa, this message translates to:
+  /// **'۲۰ تسک انجام‌شده'**
+  String get medal_tasks20;
+
+  /// No description provided for @medal_exams5.
+  ///
+  /// In fa, this message translates to:
+  /// **'۵ آزمون'**
+  String get medal_exams5;
+
   /// No description provided for @reports_heatmap.
   ///
   /// In fa, this message translates to:

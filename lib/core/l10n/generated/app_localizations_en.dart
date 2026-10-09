@@ -518,6 +518,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exams_title => 'Exams';
 
   @override
+  String get xp_title => 'Score & medals';
+
+  @override
+  String get xp_level => 'Level';
+
+  @override
+  String get xp_xp => 'XP';
+
+  @override
+  String get medal_first => 'First step';
+
+  @override
+  String get medal_streak7 => '7-day streak';
+
+  @override
+  String get medal_sessions10 => '10 sessions';
+
+  @override
+  String get medal_hours10 => '10 hours studied';
+
+  @override
+  String get medal_tasks20 => '20 tasks done';
+
+  @override
+  String get medal_exams5 => '5 exams';
+
+  @override
   String get reports_heatmap => 'Study heatmap (last 3 months)';
 
   @override

@@ -518,6 +518,33 @@ class AppLocalizationsFa extends AppLocalizations {
   String get exams_title => 'آزمون‌ها';
 
   @override
+  String get xp_title => 'امتیاز و مدال‌ها';
+
+  @override
+  String get xp_level => 'سطح';
+
+  @override
+  String get xp_xp => 'امتیاز';
+
+  @override
+  String get medal_first => 'اولین قدم';
+
+  @override
+  String get medal_streak7 => '۷ روز پیاپی';
+
+  @override
+  String get medal_sessions10 => '۱۰ جلسه';
+
+  @override
+  String get medal_hours10 => '۱۰ ساعت مطالعه';
+
+  @override
+  String get medal_tasks20 => '۲۰ تسک انجام‌شده';
+
+  @override
+  String get medal_exams5 => '۵ آزمون';
+
+  @override
   String get reports_heatmap => 'نقشهٔ حرارتی مطالعه (۳ ماه اخیر)';
 
   @override
