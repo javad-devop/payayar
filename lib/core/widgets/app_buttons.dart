@@ -99,6 +99,21 @@ class AppButton extends StatelessWidget {
               color: background,
               borderRadius: BorderRadius.circular(AppRadius.button),
               border: Border.all(color: side.color, width: side.width),
+              // Primary buttons get a soft accent lift (plan item 2).
+              boxShadow: variant == AppButtonVariant.primary
+                  ? [
+                      BoxShadow(
+                        color: scheme.primary.withValues(alpha: isDark ? 0.30 : 0.22),
+                        blurRadius: isDark ? 10 : 12,
+                        offset: const Offset(0, 4),
+                      ),
+                      BoxShadow(
+                        color: scheme.primary.withValues(alpha: 0.10),
+                        blurRadius: 3,
+                        offset: const Offset(0, 1),
+                      ),
+                    ]
+                  : null,
             ),
             alignment: Alignment.center,
             child: child,

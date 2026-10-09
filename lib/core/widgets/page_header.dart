@@ -28,13 +28,20 @@ class PageHeader extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: text.headlineSmall),
+                Text(
+                  title,
+                  style: text.headlineSmall!.copyWith(
+                    fontWeight: AppFontWeight.bold,
+                    height: 1.25,
+                  ),
+                ),
                 if (subtitle != null) ...[
                   const SizedBox(height: AppSpacing.xs),
                   Text(
                     subtitle!,
                     style: text.bodyMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      height: 1.5,
                     ),
                   ),
                 ],

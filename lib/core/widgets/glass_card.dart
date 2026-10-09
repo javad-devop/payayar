@@ -56,15 +56,24 @@ class GlassCard extends StatelessWidget {
         color: fill,
         borderRadius: radius,
         border: Border.all(color: border),
-        boxShadow: isDark && level == GlassLevel.primary
-            ? const [
-                BoxShadow(
-                  color: Color(0x40000000),
-                  blurRadius: 24,
-                  offset: Offset(0, 8),
-                ),
-              ]
-            : null,
+        // Soft-UI shadows: layered, low-alpha, no hard edges (plan item 1).
+        boxShadow: switch ((isDark, level)) {
+          (true, GlassLevel.primary) => const [
+              BoxShadow(
+                color: Color(0x40000000),
+                blurRadius: 24,
+                offset: Offset(0, 8),
+              ),
+            ],
+          (false, GlassLevel.primary) => const [
+              BoxShadow(color: Color(0x0F071426), blurRadius: 2, offset: Offset(0, 1)),
+              BoxShadow(color: Color(0x14071426), blurRadius: 12, offset: Offset(0, 4)),
+            ],
+          (false, GlassLevel.secondary) => const [
+              BoxShadow(color: Color(0x0A071426), blurRadius: 3, offset: Offset(0, 1)),
+            ],
+          _ => null,
+        },
       ),
       child: child,
     );
