@@ -11,6 +11,7 @@ import '../features/notifications/bell_button.dart';
 import '../features/planning/planning_page.dart';
 import '../features/reports/reports_page.dart';
 import '../features/settings/settings_page.dart';
+import '../features/study/focus_timer_hud.dart';
 import '../features/study/study_page.dart';
 import 'breakpoints.dart';
 import 'state/app_settings.dart';
@@ -62,6 +63,9 @@ class AppShell extends ConsumerWidget {
                 ],
               ),
             ),
+            // Compact focus timer on every screen (AGENTS.md §44.4);
+            // hidden (zero-height) while no session is active.
+            const FocusTimerHud(),
             if (!isDesktop) const _MobileNav(),
           ],
         ),
