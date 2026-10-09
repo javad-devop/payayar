@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/providers.dart';
 import '../data/repositories.dart';
 import '../database/app_database.dart';
-import '../database/tables.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../util/shamsi.dart';
 
@@ -19,7 +18,6 @@ Future<void> generateUpcomingReminders(
   WidgetRef ref,
 ) async {
   final l10n = AppLocalizations.of(context);
-  if (l10n == null) return;
   final db = ref.read(databaseProvider);
   final notifications = ref.read(notificationRepositoryProvider);
   final now = DateTime.now();
