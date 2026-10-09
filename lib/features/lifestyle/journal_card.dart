@@ -42,6 +42,7 @@ class _JournalCardState extends ConsumerState<JournalCard> {
   }
 
   void _openComposer() {
+    final l10n = AppLocalizations.of(context);
     _text.clear();
     showDialog<void>(
       context: context,
