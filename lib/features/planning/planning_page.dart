@@ -1005,8 +1005,8 @@ class _MockExamCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSpacing.xs),
                 Text(
-                  shamsiShort(exam.date)
-                  '${exam.description == null ? '' : ' · ${exam.description}'}',
+                  '${shamsiShort(exam.date)}'
+                      '${exam.description == null ? '' : ' · ${exam.description}'}',
                   style: Theme.of(context).textTheme.labelSmall!.copyWith(
                         color: scheme.onSurfaceVariant,
                       ),
