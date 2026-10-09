@@ -10,6 +10,7 @@ import '../../core/database/app_database.dart';
 import '../../core/database/tables.dart' show TaskStatus, SessionType;
 import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/theme/tokens.dart';
+import '../../core/util/countdown.dart';
 import '../../core/util/shamsi.dart';
 import '../../core/widgets/metric_card.dart';
 import '../../core/widgets/page_header.dart';
@@ -235,7 +236,7 @@ class _MetricsRow extends ConsumerWidget {
 
     final examValue = nextExam == null
         ? '—'
-        : shamsiShort(nextExam.date);
+        : examCountdown(l10n, nextExam.date) ?? shamsiShort(nextExam.date);
 
     final metrics = [
       (

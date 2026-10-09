@@ -1162,4 +1162,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lifestyle_food_poor => 'Poor';
+
+  @override
+  String get exams_today => 'Today';
+
+  @override
+  String get exams_tomorrow => 'Tomorrow';
+
+  @override
+  String exams_daysLeft(int n) {
+    return '$n days left';
+  }
 }

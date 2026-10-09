@@ -2305,6 +2305,24 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'ضعیف'**
   String get lifestyle_food_poor;
+
+  /// No description provided for @exams_today.
+  ///
+  /// In fa, this message translates to:
+  /// **'امروز'**
+  String get exams_today;
+
+  /// No description provided for @exams_tomorrow.
+  ///
+  /// In fa, this message translates to:
+  /// **'فردا'**
+  String get exams_tomorrow;
+
+  /// No description provided for @exams_daysLeft.
+  ///
+  /// In fa, this message translates to:
+  /// **'{n} روز مانده'**
+  String exams_daysLeft(int n);
 }
 
 class _AppLocalizationsDelegate

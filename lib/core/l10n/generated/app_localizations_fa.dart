@@ -1161,4 +1161,15 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get lifestyle_food_poor => 'ضعیف';
+
+  @override
+  String get exams_today => 'امروز';
+
+  @override
+  String get exams_tomorrow => 'فردا';
+
+  @override
+  String exams_daysLeft(int n) {
+    return '$n روز مانده';
+  }
 }

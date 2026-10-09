@@ -436,5 +436,15 @@
   "lifestyle_exGroup": "ورزش گروهی",
   "lifestyle_food_good": "خوب",
   "lifestyle_food_fair": "متوسط",
-  "lifestyle_food_poor": "ضعیف"
+  "lifestyle_food_poor": "ضعیف",
+  "exams_today": "امروز",
+  "exams_tomorrow": "فردا",
+  "exams_daysLeft": "{n} روز مانده",
+  "@exams_daysLeft": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  }
 }

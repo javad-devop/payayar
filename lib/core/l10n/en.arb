@@ -436,5 +436,15 @@
   "lifestyle_exGroup": "Team sport",
   "lifestyle_food_good": "Good",
   "lifestyle_food_fair": "Fair",
-  "lifestyle_food_poor": "Poor"
+  "lifestyle_food_poor": "Poor",
+  "exams_today": "Today",
+  "exams_tomorrow": "Tomorrow",
+  "exams_daysLeft": "{n} days left",
+  "@exams_daysLeft": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  }
 }

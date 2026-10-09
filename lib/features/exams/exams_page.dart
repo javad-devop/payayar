@@ -9,6 +9,7 @@ import '../../core/database/app_database.dart';
 import '../../core/database/tables.dart';
 import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/theme/tokens.dart';
+import '../../core/util/countdown.dart';
 import '../../core/util/shamsi.dart';
 import '../../core/widgets/app_buttons.dart';
 import '../../core/widgets/confirmation_dialog.dart';
@@ -181,6 +182,16 @@ class _ExamCardState extends ConsumerState<_ExamCard> {
                             color: scheme.onSurfaceVariant,
                           ),
                     ),
+                    if (examCountdown(l10n, widget.exam.date) != null) ...[
+                      const SizedBox(height: AppSpacing.xs),
+                      Text(
+                        examCountdown(l10n, widget.exam.date)!,
+                        style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                              color: scheme.primary,
+                              fontWeight: AppFontWeight.bold,
+                            ),
+                      ),
+                    ],
                   ],
                 ),
               ),
