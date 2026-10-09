@@ -33,7 +33,8 @@ Future<void> generateUpcomingReminders(
         : days == 1
             ? l10n.remind_examTomorrow(exam.title)
             : (days == 3 || days == 7)
-                ? l10n.remind_examInDays(exam.title, days)
+                // Generated signature order is (n, title).
+                ? l10n.remind_examInDays(days, exam.title)
                 : '';
     if (title.isEmpty) continue;
     await _addIfNew(db, notifications, title: title, body: shamsiLong(exam.date));
