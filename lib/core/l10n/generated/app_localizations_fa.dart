@@ -518,6 +518,21 @@ class AppLocalizationsFa extends AppLocalizations {
   String get exams_title => 'آزمون‌ها';
 
   @override
+  String get journal_title => 'دفترچهٔ یادداشت';
+
+  @override
+  String get journal_add => 'یادداشت جدید';
+
+  @override
+  String get journal_hint => 'امروز چه خبر؟';
+
+  @override
+  String get journal_empty => 'هنوز یادداشتی نداری.';
+
+  @override
+  String get journal_added => 'یادداشت ذخیره شد';
+
+  @override
   String get xp_title => 'امتیاز و مدال‌ها';
 
   @override

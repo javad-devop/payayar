@@ -1082,6 +1082,36 @@ abstract class AppLocalizations {
   /// **'آزمون‌ها'**
   String get exams_title;
 
+  /// No description provided for @journal_title.
+  ///
+  /// In fa, this message translates to:
+  /// **'دفترچهٔ یادداشت'**
+  String get journal_title;
+
+  /// No description provided for @journal_add.
+  ///
+  /// In fa, this message translates to:
+  /// **'یادداشت جدید'**
+  String get journal_add;
+
+  /// No description provided for @journal_hint.
+  ///
+  /// In fa, this message translates to:
+  /// **'امروز چه خبر؟'**
+  String get journal_hint;
+
+  /// No description provided for @journal_empty.
+  ///
+  /// In fa, this message translates to:
+  /// **'هنوز یادداشتی نداری.'**
+  String get journal_empty;
+
+  /// No description provided for @journal_added.
+  ///
+  /// In fa, this message translates to:
+  /// **'یادداشت ذخیره شد'**
+  String get journal_added;
+
   /// No description provided for @xp_title.
   ///
   /// In fa, this message translates to:

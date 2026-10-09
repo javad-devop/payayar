@@ -89,3 +89,11 @@ final dueFlashcardsProvider = StreamProvider(
 /// Every card with its box state — management list.
 final allFlashcardsProvider = StreamProvider(
     (ref) => ref.watch(flashcardRepositoryProvider).watchAll());
+
+// ---- Journal (phase 11) ----
+
+final journalRepositoryProvider =
+    Provider((ref) => JournalRepository(ref.watch(databaseProvider)));
+
+final journalEntriesProvider = StreamProvider(
+    (ref) => ref.watch(journalRepositoryProvider).watchEntries());

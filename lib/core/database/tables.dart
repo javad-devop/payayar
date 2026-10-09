@@ -160,6 +160,14 @@ class AIMessages extends Table {
 
 /// Flashcard (front/back), optionally linked to a subject/topic so a
 /// review record can point back at the curriculum (AGENTS.md §13).
+/// Free-form journal entries — دفترچهٔ یادداشت (phase 11).
+class JournalEntries extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  DateTimeColumn get date => dateTime()();
+  TextColumn get text => text().withLength(min: 1, max: 5000)();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+}
+
 class Flashcards extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get subjectId => integer().nullable().references(Subjects, #id)();

@@ -518,6 +518,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exams_title => 'Exams';
 
   @override
+  String get journal_title => 'Journal';
+
+  @override
+  String get journal_add => 'New entry';
+
+  @override
+  String get journal_hint => 'What is on your mind?';
+
+  @override
+  String get journal_empty => 'No entries yet.';
+
+  @override
+  String get journal_added => 'Entry saved';
+
+  @override
   String get xp_title => 'Score & medals';
 
   @override

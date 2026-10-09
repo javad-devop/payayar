@@ -650,3 +650,27 @@ class FlashcardRepository {
     });
   }
 }
+
+/// دفترچهٔ یادداشت — journal entries (phase 11).
+class JournalRepository {
+  JournalRepository(this._db);
+  final AppDatabase _db;
+
+  Stream<List<JournalEntry>> watchEntries() =>
+      (_db.select(_db.journalEntries)
+            ..orderBy([
+              (j) => OrderingTerm.desc(j.date),
+              (j) => OrderingTerm.desc(j.id),
+            ]))
+          .watch();
+
+  Future<int> addEntry({required DateTime date, required String text}) {
+    return _db.into(_db.journalEntries).insert(
+          JournalEntriesCompanion.insert(date: date, text: text),
+        );
+  }
+
+  Future<void> deleteEntry(int id) async {
+    await (_db.delete(_db.journalEntries)..where((j) => j.id.equals(id))).go();
+  }
+}

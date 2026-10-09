@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/ai/ai_assist.dart';
+import 'journal_card.dart';
 import '../../core/data/providers.dart';
 import '../../core/database/app_database.dart';
 import '../../core/l10n/generated/app_localizations.dart';
@@ -70,6 +71,8 @@ class _LifestylePageState extends ConsumerState<LifestylePage> {
         _TodayEditor(),
         const SizedBox(height: AppSpacing.xl),
         _HistorySection(entries: entries),
+        const SizedBox(height: AppSpacing.xl),
+        const JournalCard(),
       ],
     );
   }
