@@ -119,10 +119,12 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           $sha = $env:GITHUB_SHA.Substring(0,7)
-          $tag = "windows-build-$sha"
-          gh release view $tag 2>$null
-          if ($LASTEXITCODE -eq 0) {
-            gh release upload $tag PAYAYAR-Setup-*.exe PAYAYAR-windows-*.zip --clobber
-          } else {
-            gh release create $tag PAYAYAR-Setup-*.exe PAYAYAR-windows-*.zip --title "PAYAYAR Windows $sha" --notes "نسخه ویندوز از کامیت $sha - فایل نصب: PAYAYAR-Setup"
+          # One release per commit carrying ALL platform assets (apk + exe + zip):
+          # android-build.yml owns this tag; we top it up with Windows files.
+          $tag = "android-build-$sha"
+          gh release view $tag 2>$null | Out-Null
+          if ($LASTEXITCODE -ne 0) {
+            gh release create $tag PAYAYAR-Setup-*.exe PAYAYAR-windows-*.zip --title "PAYAYAR build $sha" --notes "ساخت خودکار از کامیت $sha - اندروید: PAYAYAR.apk، ویندوز: PAYAYAR-Setup" | Out-Null
           }
+          gh release upload $tag PAYAYAR-Setup-*.exe PAYAYAR-windows-*.zip --clobber
+          if ($LASTEXITCODE -ne 0) { exit 1 }
