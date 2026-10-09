@@ -765,6 +765,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ai_provider_none => 'Not selected';
 
   @override
+  String get ai_assist => 'AI help';
+
+  @override
+  String get ai_promptPlanning =>
+      'Look at my weekly plan and upcoming exams and give three practical suggestions to improve it. Only suggest — change nothing.';
+
+  @override
+  String get ai_promptExams =>
+      'Analyze my exam results and history and tell me which subjects I should focus on most. Only suggest.';
+
+  @override
+  String get ai_promptReports =>
+      'Review these reports and give me the most important points and my next step in a few sentences.';
+
+  @override
+  String get ai_promptStudy =>
+      'Look at my study status (subjects, today\'s sessions, flashcards) and give one concrete suggestion for today.';
+
+  @override
   String get common_save => 'Save';
 
   @override

@@ -765,6 +765,25 @@ class AppLocalizationsFa extends AppLocalizations {
   String get ai_provider_none => 'انتخاب نشده';
 
   @override
+  String get ai_assist => 'کمک AI';
+
+  @override
+  String get ai_promptPlanning =>
+      'برنامهٔ هفتگی و وضعیت آزمون‌هایم را ببین و سه پیشنهاد عملی برای بهتر کردن برنامه بده. فقط پیشنهاد بده و هیچ داده‌ای را تغییر نده.';
+
+  @override
+  String get ai_promptExams =>
+      'نتایج و تاریخچهٔ آزمون‌هایم را تحلیل کن و بگو روی چه درس‌هایی باید بیشتر تمرکز کنم. فقط پیشنهاد بده.';
+
+  @override
+  String get ai_promptReports =>
+      'این گزارش‌ها را مرور کن و مهم‌ترین نکات و قدم بعدی‌ام را در چند جمله بگو.';
+
+  @override
+  String get ai_promptStudy =>
+      'وضعیت مطالعه‌ام (درس‌ها، جلسات امروز و فلش‌کارت‌ها) را ببین و یک پیشنهاد مشخص برای امروز بده.';
+
+  @override
   String get common_save => 'ذخیره';
 
   @override

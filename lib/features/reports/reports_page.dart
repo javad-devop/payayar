@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fl_chart/fl_chart.dart';
 
+import '../../core/ai/ai_assist.dart';
 import '../../core/data/providers.dart';
 import '../../core/data/repositories.dart' show SessionType;
 import '../../core/database/app_database.dart';
@@ -37,7 +38,34 @@ class _ReportsPageState extends ConsumerState<ReportsPage> {
         AppSpacing.huge,
       ),
       children: [
-        PageHeader(title: l10n.reports_title),
+        PageHeader(
+          title: l10n.reports_title,
+          // Contextual AI over the shown report data (AGENTS.md §7.A).
+          actions: [
+            AiAssistAction(
+              ask: (aiRef) {
+                final study = aiRef.read(studySummaryProvider);
+                final sessions =
+                    aiRef.read(studySessionsProvider).value ?? const [];
+                final tasks =
+                    aiRef.read(planTasksProvider).value ?? const <PlanTask>[];
+                final results =
+                    aiRef.read(allExamResultsProvider).value ?? const [];
+                final summary = [
+                  'today study minutes: ${study.todayMinutes}, streak days: ${study.streakDays}',
+                  'study sessions: ${sessions.length}',
+                  'plan tasks done/total: ${tasks.where((t) => t.completedAt != null).length}/${tasks.length}',
+                  'exam results: ${results.length}',
+                ].join('\n');
+                return askSectionAi(
+                  aiRef,
+                  prompt: l10n.ai_promptReports,
+                  summary: summary,
+                );
+              },
+            ),
+          ],
+        ),
         _Segmented(
           labels: [l10n.reports_range_week, l10n.reports_range_month],
           index: _isWeek ? 0 : 1,

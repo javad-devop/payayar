@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/ai/ai_assist.dart';
 import '../../core/data/providers.dart';
 import '../../core/data/repositories.dart'
     show SessionType, Priority, TopicStatus;
@@ -41,6 +42,25 @@ class StudyPage extends ConsumerWidget {
               label: l10n.study_addSubject,
               icon: Icons.add,
               onPressed: () => _SubjectDialog.show(context),
+            ),
+            // Contextual AI over study data only (AGENTS.md §7.A).
+            AiAssistAction(
+              ask: (aiRef) {
+                final subjects =
+                    aiRef.read(subjectsProvider).value ?? const [];
+                final topics = aiRef.read(allTopicsProvider).value ?? const [];
+                final due = aiRef.read(dueFlashcardsProvider).value ?? const [];
+                final summary = [
+                  'subjects: ${subjects.map((s) => s.name).join(', ')}',
+                  'topics: ${topics.length}',
+                  'due flashcards: ${due.length}',
+                ].join('\n');
+                return askSectionAi(
+                  aiRef,
+                  prompt: l10n.ai_promptStudy,
+                  summary: summary,
+                );
+              },
             ),
           ],
         ),

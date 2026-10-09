@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fl_chart/fl_chart.dart';
 
+import '../../core/ai/ai_assist.dart';
 import '../../core/data/providers.dart';
 import '../../core/database/app_database.dart';
 import '../../core/database/tables.dart';
@@ -44,6 +45,28 @@ class ExamsPage extends ConsumerWidget {
               label: l10n.exams_add,
               icon: Icons.add,
               onPressed: () => _ExamDialog.show(context),
+            ),
+            // Contextual AI over exam data only (AGENTS.md §7.A).
+            AiAssistAction(
+              ask: (aiRef) {
+                final results =
+                    aiRef.read(allExamResultsProvider).value ?? const [];
+                final summary = [
+                  'upcoming exams: ${upcoming
+                      .map((e) => '${e.title} (${e.date.toIso8601String().split('T').first})')
+                      .join('; ')}',
+                  'past exams: ${past.take(5).map((e) => e.title).join(', ')}',
+                  'results: ${results
+                      .take(10)
+                      .map((r) => 'correct ${r.correct} / wrong ${r.wrong}${r.score == null ? '' : ' / score ${r.score}'}')
+                      .join('; ')}',
+                ].join('\n');
+                return askSectionAi(
+                  aiRef,
+                  prompt: l10n.ai_promptExams,
+                  summary: summary,
+                );
+              },
             ),
           ],
         ),

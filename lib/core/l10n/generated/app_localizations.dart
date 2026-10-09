@@ -1562,6 +1562,36 @@ abstract class AppLocalizations {
   /// **'انتخاب نشده'**
   String get ai_provider_none;
 
+  /// No description provided for @ai_assist.
+  ///
+  /// In fa, this message translates to:
+  /// **'کمک AI'**
+  String get ai_assist;
+
+  /// No description provided for @ai_promptPlanning.
+  ///
+  /// In fa, this message translates to:
+  /// **'برنامهٔ هفتگی و وضعیت آزمون‌هایم را ببین و سه پیشنهاد عملی برای بهتر کردن برنامه بده. فقط پیشنهاد بده و هیچ داده‌ای را تغییر نده.'**
+  String get ai_promptPlanning;
+
+  /// No description provided for @ai_promptExams.
+  ///
+  /// In fa, this message translates to:
+  /// **'نتایج و تاریخچهٔ آزمون‌هایم را تحلیل کن و بگو روی چه درس‌هایی باید بیشتر تمرکز کنم. فقط پیشنهاد بده.'**
+  String get ai_promptExams;
+
+  /// No description provided for @ai_promptReports.
+  ///
+  /// In fa, this message translates to:
+  /// **'این گزارش‌ها را مرور کن و مهم‌ترین نکات و قدم بعدی‌ام را در چند جمله بگو.'**
+  String get ai_promptReports;
+
+  /// No description provided for @ai_promptStudy.
+  ///
+  /// In fa, this message translates to:
+  /// **'وضعیت مطالعه‌ام (درس‌ها، جلسات امروز و فلش‌کارت‌ها) را ببین و یک پیشنهاد مشخص برای امروز بده.'**
+  String get ai_promptStudy;
+
   /// No description provided for @common_save.
   ///
   /// In fa, this message translates to:

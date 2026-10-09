@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/ai/ai_assist.dart';
 import '../../core/data/providers.dart';
 import '../../core/database/app_database.dart';
 import '../../core/database/tables.dart';
@@ -52,6 +53,30 @@ class _PlanningPageState extends ConsumerState<PlanningPage> {
               label: l10n.planning_task_add,
               icon: Icons.add,
               onPressed: () => TaskDialog.show(context),
+            ),
+            // Contextual AI over plan + exam context only (AGENTS.md §7.A).
+            AiAssistAction(
+              ask: (aiRef) {
+                final dash = aiRef.read(planningDashboardProvider);
+                final tasks =
+                    aiRef.read(planTasksProvider).value ?? const <PlanTask>[];
+                final exams =
+                    aiRef.read(examsProvider).value ?? const <Exam>[];
+                final subjects =
+                    aiRef.read(subjectsProvider).value ?? const <Subject>[];
+                final summary = [
+                  'subjects: ${subjects.map((s) => s.name).join(', ')}',
+                  'today: ${dash.todayCompletedTasks}/${dash.todayPlannedTasks} tasks done, overdue: ${dash.overdueTasks}',
+                  'week minutes: ${dash.weekCompletedMinutes}/${dash.weekPlannedMinutes}',
+                  'upcoming exams: ${exams.map((e) => e.title).take(5).join(', ')}',
+                  'total plan tasks: ${tasks.length}',
+                ].join('\n');
+                return askSectionAi(
+                  aiRef,
+                  prompt: l10n.ai_promptPlanning,
+                  summary: summary,
+                );
+              },
             ),
           ],
         ),
