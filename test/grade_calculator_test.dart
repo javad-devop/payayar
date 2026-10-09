@@ -10,8 +10,8 @@ void main() {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         locale: const Locale('fa'),
-        home: const Scaffold(
-          body: ListView(children: [GradeCalculatorCard()]),
+        home: Scaffold(
+          body: ListView(children: [const GradeCalculatorCard()]),
         ),
       ),
     );
