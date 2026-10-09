@@ -1114,4 +1114,12 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String get ai_chipExamsQ =>
       'نزدیک‌ترین امتحاناتم کدام‌اند و برای هرکدام چقدر وقت دارم؟';
+
+  @override
+  String get ai_promptLifestyle =>
+      'وضعیت خواب، ورزش و انرژی این روزهای مرا تحلیل کن و یک پیشنهاد عملی برای بهتر شدن بده. فقط پیشنهاد بده و چیزی را تغییر نده.';
+
+  @override
+  String get ai_promptHome =>
+      'با توجه به برنامه و وضعیت امروزم بگو الان اولویت‌ترین کارم چیست و یک قدم مشخص برای امروز پیشنهاد بده.';
 }

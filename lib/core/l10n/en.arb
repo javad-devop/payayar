@@ -421,5 +421,7 @@
   "ai_chipAnalyzeQ": "Analyze my week and tell me my strengths and weaknesses.",
   "ai_chipPlanQ": "Suggest a realistic study plan for next week.",
   "ai_chipReportQ": "Write a short report about my week.",
-  "ai_chipExamsQ": "Which exams are coming up and how much time do I have for each?"
+  "ai_chipExamsQ": "Which exams are coming up and how much time do I have for each?",
+  "ai_promptLifestyle": "Analyze my recent sleep, exercise and energy, and give one practical suggestion. Only suggest — change nothing.",
+  "ai_promptHome": "Given my plan and today's status, tell me the single most important thing to do now and suggest one concrete step for today."
 }

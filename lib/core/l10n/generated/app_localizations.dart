@@ -2215,6 +2215,18 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'نزدیک‌ترین امتحاناتم کدام‌اند و برای هرکدام چقدر وقت دارم؟'**
   String get ai_chipExamsQ;
+
+  /// No description provided for @ai_promptLifestyle.
+  ///
+  /// In fa, this message translates to:
+  /// **'وضعیت خواب، ورزش و انرژی این روزهای مرا تحلیل کن و یک پیشنهاد عملی برای بهتر شدن بده. فقط پیشنهاد بده و چیزی را تغییر نده.'**
+  String get ai_promptLifestyle;
+
+  /// No description provided for @ai_promptHome.
+  ///
+  /// In fa, this message translates to:
+  /// **'با توجه به برنامه و وضعیت امروزم بگو الان اولویت‌ترین کارم چیست و یک قدم مشخص برای امروز پیشنهاد بده.'**
+  String get ai_promptHome;
 }
 
 class _AppLocalizationsDelegate

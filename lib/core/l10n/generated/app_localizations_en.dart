@@ -1115,4 +1115,12 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get ai_chipExamsQ =>
       'Which exams are coming up and how much time do I have for each?';
+
+  @override
+  String get ai_promptLifestyle =>
+      'Analyze my recent sleep, exercise and energy, and give one practical suggestion. Only suggest — change nothing.';
+
+  @override
+  String get ai_promptHome =>
+      'Given my plan and today\'s status, tell me the single most important thing to do now and suggest one concrete step for today.';
 }

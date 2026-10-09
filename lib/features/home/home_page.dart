@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../app/breakpoints.dart';
 import '../../app/state/app_settings.dart';
 import '../../app/state/navigation.dart';
+import '../../core/ai/ai_assist.dart';
 import '../../core/data/providers.dart';
 import '../../core/database/app_database.dart';
 import '../../core/database/tables.dart' show TaskStatus, SessionType;
@@ -57,17 +58,48 @@ class HomePage extends ConsumerWidget {
         AppSpacing.huge,
       ),
       children: [
-        // Greeting header.
-        Column(
+        // Greeting header with the global AI entry point — the advisor
+        // is reachable from every section (PLAN.md phase 2).
+        Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(greeting, style: Theme.of(context).textTheme.headlineMedium),
-            const SizedBox(height: AppSpacing.xs),
-            Text(
-              l10n.home_greetingSubtitle,
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(greeting,
+                      style: Theme.of(context).textTheme.headlineMedium),
+                  const SizedBox(height: AppSpacing.xs),
+                  Text(
+                    l10n.home_greetingSubtitle,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
                   ),
+                ],
+              ),
+            ),
+            const SizedBox(width: AppSpacing.md),
+            AiAssistAction(
+              ask: (aiRef) {
+                final dash = aiRef.read(planningDashboardProvider);
+                final study = aiRef.read(studySummaryProvider);
+                final nextExam = aiRef.read(nextExamProvider);
+                final summary = [
+                  'today: ${dash.todayCompletedTasks}/${dash.todayPlannedTasks} tasks, '
+                      '${dash.weekCompletedMinutes}/${dash.weekPlannedMinutes} min this week, '
+                      'overdue: ${dash.overdueTasks}',
+                  'study today: ${study.todayMinutes} min, streak: ${study.streakDays} days',
+                  if (nextExam != null)
+                    'next exam: ${nextExam.title} on '
+                        '${nextExam.date.toIso8601String().substring(0, 10)}',
+                ].join('\n');
+                return askSectionAi(
+                  aiRef,
+                  prompt: l10n.ai_promptHome,
+                  summary: summary,
+                );
+              },
             ),
           ],
         ),

@@ -2,6 +2,7 @@ import 'package:drift/drift.dart' show Value;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/ai/ai_assist.dart';
 import '../../core/data/providers.dart';
 import '../../core/database/app_database.dart';
 import '../../core/l10n/generated/app_localizations.dart';
@@ -39,7 +40,32 @@ class _LifestylePageState extends ConsumerState<LifestylePage> {
         AppSpacing.huge,
       ),
       children: [
-        PageHeader(title: l10n.lifestyle_title),
+        PageHeader(
+          title: l10n.lifestyle_title,
+          // Contextual AI over lifestyle data (AGENTS.md §7.A).
+          actions: [
+            AiAssistAction(
+              ask: (aiRef) {
+                final entries =
+                    aiRef.read(lifestyleEntriesProvider).value ?? const [];
+                final recent = entries.toList()
+                  ..sort((a, b) => b.date.compareTo(a.date));
+                final summary = [
+                  for (final e in recent.take(7))
+                    'date: ${e.date.toIso8601String().substring(0, 10)}, '
+                        'sleepHours: ${e.sleepMinutes == null ? '-' : (e.sleepMinutes! / 60).round()}, '
+                        'exerciseMin: ${e.exerciseMinutes ?? '-'}, '
+                        'mood: ${e.mood ?? '-'}, energy: ${e.energy ?? '-'}',
+                ].join('\n');
+                return askSectionAi(
+                  aiRef,
+                  prompt: l10n.ai_promptLifestyle,
+                  summary: summary.isEmpty ? 'no lifestyle entries yet' : summary,
+                );
+              },
+            ),
+          ],
+        ),
         _TodayEditor(),
         const SizedBox(height: AppSpacing.xl),
         _HistorySection(entries: entries),
