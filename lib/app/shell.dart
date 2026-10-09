@@ -21,7 +21,7 @@ import 'state/navigation.dart';
 /// Application shell (design.md §4): full-width top header, desktop
 /// sidebar, mobile bottom navigation with a "More" area. Navigation
 /// stays stable across screens and the active section is always clear.
-class AppShell extends ConsumerWidget {
+class AppShell extends ConsumerStatefulWidget {
   const AppShell({super.key});
 
   static const List<Widget> _pages = [
@@ -36,8 +36,35 @@ class AppShell extends ConsumerWidget {
   ];
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<AppShell> createState() => _AppShellState();
+}
+
+class _AppShellState extends ConsumerState<AppShell>
+    with SingleTickerProviderStateMixin {
+  /// Subtle fade whenever the section changes (phase 8 polish); pages
+  /// stay mounted inside the IndexedStack, so no state is lost.
+  late final AnimationController _sectionFade = AnimationController(
+    vsync: this,
+    duration: AppDurations.fast,
+    value: 1, // no fade on first paint
+  );
+  late final CurvedAnimation _fadeCurve = CurvedAnimation(
+    parent: _sectionFade,
+    curve: Curves.easeOut,
+  );
+
+  @override
+  void dispose() {
+    _sectionFade.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final section = ref.watch(sectionProvider);
+    ref.listen(sectionProvider, (previous, next) {
+      if (previous != next) _sectionFade.forward(from: 0);
+    });
     final width = MediaQuery.sizeOf(context).width;
     final isDesktop = Breakpoints.isDesktop(width);
     final palette = Theme.of(context).colorScheme;
@@ -56,9 +83,12 @@ class AppShell extends ConsumerWidget {
                   if (isDesktop) const _Sidebar(),
                   if (isDesktop) Container(width: 1, color: palette.outlineVariant),
                   Expanded(
-                    child: IndexedStack(
-                      index: section.index,
-                      children: _pages,
+                    child: FadeTransition(
+                      opacity: _fadeCurve,
+                      child: IndexedStack(
+                        index: section.index,
+                        children: AppShell._pages,
+                      ),
                     ),
                   ),
                 ],
