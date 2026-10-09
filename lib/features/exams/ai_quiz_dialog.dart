@@ -269,15 +269,21 @@ class _AiQuizDialogState extends ConsumerState<AiQuizDialog> {
                   ),
             ),
             const SizedBox(height: AppSpacing.md),
-            for (var i = 0; i < question.options.length; i++)
-              RadioListTile<int>(
-                dense: true,
-                contentPadding: EdgeInsets.zero,
-                value: i,
-                groupValue: _picked,
-                onChanged: (v) => setState(() => _picked = v),
-                title: Text(question.options[i]),
+            RadioGroup<int>(
+              groupValue: _picked,
+              onChanged: (v) => setState(() => _picked = v),
+              child: Column(
+                children: [
+                  for (var i = 0; i < question.options.length; i++)
+                    RadioListTile<int>(
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      value: i,
+                      title: Text(question.options[i]),
+                    ),
+                ],
               ),
+            ),
           ],
         ),
       );
