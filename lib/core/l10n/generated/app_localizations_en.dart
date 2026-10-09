@@ -518,6 +518,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exams_title => 'Exams';
 
   @override
+  String get reports_heatmap => 'Study heatmap (last 3 months)';
+
+  @override
+  String get heatmap_less => 'less';
+
+  @override
+  String get heatmap_more => 'more';
+
+  @override
   String get common_confirm => 'OK';
 
   @override

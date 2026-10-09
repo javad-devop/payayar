@@ -518,6 +518,15 @@ class AppLocalizationsFa extends AppLocalizations {
   String get exams_title => 'آزمون‌ها';
 
   @override
+  String get reports_heatmap => 'نقشهٔ حرارتی مطالعه (۳ ماه اخیر)';
+
+  @override
+  String get heatmap_less => 'کم';
+
+  @override
+  String get heatmap_more => 'زیاد';
+
+  @override
   String get common_confirm => 'تأیید';
 
   @override

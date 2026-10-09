@@ -1082,6 +1082,24 @@ abstract class AppLocalizations {
   /// **'آزمون‌ها'**
   String get exams_title;
 
+  /// No description provided for @reports_heatmap.
+  ///
+  /// In fa, this message translates to:
+  /// **'نقشهٔ حرارتی مطالعه (۳ ماه اخیر)'**
+  String get reports_heatmap;
+
+  /// No description provided for @heatmap_less.
+  ///
+  /// In fa, this message translates to:
+  /// **'کم'**
+  String get heatmap_less;
+
+  /// No description provided for @heatmap_more.
+  ///
+  /// In fa, this message translates to:
+  /// **'زیاد'**
+  String get heatmap_more;
+
   /// No description provided for @common_confirm.
   ///
   /// In fa, this message translates to:
