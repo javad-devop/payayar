@@ -25,6 +25,7 @@ part 'app_database.g.dart';
     Notifications,
     Flashcards,
     ReviewItems,
+    JournalEntries,
   ],
 )
 class AppDatabase extends _$AppDatabase {
