@@ -138,7 +138,8 @@ abstract final class AppRadius {
   static const double pill = 999;
 }
 
-/// Vazirmatn weight mapping (design.md §8).
+/// Font weight mapping (design.md §8). Shabnam ships 100/300/400/500/700;
+/// 600/800/900 resolve to the nearest registered weight at render time.
 abstract final class AppFontWeight {
   static const FontWeight light = FontWeight.w300; // secondary/supporting
   static const FontWeight regular = FontWeight.w400; // body
@@ -160,9 +161,9 @@ abstract final class AppTypeScale {
   static const double caption = 12;
 }
 
-/// Font family registered in pubspec.yaml (Vazirmatn = maintained
-/// distribution of the Vazir family, design.md §8).
-const String appFontFamily = 'Vazirmatn';
+/// Font family registered in pubspec.yaml — Shabnam (Farsi-digits
+/// build) by rastikerdar; user-selected replacement for Vazirmatn.
+const String appFontFamily = 'Shabnam';
 
 /// Motion (design.md §22): motion is used sparingly and never decorative.
 abstract final class AppDurations {

@@ -232,7 +232,7 @@ void main() {
       expect(AppTheme.light.scaffoldBackgroundColor, AppPalette.light.background);
     });
 
-    test('both themes use Vazirmatn with the documented weights', () {
+    test('both themes use the app font with the documented weights', () {
       for (final theme in [AppTheme.dark, AppTheme.light]) {
         final body = theme.textTheme.bodyMedium!;
         final title = theme.textTheme.headlineSmall!;

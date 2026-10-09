@@ -79,3 +79,17 @@ flutter:
           weight: 800
         - asset: assets/fonts/Vazirmatn-Black.ttf
           weight: 900
+  # Shabnam (Farsi-digits build) — user's requested UI font.
+  # 100 Thin, 300 Light, 400 Regular, 500 Medium, 700 Bold.
+    - family: Shabnam
+      fonts:
+        - asset: assets/fonts/Shabnam-Thin-FD.ttf
+          weight: 100
+        - asset: assets/fonts/Shabnam-Light-FD.ttf
+          weight: 300
+        - asset: assets/fonts/Shabnam-FD.ttf
+          weight: 400
+        - asset: assets/fonts/Shabnam-Medium-FD.ttf
+          weight: 500
+        - asset: assets/fonts/Shabnam-Bold-FD.ttf
+          weight: 700
