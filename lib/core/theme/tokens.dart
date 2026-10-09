@@ -77,6 +77,41 @@ class AppPalette {
   bool get isDark => brightness == Brightness.dark;
 }
 
+/// One of the six selectable accent themes (PLAN.md phase 1).
+///
+/// A theme is a single seed color; `AppTheme` derives the full light and
+/// dark schemes from it, so switching themes never touches widgets —
+/// only the palette does.
+class AccentTheme {
+  const AccentTheme({required this.id, required this.seed});
+
+  /// Stable id persisted in settings (`settings.color_theme`).
+  final String id;
+
+  /// Seed color every accent variant is derived from.
+  final Color seed;
+
+  /// Preserves the original look (design.md) as the out-of-the-box theme.
+  static const String defaultId = 'blue';
+
+  static const List<AccentTheme> all = <AccentTheme>[
+    AccentTheme(id: 'blue', seed: Color(0xFF4F63F7)), // آبی (پیش‌فرض)
+    AccentTheme(id: 'green', seed: Color(0xFF1DA970)), // سبز
+    AccentTheme(id: 'purple', seed: Color(0xFF8B5CF6)), // بنفش
+    AccentTheme(id: 'amber', seed: Color(0xFFF59E0B)), // کهربایی
+    AccentTheme(id: 'pink', seed: Color(0xFFEC4899)), // صورتی
+    AccentTheme(id: 'teal', seed: Color(0xFF14B8A6)), // فیروزه‌ای
+  ];
+
+  /// Unknown/stale ids fall back to the default theme instead of throwing.
+  static AccentTheme byId(String? id) {
+    for (final accent in all) {
+      if (accent.id == id) return accent;
+    }
+    return all.first;
+  }
+}
+
 /// Spacing rhythm (design.md §9): 4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48.
 abstract final class AppSpacing {
   static const double xs = 4;

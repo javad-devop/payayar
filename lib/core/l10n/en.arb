@@ -264,7 +264,12 @@
   "ai_welcome": "Hi! I'm your AI advisor. We can talk about your study plan or I can give suggestions — but nothing changes without your approval.",
   "ai_contextConsent": "Send a summary of my plan to AI",
   "ai_provider_gemini": "Google Gemini",
-  "ai_assist": "AI help", "ai_promptPlanning": "Look at my weekly plan and upcoming exams and give three practical suggestions to improve it. Only suggest — change nothing.", "ai_promptExams": "Analyze my exam results and history and tell me which subjects I should focus on most. Only suggest.", "ai_promptReports": "Review these reports and give me the most important points and my next step in a few sentences.", "ai_promptStudy": "Look at my study status (subjects, today's sessions, flashcards) and give one concrete suggestion for today.", "ai_provider_none": "Not selected",
+  "ai_assist": "AI help",
+  "ai_promptPlanning": "Look at my weekly plan and upcoming exams and give three practical suggestions to improve it. Only suggest — change nothing.",
+  "ai_promptExams": "Analyze my exam results and history and tell me which subjects I should focus on most. Only suggest.",
+  "ai_promptReports": "Review these reports and give me the most important points and my next step in a few sentences.",
+  "ai_promptStudy": "Look at my study status (subjects, today's sessions, flashcards) and give one concrete suggestion for today.",
+  "ai_provider_none": "Not selected",
   "common_save": "Save",
   "common_cancel": "Cancel",
   "common_add": "Add",
@@ -395,5 +400,12 @@
         "type": "int"
       }
     }
-  }
+  },
+  "settings_theme_color": "Theme color",
+  "settings_theme_color_blue": "Blue",
+  "settings_theme_color_green": "Green",
+  "settings_theme_color_purple": "Purple",
+  "settings_theme_color_amber": "Amber",
+  "settings_theme_color_pink": "Pink",
+  "settings_theme_color_teal": "Teal"
 }

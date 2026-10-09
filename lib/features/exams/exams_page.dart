@@ -324,7 +324,7 @@ class _ExamResults extends ConsumerWidget {
                     ),
                     if (r.score != null)
                       _ResultStat(
-                        color: AppColors.primary,
+                        color: Theme.of(context).colorScheme.primary,
                         value: r.score!.toStringAsFixed(1),
                         label: l10n.exams_result_score,
                       ),

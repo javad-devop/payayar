@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../core/theme/tokens.dart';
+
 /// Locally persisted user preferences (local-first: no account, no sync).
 @immutable
 class AppSettings {
@@ -10,6 +12,7 @@ class AppSettings {
     this.locale = const Locale('fa'),
     this.userName = '',
     this.focusMinutes = 25,
+    this.colorTheme = AccentTheme.defaultId,
   });
 
   /// Dark is the approved reference direction (design.md §40).
@@ -21,6 +24,9 @@ class AppSettings {
   /// Kept in settings so the user's last choice survives a restart.
   final int focusMinutes;
 
+  /// Selected accent theme id (one of `AccentTheme.all`).
+  final String colorTheme;
+
   bool get isPersian => locale.languageCode == 'fa';
 
   AppSettings copyWith({
@@ -28,12 +34,14 @@ class AppSettings {
     Locale? locale,
     String? userName,
     int? focusMinutes,
+    String? colorTheme,
   }) {
     return AppSettings(
       themeMode: themeMode ?? this.themeMode,
       locale: locale ?? this.locale,
       userName: userName ?? this.userName,
       focusMinutes: focusMinutes ?? this.focusMinutes,
+      colorTheme: colorTheme ?? this.colorTheme,
     );
   }
 }
@@ -43,6 +51,7 @@ class AppSettingsNotifier extends Notifier<AppSettings> {
   static const _kLocale = 'settings.locale';
   static const _kUserName = 'settings.user_name';
   static const _kFocusMinutes = 'settings.focus_minutes';
+  static const _kColorTheme = 'settings.color_theme';
 
   @override
   AppSettings build() => const AppSettings();
@@ -65,6 +74,7 @@ class AppSettingsNotifier extends Notifier<AppSettings> {
       locale: Locale(languageCode ?? 'fa'),
       userName: userName ?? '',
       focusMinutes: _validFocusMinutes(focusMinutes),
+      colorTheme: AccentTheme.byId(prefs.getString(_kColorTheme)).id,
     );
   }
 
@@ -72,6 +82,12 @@ class AppSettingsNotifier extends Notifier<AppSettings> {
     state = state.copyWith(themeMode: mode);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_kTheme, mode.name);
+  }
+
+  Future<void> setColorTheme(String id) async {
+    state = state.copyWith(colorTheme: AccentTheme.byId(id).id);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_kColorTheme, id);
   }
 
   Future<void> setLocale(Locale locale) async {

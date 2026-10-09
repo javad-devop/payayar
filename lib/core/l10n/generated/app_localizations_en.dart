@@ -1048,4 +1048,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String flashcard_box(int box) {
     return 'Box $box';
   }
+
+  @override
+  String get settings_theme_color => 'Theme color';
+
+  @override
+  String get settings_theme_color_blue => 'Blue';
+
+  @override
+  String get settings_theme_color_green => 'Green';
+
+  @override
+  String get settings_theme_color_purple => 'Purple';
+
+  @override
+  String get settings_theme_color_amber => 'Amber';
+
+  @override
+  String get settings_theme_color_pink => 'Pink';
+
+  @override
+  String get settings_theme_color_teal => 'Teal';
 }

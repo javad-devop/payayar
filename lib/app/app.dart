@@ -34,8 +34,8 @@ class _PayayarAppState extends ConsumerState<PayayarApp> {
     return MaterialApp(
       title: 'Payayaar',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
+      theme: AppTheme.lightFor(settings.colorTheme),
+      darkTheme: AppTheme.darkFor(settings.colorTheme),
       themeMode: settings.themeMode,
       locale: settings.locale,
       supportedLocales: AppLocalizations.supportedLocales,

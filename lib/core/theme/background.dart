@@ -61,12 +61,15 @@ class AtmosphericBackground extends StatelessWidget {
         ),
 
         // Controlled glow — one soft accent, never a neon effect.
-        const DecoratedBox(
+        DecoratedBox(
           decoration: BoxDecoration(
             gradient: RadialGradient(
-              center: Alignment(-0.7, -0.9),
+              center: const Alignment(-0.7, -0.9),
               radius: 1.1,
-              colors: [Color(0x334F63F7), Color(0x004F63F7)],
+              colors: [
+                Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+                Theme.of(context).colorScheme.primary.withValues(alpha: 0.0),
+              ],
             ),
           ),
         ),

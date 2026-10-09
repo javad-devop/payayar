@@ -400,5 +400,12 @@
         "type": "int"
       }
     }
-  }
+  },
+  "settings_theme_color": "رنگ ظاهر",
+  "settings_theme_color_blue": "آبی",
+  "settings_theme_color_green": "سبز",
+  "settings_theme_color_purple": "بنفش",
+  "settings_theme_color_amber": "کهربایی",
+  "settings_theme_color_pink": "صورتی",
+  "settings_theme_color_teal": "فیروزه‌ای"
 }

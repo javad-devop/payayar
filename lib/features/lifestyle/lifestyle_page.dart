@@ -353,8 +353,8 @@ class _HistorySection extends ConsumerWidget {
                       ),
                     ),
                     if (e.sleepMinutes != null) ...[
-                      const Icon(Icons.bedtime_outlined,
-                          size: 14, color: AppColors.primary),
+                      Icon(Icons.bedtime_outlined,
+                          size: 14, color: Theme.of(context).colorScheme.primary),
                       const SizedBox(width: 4),
                       Text(
                         '${(e.sleepMinutes! / 60).toStringAsFixed(1)}${l10n.planning_hoursUnit}',
@@ -451,13 +451,15 @@ class _Observation extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.primary.withValues(alpha: 0.08),
+        color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(AppRadius.control),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.25)),
+        border:
+            Border.all(color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.25)),
       ),
       child: Row(
         children: [
-          const Icon(Icons.lightbulb_outline, size: 18, color: AppColors.primary),
+          Icon(Icons.lightbulb_outline,
+              size: 18, color: Theme.of(context).colorScheme.primary),
           const SizedBox(width: AppSpacing.md),
           Expanded(
             child: Text(

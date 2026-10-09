@@ -88,6 +88,25 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                 ],
                 onChanged: notifier.setThemeMode,
               ),
+              const SizedBox(height: AppSpacing.lg),
+              Text(
+                l10n.settings_theme_color,
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              Wrap(
+                spacing: AppSpacing.md,
+                runSpacing: AppSpacing.sm,
+                children: [
+                  for (final accent in AccentTheme.all)
+                    _AccentChip(
+                      accent: accent,
+                      label: _accentLabel(l10n, accent.id),
+                      selected: settings.colorTheme == accent.id,
+                      onTap: () => notifier.setColorTheme(accent.id),
+                    ),
+                ],
+              ),
             ],
           ),
         ),
@@ -117,7 +136,8 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
         GlassCard(
           child: Row(
             children: [
-              const Icon(Icons.info_outline, size: 18, color: AppColors.primary),
+              Icon(Icons.info_outline,
+                  size: 18, color: Theme.of(context).colorScheme.primary),
               const SizedBox(width: AppSpacing.md),
               Text(
                 '${l10n.settings_about} — ${l10n.settings_about_version} 0.1.0',
@@ -675,6 +695,63 @@ class _SegmentedChoice<T> extends StatelessWidget {
               ),
             ),
         ],
+      ),
+    );
+  }
+}
+
+/// Persian label for one accent theme id.
+String _accentLabel(AppLocalizations l10n, String id) => switch (id) {
+      'green' => l10n.settings_theme_color_green,
+      'purple' => l10n.settings_theme_color_purple,
+      'amber' => l10n.settings_theme_color_amber,
+      'pink' => l10n.settings_theme_color_pink,
+      'teal' => l10n.settings_theme_color_teal,
+      _ => l10n.settings_theme_color_blue,
+    };
+
+/// One circular color option in the accent-theme picker.
+class _AccentChip extends StatelessWidget {
+  const _AccentChip({
+    required this.accent,
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final AccentTheme accent;
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final onAccent = accent.seed.computeLuminance() > 0.4
+        ? const Color(0xFF071426)
+        : Colors.white;
+    return Tooltip(
+      message: label,
+      child: Semantics(
+        button: true,
+        selected: selected,
+        label: label,
+        child: GestureDetector(
+          onTap: onTap,
+          child: Container(
+            width: 44,
+            height: 44,
+            decoration: BoxDecoration(
+              color: accent.seed,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: selected ? scheme.onSurface : Colors.transparent,
+                width: 2.5,
+              ),
+            ),
+            child: selected ? Icon(Icons.check, size: 22, color: onAccent) : null,
+          ),
+        ),
       ),
     );
   }

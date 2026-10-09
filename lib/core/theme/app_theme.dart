@@ -9,19 +9,36 @@ import 'tokens.dart';
 /// Both themes derive from the same token sets, so components never
 /// carry separate Dark/Light implementations.
 abstract final class AppTheme {
-  static ThemeData get dark => _build(AppPalette.dark);
+  static ThemeData get dark => darkFor(AccentTheme.defaultId);
 
-  static ThemeData get light => _build(AppPalette.light);
+  static ThemeData get light => lightFor(AccentTheme.defaultId);
 
-  static ThemeData _build(AppPalette palette) {
+  /// Dark palette for one of the six selectable accent themes.
+  static ThemeData darkFor(String accentId) =>
+      _build(AppPalette.dark, AccentTheme.byId(accentId));
+
+  /// Light palette for one of the six selectable accent themes.
+  static ThemeData lightFor(String accentId) =>
+      _build(AppPalette.light, AccentTheme.byId(accentId));
+
+  static ThemeData _build(AppPalette palette, AccentTheme accent) {
     final isDark = palette.isDark;
+    final seed = accent.seed;
+    // Dark mode keeps navy ink (design.md reference); light mode flips
+    // to navy ink on bright accents (amber) for readable buttons.
+    final onPrimary = isDark || seed.computeLuminance() > 0.4
+        ? const Color(0xFF071426)
+        : Colors.white;
 
     final colorScheme = ColorScheme(
       brightness: palette.brightness,
-      primary: AppColors.primary,
-      onPrimary: isDark ? const Color(0xFF071426) : Colors.white,
-      primaryContainer: isDark ? AppColors.primary.withValues(alpha: 0.22) : const Color(0xFFE1E5FF),
-      onPrimaryContainer: isDark ? const Color(0xFFC7CDFF) : const Color(0xFF22307A),
+      primary: seed,
+      onPrimary: onPrimary,
+      primaryContainer:
+          isDark ? seed.withValues(alpha: 0.22) : Color.lerp(seed, Colors.white, 0.85)!,
+      onPrimaryContainer: isDark
+          ? Color.lerp(seed, Colors.white, 0.78)!
+          : Color.lerp(seed, const Color(0xFF071426), 0.55)!,
       secondary: AppColors.ai,
       onSecondary: isDark ? const Color(0xFF071426) : Colors.white,
       secondaryContainer: AppColors.ai.withValues(alpha: isDark ? 0.22 : 0.16),
@@ -40,7 +57,7 @@ abstract final class AppTheme {
       scrim: Colors.black.withValues(alpha: 0.4),
       inverseSurface: isDark ? const Color(0xFFF4F7FF) : const Color(0xFF071426),
       onInverseSurface: isDark ? const Color(0xFF071426) : const Color(0xFFF4F7FF),
-      inversePrimary: isDark ? const Color(0xFF9AA5FF) : AppColors.primary,
+      inversePrimary: isDark ? Color.lerp(seed, Colors.white, 0.35)! : seed,
     );
 
     return ThemeData(
@@ -83,7 +100,7 @@ abstract final class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.button),
-          borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+          borderSide: BorderSide(color: seed, width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.button),
@@ -91,12 +108,12 @@ abstract final class AppTheme {
         ),
       ),
       textSelectionTheme: TextSelectionThemeData(
-        cursorColor: AppColors.primary,
-        selectionColor: AppColors.primary.withValues(alpha: 0.32),
-        selectionHandleColor: AppColors.primary,
+        cursorColor: seed,
+        selectionColor: seed.withValues(alpha: 0.32),
+        selectionHandleColor: seed,
       ),
-      progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: AppColors.primary,
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: seed,
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,

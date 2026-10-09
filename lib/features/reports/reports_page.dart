@@ -295,8 +295,8 @@ class _SubjectDistributionReport extends ConsumerWidget {
       ..sort((a, b) => b.value.compareTo(a.value));
     final total = entries.fold<int>(0, (sum, e) => sum + e.value);
 
-    const palette = [
-      AppColors.primary,
+    final palette = [
+      Theme.of(context).colorScheme.primary,
       AppColors.success,
       AppColors.warning,
       AppColors.ai,
@@ -673,12 +673,12 @@ class _SleepReport extends ConsumerWidget {
                     if (daily[i] != null) FlSpot(i.toDouble(), daily[i]!),
                 ],
                 isCurved: true,
-                color: AppColors.primary,
+                color: Theme.of(context).colorScheme.primary,
                 barWidth: 3,
                 dotData: const FlDotData(show: true),
                 belowBarData: BarAreaData(
                   show: true,
-                  color: AppColors.primary.withValues(alpha: 0.12),
+                  color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.12),
                 ),
               ),
             ],

@@ -1046,4 +1046,25 @@ class AppLocalizationsFa extends AppLocalizations {
   String flashcard_box(int box) {
     return 'جعبه $box';
   }
+
+  @override
+  String get settings_theme_color => 'رنگ ظاهر';
+
+  @override
+  String get settings_theme_color_blue => 'آبی';
+
+  @override
+  String get settings_theme_color_green => 'سبز';
+
+  @override
+  String get settings_theme_color_purple => 'بنفش';
+
+  @override
+  String get settings_theme_color_amber => 'کهربایی';
+
+  @override
+  String get settings_theme_color_pink => 'صورتی';
+
+  @override
+  String get settings_theme_color_teal => 'فیروزه‌ای';
 }

@@ -201,7 +201,7 @@ class _TopicRowState extends ConsumerState<_TopicRow> {
 
   Color get _statusColor => switch (widget.topic.status) {
         TopicStatus.notStarted => AppColors.warning,
-        TopicStatus.learning => AppColors.primary,
+        TopicStatus.learning => Theme.of(context).colorScheme.primary,
         TopicStatus.reviewing => AppColors.ai,
         TopicStatus.mastered => AppColors.success,
       };

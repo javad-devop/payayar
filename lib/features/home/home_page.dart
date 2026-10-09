@@ -209,7 +209,7 @@ class _MetricsRow extends ConsumerWidget {
         l10n.home_metric_plannedToday,
         hours(dash.todayPlannedMinutes),
         Icons.event_outlined,
-        AppColors.primary,
+        Theme.of(context).colorScheme.primary,
       ),
       (
         l10n.home_metric_completed,
@@ -233,7 +233,7 @@ class _MetricsRow extends ConsumerWidget {
         l10n.home_metric_todayStudy,
         hours(study.todayMinutes),
         Icons.menu_book_outlined,
-        AppColors.primary,
+        Theme.of(context).colorScheme.primary,
       ),
       (
         l10n.home_metric_streak,

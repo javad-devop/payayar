@@ -2089,6 +2089,48 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'جعبه {box}'**
   String flashcard_box(int box);
+
+  /// No description provided for @settings_theme_color.
+  ///
+  /// In fa, this message translates to:
+  /// **'رنگ ظاهر'**
+  String get settings_theme_color;
+
+  /// No description provided for @settings_theme_color_blue.
+  ///
+  /// In fa, this message translates to:
+  /// **'آبی'**
+  String get settings_theme_color_blue;
+
+  /// No description provided for @settings_theme_color_green.
+  ///
+  /// In fa, this message translates to:
+  /// **'سبز'**
+  String get settings_theme_color_green;
+
+  /// No description provided for @settings_theme_color_purple.
+  ///
+  /// In fa, this message translates to:
+  /// **'بنفش'**
+  String get settings_theme_color_purple;
+
+  /// No description provided for @settings_theme_color_amber.
+  ///
+  /// In fa, this message translates to:
+  /// **'کهربایی'**
+  String get settings_theme_color_amber;
+
+  /// No description provided for @settings_theme_color_pink.
+  ///
+  /// In fa, this message translates to:
+  /// **'صورتی'**
+  String get settings_theme_color_pink;
+
+  /// No description provided for @settings_theme_color_teal.
+  ///
+  /// In fa, this message translates to:
+  /// **'فیروزه‌ای'**
+  String get settings_theme_color_teal;
 }
 
 class _AppLocalizationsDelegate
