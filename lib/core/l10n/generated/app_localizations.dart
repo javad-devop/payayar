@@ -2161,6 +2161,60 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'آدرس سرویس‌دهنده یا مدل درست نیست'**
   String get ai_errorBadUrl;
+
+  /// No description provided for @ai_contextHint.
+  ///
+  /// In fa, this message translates to:
+  /// **'برای پاسخ دربارهٔ داده‌های خودت، «اشتراک خلاصهٔ برنامه» را در تنظیمات روشن کن.'**
+  String get ai_contextHint;
+
+  /// No description provided for @ai_chipAnalyze.
+  ///
+  /// In fa, this message translates to:
+  /// **'تحلیل هفته'**
+  String get ai_chipAnalyze;
+
+  /// No description provided for @ai_chipPlan.
+  ///
+  /// In fa, this message translates to:
+  /// **'برنامهٔ هفتهٔ آینده'**
+  String get ai_chipPlan;
+
+  /// No description provided for @ai_chipReport.
+  ///
+  /// In fa, this message translates to:
+  /// **'گزارش هفتگی'**
+  String get ai_chipReport;
+
+  /// No description provided for @ai_chipExams.
+  ///
+  /// In fa, this message translates to:
+  /// **'امتحانات'**
+  String get ai_chipExams;
+
+  /// No description provided for @ai_chipAnalyzeQ.
+  ///
+  /// In fa, this message translates to:
+  /// **'وضعیت این هفتهٔ مرا تحلیل کن و نقاط قوت و ضعفم را بگو.'**
+  String get ai_chipAnalyzeQ;
+
+  /// No description provided for @ai_chipPlanQ.
+  ///
+  /// In fa, this message translates to:
+  /// **'برای هفتهٔ آینده‌ام یک برنامهٔ مطالعهٔ واقع‌بینانه پیشنهاد بده.'**
+  String get ai_chipPlanQ;
+
+  /// No description provided for @ai_chipReportQ.
+  ///
+  /// In fa, this message translates to:
+  /// **'از هفتهٔ من یک گزارش کوتاه بنویس.'**
+  String get ai_chipReportQ;
+
+  /// No description provided for @ai_chipExamsQ.
+  ///
+  /// In fa, this message translates to:
+  /// **'نزدیک‌ترین امتحاناتم کدام‌اند و برای هرکدام چقدر وقت دارم؟'**
+  String get ai_chipExamsQ;
 }
 
 class _AppLocalizationsDelegate

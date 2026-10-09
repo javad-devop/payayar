@@ -1085,4 +1085,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ai_errorBadUrl => 'The service URL or model is not correct';
+
+  @override
+  String get ai_contextHint =>
+      'Turn on “Share plan summary” in Settings so the advisor can answer questions about your data.';
+
+  @override
+  String get ai_chipAnalyze => 'Week analysis';
+
+  @override
+  String get ai_chipPlan => 'Next-week plan';
+
+  @override
+  String get ai_chipReport => 'Weekly report';
+
+  @override
+  String get ai_chipExams => 'Exams';
+
+  @override
+  String get ai_chipAnalyzeQ =>
+      'Analyze my week and tell me my strengths and weaknesses.';
+
+  @override
+  String get ai_chipPlanQ => 'Suggest a realistic study plan for next week.';
+
+  @override
+  String get ai_chipReportQ => 'Write a short report about my week.';
+
+  @override
+  String get ai_chipExamsQ =>
+      'Which exams are coming up and how much time do I have for each?';
 }

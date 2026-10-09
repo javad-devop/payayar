@@ -412,5 +412,14 @@
   "settings_ai_baseUrl": "آدرس پایه (Base URL)",
   "settings_ai_baseUrl_hint": "https://api.openai.com/v1",
   "settings_ai_model_hint": "gpt-4o-mini / gemini-2.0-flash / llama-3.3-70b",
-  "ai_errorBadUrl": "آدرس سرویس‌دهنده یا مدل درست نیست"
+  "ai_errorBadUrl": "آدرس سرویس‌دهنده یا مدل درست نیست",
+  "ai_contextHint": "برای پاسخ دربارهٔ داده‌های خودت، «اشتراک خلاصهٔ برنامه» را در تنظیمات روشن کن.",
+  "ai_chipAnalyze": "تحلیل هفته",
+  "ai_chipPlan": "برنامهٔ هفتهٔ آینده",
+  "ai_chipReport": "گزارش هفتگی",
+  "ai_chipExams": "امتحانات",
+  "ai_chipAnalyzeQ": "وضعیت این هفتهٔ مرا تحلیل کن و نقاط قوت و ضعفم را بگو.",
+  "ai_chipPlanQ": "برای هفتهٔ آینده‌ام یک برنامهٔ مطالعهٔ واقع‌بینانه پیشنهاد بده.",
+  "ai_chipReportQ": "از هفتهٔ من یک گزارش کوتاه بنویس.",
+  "ai_chipExamsQ": "نزدیک‌ترین امتحاناتم کدام‌اند و برای هرکدام چقدر وقت دارم؟"
 }

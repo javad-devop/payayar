@@ -412,5 +412,14 @@
   "settings_ai_baseUrl": "Base URL",
   "settings_ai_baseUrl_hint": "https://api.openai.com/v1",
   "settings_ai_model_hint": "gpt-4o-mini / gemini-2.0-flash / llama-3.3-70b",
-  "ai_errorBadUrl": "The service URL or model is not correct"
+  "ai_errorBadUrl": "The service URL or model is not correct",
+  "ai_contextHint": "Turn on “Share plan summary” in Settings so the advisor can answer questions about your data.",
+  "ai_chipAnalyze": "Week analysis",
+  "ai_chipPlan": "Next-week plan",
+  "ai_chipReport": "Weekly report",
+  "ai_chipExams": "Exams",
+  "ai_chipAnalyzeQ": "Analyze my week and tell me my strengths and weaknesses.",
+  "ai_chipPlanQ": "Suggest a realistic study plan for next week.",
+  "ai_chipReportQ": "Write a short report about my week.",
+  "ai_chipExamsQ": "Which exams are coming up and how much time do I have for each?"
 }

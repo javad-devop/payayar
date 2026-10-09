@@ -62,6 +62,13 @@ class _AiAdvisorPageState extends ConsumerState<AiAdvisorPage> {
       return;
     }
 
+    // Real prior turns: the advisor must remember the whole thread
+    // (PLAN.md phase 2 — AI as the core consultant, read §24).
+    final prior = _conversationId == null
+        ? const <AIMessage>[]
+        : (ref.read(aiMessagesProvider(_conversationId!)).value ??
+            const <AIMessage>[]);
+
     final aiRepo = ref.read(aiRepositoryProvider);
     _conversationId ??= await aiRepo.createConversation();
     await aiRepo.addMessage(
@@ -76,8 +83,12 @@ class _AiAdvisorPageState extends ConsumerState<AiAdvisorPage> {
     });
 
     try {
+      final tail =
+          prior.length > 12 ? prior.sublist(prior.length - 12) : prior;
       final history = <(String, String)>[
         ('assistant', l10n.ai_welcome),
+        for (final m in tail)
+          (m.role == 'assistant' ? 'assistant' : 'user', m.content),
       ];
 
       final response = await provider.send(
@@ -107,11 +118,27 @@ class _AiAdvisorPageState extends ConsumerState<AiAdvisorPage> {
     }
   }
 
+  Future<void> _askPreset(String prompt) {
+    _controller.text = prompt;
+    return _send();
+  }
+
   String _buildSummary() {
     final l10n = AppLocalizations.of(context);
     final dash = ref.read(planningDashboardProvider);
     final study = ref.read(studySummaryProvider);
     final subjects = ref.read(subjectsProvider).value ?? const <Subject>[];
+
+    final now = DateTime.now();
+    final upcoming = (ref.read(examsProvider).value ?? const [])
+        .where((e) => !e.date.isBefore(now))
+        .toList()
+      ..sort((a, b) => a.date.compareTo(b.date));
+    final lifestyle =
+        (ref.read(lifestyleEntriesProvider).value ?? const []).toList()
+          ..sort((a, b) => b.date.compareTo(a.date));
+    final dueCards = ref.read(dueFlashcardsProvider).value?.length ?? 0;
+    final nextExam = ref.read(nextExamProvider);
 
     return jsonEncode({
       'todayPlannedTasks': dash.todayPlannedTasks,
@@ -122,6 +149,34 @@ class _AiAdvisorPageState extends ConsumerState<AiAdvisorPage> {
       'todayStudyMinutes': study.todayMinutes,
       'streakDays': study.streakDays,
       'subjects': subjects.map((s) => s.name).take(15).toList(),
+      'nextExam': nextExam == null
+          ? null
+          : {
+              'title': nextExam.title,
+              'date': nextExam.date.toIso8601String(),
+              'daysLeft': nextExam.date.difference(now).inDays,
+            },
+      'upcomingExams': [
+        for (final e in upcoming.take(3))
+          {
+            'title': e.title,
+            'date': e.date.toIso8601String(),
+            'daysLeft': e.date.difference(now).inDays,
+          },
+      ],
+      'recentLifestyle': [
+        for (final l in lifestyle.take(5))
+          {
+            'date': l.date.toIso8601String().substring(0, 10),
+            'sleepHours': l.sleepMinutes == null
+                ? null
+                : (l.sleepMinutes! / 60).round(),
+            'exerciseMinutes': l.exerciseMinutes,
+            'mood': l.mood,
+            'energy': l.energy,
+          },
+      ],
+      'flashcardsDue': dueCards,
       'notes': l10n.reports_title,
     });
   }
@@ -171,6 +226,13 @@ class _AiAdvisorPageState extends ConsumerState<AiAdvisorPage> {
         if (mounted) setState(() {});
       });
     }
+
+    // Keep section data streams alive so the advisor digest (§24) is
+    // fresh when the user asks about their own sections.
+    ref.watch(examsProvider);
+    ref.watch(lifestyleEntriesProvider);
+    ref.watch(dueFlashcardsProvider);
+    ref.watch(nextExamProvider);
 
     final messages = _conversationId == null
         ? const <AIMessage>[]
@@ -315,22 +377,66 @@ class _AiAdvisorPageState extends ConsumerState<AiAdvisorPage> {
           top: false,
           child: Padding(
             padding: const EdgeInsets.all(AppSpacing.xl),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration: InputDecoration(
-                      hintText: l10n.ai_inputHint,
+                if (!settings.includePlanSummary)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                    child: Text(
+                      l10n.ai_contextHint,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: scheme.onSurfaceVariant,
+                          ),
+                      textAlign: TextAlign.center,
                     ),
-                    onSubmitted: (_) => _send(),
                   ),
+                Wrap(
+                  spacing: AppSpacing.sm,
+                  runSpacing: AppSpacing.sm,
+                  alignment: WrapAlignment.center,
+                  children: [
+                    _AdvisorChip(
+                      icon: Icons.insights_outlined,
+                      label: l10n.ai_chipAnalyze,
+                      onTap: () => _askPreset(l10n.ai_chipAnalyzeQ),
+                    ),
+                    _AdvisorChip(
+                      icon: Icons.calendar_month_outlined,
+                      label: l10n.ai_chipPlan,
+                      onTap: () => _askPreset(l10n.ai_chipPlanQ),
+                    ),
+                    _AdvisorChip(
+                      icon: Icons.summarize_outlined,
+                      label: l10n.ai_chipReport,
+                      onTap: () => _askPreset(l10n.ai_chipReportQ),
+                    ),
+                    _AdvisorChip(
+                      icon: Icons.school_outlined,
+                      label: l10n.ai_chipExams,
+                      onTap: () => _askPreset(l10n.ai_chipExamsQ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: AppSpacing.md),
-                AppButton(
-                  label: l10n.ai_send,
-                  icon: Icons.send_outlined,
-                  onPressed: _sending ? null : _send,
+                const SizedBox(height: AppSpacing.md),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _controller,
+                        decoration: InputDecoration(
+                          hintText: l10n.ai_inputHint,
+                        ),
+                        onSubmitted: (_) => _send(),
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.md),
+                    AppButton(
+                      label: l10n.ai_send,
+                      icon: Icons.send_outlined,
+                      onPressed: _sending ? null : _send,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -375,6 +481,46 @@ class _SetupState extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _AdvisorChip extends StatelessWidget {
+  const _AdvisorChip({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(AppRadius.control),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.sm,
+        ),
+        decoration: BoxDecoration(
+          color: scheme.primary.withValues(alpha: 0.10),
+          borderRadius: BorderRadius.circular(AppRadius.control),
+          border: Border.all(color: scheme.outlineVariant),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 14, color: scheme.primary),
+            const SizedBox(width: AppSpacing.xs),
+            Text(label, style: Theme.of(context).textTheme.labelMedium),
+          ],
+        ),
+      ),
     );
   }
 }

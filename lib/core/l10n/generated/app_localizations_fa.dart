@@ -1083,4 +1083,35 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get ai_errorBadUrl => 'آدرس سرویس‌دهنده یا مدل درست نیست';
+
+  @override
+  String get ai_contextHint =>
+      'برای پاسخ دربارهٔ داده‌های خودت، «اشتراک خلاصهٔ برنامه» را در تنظیمات روشن کن.';
+
+  @override
+  String get ai_chipAnalyze => 'تحلیل هفته';
+
+  @override
+  String get ai_chipPlan => 'برنامهٔ هفتهٔ آینده';
+
+  @override
+  String get ai_chipReport => 'گزارش هفتگی';
+
+  @override
+  String get ai_chipExams => 'امتحانات';
+
+  @override
+  String get ai_chipAnalyzeQ =>
+      'وضعیت این هفتهٔ مرا تحلیل کن و نقاط قوت و ضعفم را بگو.';
+
+  @override
+  String get ai_chipPlanQ =>
+      'برای هفتهٔ آینده‌ام یک برنامهٔ مطالعهٔ واقع‌بینانه پیشنهاد بده.';
+
+  @override
+  String get ai_chipReportQ => 'از هفتهٔ من یک گزارش کوتاه بنویس.';
+
+  @override
+  String get ai_chipExamsQ =>
+      'نزدیک‌ترین امتحاناتم کدام‌اند و برای هرکدام چقدر وقت دارم؟';
 }
