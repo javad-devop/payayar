@@ -15,6 +15,8 @@ on:
       - 'l10n.yaml'
       - '.github/workflows/windows-build.yml'
   workflow_dispatch:
+  schedule:
+    - cron: '43 * * * *'   # hourly — tops up the android-build tag (companion to android's :17)
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
