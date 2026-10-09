@@ -318,7 +318,7 @@ class _BrandMark extends StatelessWidget {
           width: 38,
           height: 38,
           fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => Center(
+          errorBuilder: (context, error, stack) => Center(
             child: Text(
               'پ',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
