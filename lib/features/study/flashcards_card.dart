@@ -7,6 +7,7 @@ import '../../core/l10n/generated/app_localizations.dart';
 import '../../core/theme/tokens.dart';
 import '../../core/widgets/app_buttons.dart';
 import '../../core/widgets/glass_card.dart';
+import 'ai_flashcard_dialog.dart';
 import 'flashcard_dialog.dart';
 import 'flashcard_review_sheet.dart';
 
@@ -41,6 +42,12 @@ class FlashcardsCard extends ConsumerWidget {
               icon: Icons.add,
               onPressed: () => FlashcardDialog.show(context),
             ),
+            const SizedBox(height: AppSpacing.md),
+            SecondaryButton(
+              label: l10n.ai_makeCards,
+              icon: Icons.auto_awesome_outlined,
+              onPressed: () => AiFlashcardDialog.show(context),
+            ),
           ],
         ),
       );
@@ -67,6 +74,11 @@ class FlashcardsCard extends ConsumerWidget {
                 tooltip: l10n.flashcard_add,
                 icon: const Icon(Icons.add),
                 onPressed: () => FlashcardDialog.show(context),
+              ),
+              IconButton(
+                tooltip: l10n.ai_makeCards,
+                icon: const Icon(Icons.auto_awesome_outlined),
+                onPressed: () => AiFlashcardDialog.show(context),
               ),
             ],
           ),

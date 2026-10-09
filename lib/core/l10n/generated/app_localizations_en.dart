@@ -518,6 +518,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exams_title => 'Exams';
 
   @override
+  String get ai_makeCards => 'Generate with AI';
+
+  @override
+  String get ai_cardsTopic => 'Topic';
+
+  @override
+  String get ai_cardsHint => 'e.g. English past tense';
+
+  @override
+  String ai_makeCardsPrompt(Object topic) {
+    return 'Build five short flashcards for the topic \"$topic\": question on one side, answer on the other. Output must be only a JSON array where each item has a front and a back key, with no extra text.';
+  }
+
+  @override
+  String get ai_cardsParse => 'The reply was not understood; try again.';
+
+  @override
+  String ai_cardsPreview(Object n) {
+    return '$n suggested cards — save the ones you keep';
+  }
+
+  @override
+  String get ai_cardsSave => 'Save cards';
+
+  @override
+  String ai_cardsSaved(Object n) {
+    return '$n cards saved';
+  }
+
+  @override
   String get ai_weeklySummary => 'AI weekly summary';
 
   @override

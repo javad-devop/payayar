@@ -1082,6 +1082,54 @@ abstract class AppLocalizations {
   /// **'آزمون‌ها'**
   String get exams_title;
 
+  /// No description provided for @ai_makeCards.
+  ///
+  /// In fa, this message translates to:
+  /// **'ساخت با هوش مصنوعی'**
+  String get ai_makeCards;
+
+  /// No description provided for @ai_cardsTopic.
+  ///
+  /// In fa, this message translates to:
+  /// **'موضوع'**
+  String get ai_cardsTopic;
+
+  /// No description provided for @ai_cardsHint.
+  ///
+  /// In fa, this message translates to:
+  /// **'مثلاً: افعال گذشتهٔ انگلیسی'**
+  String get ai_cardsHint;
+
+  /// No description provided for @ai_makeCardsPrompt.
+  ///
+  /// In fa, this message translates to:
+  /// **'برای موضوع «{topic}» پنج کارت فلش‌کارت بساز؛ هر کارت یک سوال کوتاه از یک طرف و جوابش از طرف دیگر. خروجی فقط یک آرایهٔ JSON باشد که هر عضو آن دو کلید front و back دارد؛ بدون هیچ متن اضافه.'**
+  String ai_makeCardsPrompt(Object topic);
+
+  /// No description provided for @ai_cardsParse.
+  ///
+  /// In fa, this message translates to:
+  /// **'جواب قابل فهم نبود؛ دوباره تلاش کن.'**
+  String get ai_cardsParse;
+
+  /// No description provided for @ai_cardsPreview.
+  ///
+  /// In fa, this message translates to:
+  /// **'{n} کارت پیشنهادی — موارد انتخابی را ذخیره کن'**
+  String ai_cardsPreview(Object n);
+
+  /// No description provided for @ai_cardsSave.
+  ///
+  /// In fa, this message translates to:
+  /// **'ذخیرهٔ کارت‌ها'**
+  String get ai_cardsSave;
+
+  /// No description provided for @ai_cardsSaved.
+  ///
+  /// In fa, this message translates to:
+  /// **'{n} کارت ذخیره شد'**
+  String ai_cardsSaved(Object n);
+
   /// No description provided for @ai_weeklySummary.
   ///
   /// In fa, this message translates to:

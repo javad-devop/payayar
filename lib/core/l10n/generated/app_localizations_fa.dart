@@ -518,6 +518,36 @@ class AppLocalizationsFa extends AppLocalizations {
   String get exams_title => 'آزمون‌ها';
 
   @override
+  String get ai_makeCards => 'ساخت با هوش مصنوعی';
+
+  @override
+  String get ai_cardsTopic => 'موضوع';
+
+  @override
+  String get ai_cardsHint => 'مثلاً: افعال گذشتهٔ انگلیسی';
+
+  @override
+  String ai_makeCardsPrompt(Object topic) {
+    return 'برای موضوع «$topic» پنج کارت فلش‌کارت بساز؛ هر کارت یک سوال کوتاه از یک طرف و جوابش از طرف دیگر. خروجی فقط یک آرایهٔ JSON باشد که هر عضو آن دو کلید front و back دارد؛ بدون هیچ متن اضافه.';
+  }
+
+  @override
+  String get ai_cardsParse => 'جواب قابل فهم نبود؛ دوباره تلاش کن.';
+
+  @override
+  String ai_cardsPreview(Object n) {
+    return '$n کارت پیشنهادی — موارد انتخابی را ذخیره کن';
+  }
+
+  @override
+  String get ai_cardsSave => 'ذخیرهٔ کارت‌ها';
+
+  @override
+  String ai_cardsSaved(Object n) {
+    return '$n کارت ذخیره شد';
+  }
+
+  @override
   String get ai_weeklySummary => 'خلاصهٔ هوشمند هفته';
 
   @override
