@@ -4,7 +4,7 @@ description: "Payayaar (پایا‌یار) — local-first study and life planni
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none'
 
-version: 0.1.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ^3.13.4
