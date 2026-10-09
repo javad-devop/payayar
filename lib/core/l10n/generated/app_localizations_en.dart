@@ -518,6 +518,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exams_title => 'Exams';
 
   @override
+  String remind_examToday(Object title) {
+    return '$title: exam today';
+  }
+
+  @override
+  String remind_examTomorrow(Object title) {
+    return '$title: exam tomorrow';
+  }
+
+  @override
+  String remind_examInDays(Object n, Object title) {
+    return '$title: exam in $n days';
+  }
+
+  @override
+  String remind_taskToday(Object title) {
+    return 'Task «$title» is due today';
+  }
+
+  @override
+  String remind_taskTomorrow(Object title) {
+    return 'Task «$title» is due tomorrow';
+  }
+
+  @override
   String get exams_add => 'New exam';
 
   @override

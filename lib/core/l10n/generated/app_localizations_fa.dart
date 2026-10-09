@@ -518,6 +518,31 @@ class AppLocalizationsFa extends AppLocalizations {
   String get exams_title => 'آزمون‌ها';
 
   @override
+  String remind_examToday(Object title) {
+    return '$title — امروز آزمون داری';
+  }
+
+  @override
+  String remind_examTomorrow(Object title) {
+    return '$title — فردا آزمون داری';
+  }
+
+  @override
+  String remind_examInDays(Object n, Object title) {
+    return '$title — تا آزمون $n روز مانده';
+  }
+
+  @override
+  String remind_taskToday(Object title) {
+    return 'تسک «$title» امروز سررسید دارد';
+  }
+
+  @override
+  String remind_taskTomorrow(Object title) {
+    return 'تسک «$title» فردا سررسید دارد';
+  }
+
+  @override
   String get exams_add => 'آزمون جدید';
 
   @override

@@ -1082,6 +1082,36 @@ abstract class AppLocalizations {
   /// **'آزمون‌ها'**
   String get exams_title;
 
+  /// No description provided for @remind_examToday.
+  ///
+  /// In fa, this message translates to:
+  /// **'{title} — امروز آزمون داری'**
+  String remind_examToday(Object title);
+
+  /// No description provided for @remind_examTomorrow.
+  ///
+  /// In fa, this message translates to:
+  /// **'{title} — فردا آزمون داری'**
+  String remind_examTomorrow(Object title);
+
+  /// No description provided for @remind_examInDays.
+  ///
+  /// In fa, this message translates to:
+  /// **'{title} — تا آزمون {n} روز مانده'**
+  String remind_examInDays(Object n, Object title);
+
+  /// No description provided for @remind_taskToday.
+  ///
+  /// In fa, this message translates to:
+  /// **'تسک «{title}» امروز سررسید دارد'**
+  String remind_taskToday(Object title);
+
+  /// No description provided for @remind_taskTomorrow.
+  ///
+  /// In fa, this message translates to:
+  /// **'تسک «{title}» فردا سررسید دارد'**
+  String remind_taskTomorrow(Object title);
+
   /// No description provided for @exams_add.
   ///
   /// In fa, this message translates to:

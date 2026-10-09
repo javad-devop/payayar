@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/l10n/generated/app_localizations.dart';
+import '../core/notifications/upcoming_reminders.dart';
 import '../core/theme/tokens.dart';
 import '../features/ai_advisor/ai_advisor_page.dart';
 import '../features/exams/exams_page.dart';
@@ -52,6 +53,17 @@ class _AppShellState extends ConsumerState<AppShell>
     parent: _sectionFade,
     curve: Curves.easeOut,
   );
+
+  @override
+  void initState() {
+    super.initState();
+    // Staged reminders (phase 9) — after first frame so the l10n
+    // lookup has a Localizations scope.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      generateUpcomingReminders(context, ref);
+    });
+  }
 
   @override
   void dispose() {
