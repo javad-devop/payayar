@@ -55,7 +55,7 @@ void main() {
     expect(seen, isNotNull);
     expect(seen!.requestedUri.path, '/v1/chat/completions');
     expect(seen!.headers.value(HttpHeaders.authorizationHeader),
-        'Bearer ' + 'k');
+        'Bearer ' 'k');
 
     final body = jsonDecode(rawBody!) as Map<String, dynamic>;
     expect(body['model'], 'test-model');

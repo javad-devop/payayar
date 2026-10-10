@@ -62,17 +62,15 @@ class OpenAiCompatibleProvider implements AIProvider {
     // once with an explicit token budget so the model *must* answer.
     var text = await _post(uri, apiKey,
         body: jsonEncode({'model': model, 'messages': messages}));
-    if (text == null) {
-      text = await _post(
-        uri,
-        apiKey,
-        body: jsonEncode({
-          'model': model,
-          'messages': messages,
-          'max_tokens': 4096,
-        }),
-      );
-    }
+    text ??= await _post(
+      uri,
+      apiKey,
+      body: jsonEncode({
+        'model': model,
+        'messages': messages,
+        'max_tokens': 4096,
+      }),
+    );
     if (text == null) {
       throw AiException('empty_response', detail: uri.toString());
     }
