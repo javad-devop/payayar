@@ -2474,6 +2474,36 @@ abstract class AppLocalizations {
   /// **'آدرس سرویس‌دهنده یا مدل درست نیست'**
   String get ai_errorBadUrl;
 
+  /// No description provided for @ai_errorEmpty.
+  ///
+  /// In fa, this message translates to:
+  /// **'سرور جواب داد ولی متنی برنگرداند؛ مدل دیگه‌ای را امتحان کن.'**
+  String get ai_errorEmpty;
+
+  /// No description provided for @ai_errorRateLimit.
+  ///
+  /// In fa, this message translates to:
+  /// **'زیاد درخواست فرستاده شد؛ چند دقیقه بعد دوباره تست کن.'**
+  String get ai_errorRateLimit;
+
+  /// No description provided for @ai_errorServer.
+  ///
+  /// In fa, this message translates to:
+  /// **'خود سرور مشکل دارد؛ کمی بعد دوباره تست کن.'**
+  String get ai_errorServer;
+
+  /// No description provided for @settings_ai_providerMissing.
+  ///
+  /// In fa, this message translates to:
+  /// **'اول «سرویس‌دهنده» را انتخاب کن، بعد تست بزن.'**
+  String get settings_ai_providerMissing;
+
+  /// No description provided for @settings_ai_endpoint.
+  ///
+  /// In fa, this message translates to:
+  /// **'آدرس درخواست: {url}'**
+  String settings_ai_endpoint(Object url);
+
   /// No description provided for @ai_contextHint.
   ///
   /// In fa, this message translates to:

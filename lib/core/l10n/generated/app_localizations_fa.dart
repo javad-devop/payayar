@@ -1265,6 +1265,26 @@ class AppLocalizationsFa extends AppLocalizations {
   String get ai_errorBadUrl => 'آدرس سرویس‌دهنده یا مدل درست نیست';
 
   @override
+  String get ai_errorEmpty =>
+      'سرور جواب داد ولی متنی برنگرداند؛ مدل دیگه‌ای را امتحان کن.';
+
+  @override
+  String get ai_errorRateLimit =>
+      'زیاد درخواست فرستاده شد؛ چند دقیقه بعد دوباره تست کن.';
+
+  @override
+  String get ai_errorServer => 'خود سرور مشکل دارد؛ کمی بعد دوباره تست کن.';
+
+  @override
+  String get settings_ai_providerMissing =>
+      'اول «سرویس‌دهنده» را انتخاب کن، بعد تست بزن.';
+
+  @override
+  String settings_ai_endpoint(Object url) {
+    return 'آدرس درخواست: $url';
+  }
+
+  @override
   String get ai_contextHint =>
       'برای پاسخ دربارهٔ داده‌های خودت، «اشتراک خلاصهٔ برنامه» را در تنظیمات روشن کن.';
 

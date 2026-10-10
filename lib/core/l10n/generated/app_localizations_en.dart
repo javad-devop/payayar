@@ -1267,6 +1267,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ai_errorBadUrl => 'The service URL or model is not correct';
 
   @override
+  String get ai_errorEmpty =>
+      'The server replied but sent no text; try another model.';
+
+  @override
+  String get ai_errorRateLimit =>
+      'Too many requests; wait a minute and test again.';
+
+  @override
+  String get ai_errorServer => 'The server itself failed; try again later.';
+
+  @override
+  String get settings_ai_providerMissing => 'Pick a provider first, then test.';
+
+  @override
+  String settings_ai_endpoint(Object url) {
+    return 'Request URL: $url';
+  }
+
+  @override
   String get ai_contextHint =>
       'Turn on “Share plan summary” in Settings so the advisor can answer questions about your data.';
 
