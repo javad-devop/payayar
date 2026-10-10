@@ -48,7 +48,7 @@ void main() {
     );
     final response = await provider.send(
       const AiRequest(prompt: 'ping', history: [('user', 'hi')]),
-      apiKey: apiKey: 'k'),
+      apiKey: 'k',
     );
 
     expect(response.text, 'pong');
@@ -76,7 +76,7 @@ void main() {
         OpenAiCompatibleProvider(baseUrl: 'http://127.0.0.1:${server.port}');
 
     await expectLater(
-      provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k'),
+      provider.send(const AiRequest(prompt: 'x'), apiKey: 'k'),
       throwsA(isA<AiException>()
           .having((e) => e.message, 'message', 'invalid_key')),
     );
@@ -98,7 +98,7 @@ void main() {
       model: 'test-model',
     );
     final response =
-        await provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k');
+        await provider.send(const AiRequest(prompt: 'x'), apiKey: 'k');
 
     expect(response.text, 'ok');
     expect(seenPath, '/v1/chat/completions');
@@ -126,7 +126,7 @@ void main() {
       model: 'test-model',
     );
     final response =
-        await provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k');
+        await provider.send(const AiRequest(prompt: 'x'), apiKey: 'k');
 
     expect(response.text, 'recovered');
     expect(hits, 2);
@@ -143,7 +143,7 @@ void main() {
     final provider =
         OpenAiCompatibleProvider(baseUrl: 'http://127.0.0.1:${server.port}');
     await expectLater(
-      provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k'),
+      provider.send(const AiRequest(prompt: 'x'), apiKey: 'k'),
       throwsA(isA<AiException>()
           .having((e) => e.message, 'message', 'server_error')
           .having((e) => e.detail, 'detail', contains('HTTP 500'))),
@@ -155,7 +155,7 @@ void main() {
     const provider = OpenAiCompatibleProvider(baseUrl: 'not a url');
 
     await expectLater(
-      provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k'),
+      provider.send(const AiRequest(prompt: 'x'), apiKey: 'k'),
       throwsA(isA<AiException>()
           .having((e) => e.message, 'message', 'bad_url')),
     );
