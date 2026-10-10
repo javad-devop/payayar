@@ -190,6 +190,8 @@ class _AiConfigCardState extends ConsumerState<_AiConfigCard> {
   late final TextEditingController _modelController;
   bool _testing = false;
   String? _testResult;
+  String? _testDetail;
+  String? _endpoint;
 
   @override
   void initState() {
@@ -215,10 +217,22 @@ class _AiConfigCardState extends ConsumerState<_AiConfigCard> {
     });
 
     final aiNow = ref.read(aiSettingsProvider);
+    if (aiNow.providerId == null) {
+      // Testing without an explicit provider choice used to silently hit
+      // Gemini with a non-Gemini key — a confusing failure. Say it out loud.
+      if (mounted) {
+        setState(() {
+          _testResult = l10n.settings_ai_providerMissing;
+          _testDetail = null;
+          _endpoint = null;
+          _testing = false;
+        });
+      }
+      return;
+    }
     final provider = ref
         .read(aiProvidersProvider)
-        .where((p) =>
-            p.id == (aiNow.providerId ?? const GeminiProvider().id))
+        .where((p) => p.id == aiNow.providerId)
         .firstOrNull;
     if (provider == null) {
       if (mounted) {
@@ -229,25 +243,43 @@ class _AiConfigCardState extends ConsumerState<_AiConfigCard> {
       }
       return;
     }
+    // Show exactly where the request goes, so a typo in the Base URL is
+    // visible instead of hidden behind a generic failure.
+    if (mounted) {
+      setState(() {
+        _endpoint = provider is OpenAiCompatibleProvider
+            ? '${normalizeOpenAiBase(provider.baseUrl)}/chat/completions'
+            : provider.displayName;
+      });
+    }
     final key = await ref.read(aiSettingsProvider.notifier).readKey() ??
         _keyController.text.trim();
 
     try {
       await provider.send(
         const AiRequest(prompt: 'ping'),
-        apiKey: key,
+        apiKey: ***
       );
       if (mounted) {
-        setState(() => _testResult = l10n.settings_ai_testOk);
+        setState(() {
+          _testResult = l10n.settings_ai_testOk;
+          _testDetail = null;
+        });
       }
     } on AiException catch (e) {
       if (mounted) {
-        setState(() => _testResult =
-            l10n.settings_ai_testFail(_friendly(l10n, e.message)));
+        setState(() {
+          _testResult =
+              l10n.settings_ai_testFail(_friendly(l10n, e.message));
+          _testDetail = e.detail;
+        });
       }
     } catch (_) {
       if (mounted) {
-        setState(() => _testResult = l10n.settings_ai_testFail(l10n.ai_errorNetwork));
+        setState(() {
+          _testResult = l10n.settings_ai_testFail(l10n.ai_errorNetwork);
+          _testDetail = null;
+        });
       }
     } finally {
       if (mounted) setState(() => _testing = false);
@@ -258,6 +290,9 @@ class _AiConfigCardState extends ConsumerState<_AiConfigCard> {
         'invalid_key' => l10n.settings_ai_keyMissing,
         'network' || 'timeout' => l10n.ai_errorNetwork,
         'bad_url' => l10n.ai_errorBadUrl,
+        'empty_response' => l10n.ai_errorEmpty,
+        'rate_limit' => l10n.ai_errorRateLimit,
+        'server_error' => l10n.ai_errorServer,
         _ => l10n.ai_error,
       };
 
@@ -387,6 +422,26 @@ class _AiConfigCardState extends ConsumerState<_AiConfigCard> {
                     color: _testResult == l10n.settings_ai_testOk
                         ? AppColors.success
                         : AppColors.error,
+                  ),
+            ),
+          ],
+          if (_endpoint != null) ...[
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              l10n.settings_ai_endpoint(_endpoint!),
+              textDirection: TextDirection.ltr,
+              style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+            ),
+          ],
+          if (_testDetail != null) ...[
+            const SizedBox(height: AppSpacing.xs),
+            Text(
+              _testDetail!,
+              textDirection: TextDirection.ltr,
+              style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
             ),
           ],

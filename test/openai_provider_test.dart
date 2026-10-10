@@ -77,6 +77,98 @@ void main() {
     );
   });
 
+  test('normalizes pasted base URLs (double /v1, pasted /chat/completions)',
+      () async {
+    String? seenPath;
+    server.listen((request) async {
+      seenPath = request.requestedUri.path;
+      await request.drain<void>();
+      request.response.statusCode = 200;
+      request.response.headers.contentType = ContentType.json;
+      request.response.write(
+        jsonEncode({
+          'choices': [
+            {
+              'message': {'role': 'assistant', 'content': 'ok'}
+            }
+          ],
+        }),
+      );
+      await request.response.close();
+    });
+
+    // A pasted full endpoint URL with a duplicated version prefix must
+    // still land on exactly one /v1/chat/completions.
+    final provider = OpenAiCompatibleProvider(
+      baseUrl: 'http://127.0.0.1:${server.port}/v1/v1/chat/completions/',
+      model: 'test-model',
+    );
+    final response =
+        await provider.send(const AiRequest(prompt: 'x'), apiKey: 'k');
+
+    expect(response.text, 'ok');
+    expect(seenPath, '/v1/chat/completions');
+  });
+
+  test('normalizeOpenAiBase covers the common paste mistakes', () {
+    expect(normalizeOpenAiBase('  https://x.dev/v1/  '), 'https://x.dev/v1');
+    expect(normalizeOpenAiBase('https://x.dev/v1/chat/completions'),
+        'https://x.dev/v1');
+    expect(normalizeOpenAiBase('https://x.dev/v1/v1'), 'https://x.dev/v1');
+    expect(normalizeOpenAiBase(''), AiSettings.defaultBaseUrl);
+  });
+
+  test('retries with max_tokens when the model answers empty', () async {
+    var hits = 0;
+    server.listen((request) async {
+      await request.drain<void>();
+      hits++;
+      request.response.statusCode = 200;
+      request.response.headers.contentType = ContentType.json;
+      // First call: reasoning model returned nothing usable.
+      request.response.write(
+        jsonEncode({
+          'choices': [
+            {
+              'message': {
+                'role': 'assistant',
+                'content': hits == 1 ? '' : 'recovered',
+              }
+            }
+          ],
+        }),
+      );
+      await request.response.close();
+    });
+
+    final provider = OpenAiCompatibleProvider(
+      baseUrl: 'http://127.0.0.1:${server.port}/v1',
+      model: 'test-model',
+    );
+    final response =
+        await provider.send(const AiRequest(prompt: 'x'), apiKey: 'k');
+
+    expect(response.text, 'recovered');
+    expect(hits, 2);
+  });
+
+  test('maps 500 to server_error carrying an HTTP detail', () async {
+    server.listen((request) async {
+      await request.drain<void>();
+      request.response.statusCode = 500;
+      request.response.write('upstream exploded');
+      await request.response.close();
+    });
+
+    final provider =
+        OpenAiCompatibleProvider(baseUrl: 'http://127.0.0.1:${server.port}');
+    await expectLater(
+      provider.send(const AiRequest(prompt: 'x'), apiKey: *** AiException()
+          .having((e) => e.message, 'message', 'server_error')
+          .having((e) => e.detail, 'detail', contains('HTTP 500'))),
+    );
+  });
+
   test('rejects a base URL without a scheme before any network call',
       () async {
     const provider = OpenAiCompatibleProvider(baseUrl: 'not a url');

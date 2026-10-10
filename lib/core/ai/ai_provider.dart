@@ -42,12 +42,16 @@ abstract class AIProvider {
 }
 
 /// Errors surfaced to the UI as friendly states, never raw stack traces.
+/// `detail` is optional technical context (HTTP status, resolved URL) so
+/// the settings screen can show *what* actually failed instead of one
+/// vague message for every cause.
 class AiException implements Exception {
-  const AiException(this.message);
+  const AiException(this.message, {this.detail});
   final String message;
+  final String? detail;
 
   @override
-  String toString() => message;
+  String toString() => detail == null ? message : '$message ($detail)';
 }
 
 /// Local AI configuration persisted on-device. The API key lives in
