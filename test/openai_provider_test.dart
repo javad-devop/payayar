@@ -76,7 +76,7 @@ void main() {
         OpenAiCompatibleProvider(baseUrl: 'http://127.0.0.1:${server.port}');
 
     await expectLater(
-      provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k')),
+      provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k'),
       throwsA(isA<AiException>()
           .having((e) => e.message, 'message', 'invalid_key')),
     );
@@ -98,7 +98,7 @@ void main() {
       model: 'test-model',
     );
     final response =
-        await provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k'));
+        await provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k');
 
     expect(response.text, 'ok');
     expect(seenPath, '/v1/chat/completions');
@@ -126,7 +126,7 @@ void main() {
       model: 'test-model',
     );
     final response =
-        await provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k'));
+        await provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k');
 
     expect(response.text, 'recovered');
     expect(hits, 2);
@@ -143,7 +143,7 @@ void main() {
     final provider =
         OpenAiCompatibleProvider(baseUrl: 'http://127.0.0.1:${server.port}');
     await expectLater(
-      provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k')),
+      provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k'),
       throwsA(isA<AiException>()
           .having((e) => e.message, 'message', 'server_error')
           .having((e) => e.detail, 'detail', contains('HTTP 500'))),
@@ -155,7 +155,7 @@ void main() {
     const provider = OpenAiCompatibleProvider(baseUrl: 'not a url');
 
     await expectLater(
-      provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k')),
+      provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k'),
       throwsA(isA<AiException>()
           .having((e) => e.message, 'message', 'bad_url')),
     );
@@ -170,7 +170,9 @@ void main() {
 
       await container.read(aiSettingsProvider.notifier)
           .setBaseUrl('https://openrouter.ai/api/v1');
-      await container.read(aiSettingsProvider.notifier).setModel('llama-3.3-70b');
+      await container
+          .read(aiSettingsProvider.notifier)
+          .setModel('llama-3.3-70b');
 
       final settings = container.read(aiSettingsProvider);
       expect(settings.baseUrl, 'https://openrouter.ai/api/v1');
