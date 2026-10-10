@@ -258,8 +258,7 @@ class _AiConfigCardState extends ConsumerState<_AiConfigCard> {
     try {
       await provider.send(
         const AiRequest(prompt: 'ping'),
-        apiKey: ***
-      );
+        apiKey: 'sk-test');      );
       if (mounted) {
         setState(() {
           _testResult = l10n.settings_ai_testOk;

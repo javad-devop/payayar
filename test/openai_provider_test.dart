@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -16,6 +17,21 @@ void main() {
 
   tearDown(() => server.close(force: true));
 
+  void okJson(HttpRequest request, String text) {
+    request.response.statusCode = 200;
+    request.response.headers.contentType = ContentType.json;
+    request.response.write(
+      jsonEncode({
+        'choices': [
+          {
+            'message': {'role': 'assistant', 'content': text}
+          }
+        ],
+      }),
+    );
+    request.response.close();
+  }
+
   test('sends a correct chat/completions request and parses the reply',
       () async {
     HttpRequest? seen;
@@ -23,18 +39,7 @@ void main() {
     server.listen((request) async {
       seen = request;
       rawBody = await utf8.decoder.bind(request).join();
-      request.response.statusCode = 200;
-      request.response.headers.contentType = ContentType.json;
-      request.response.write(
-        jsonEncode({
-          'choices': [
-            {
-              'message': {'role': 'assistant', 'content': 'pong'}
-            }
-          ],
-        }),
-      );
-      await request.response.close();
+      okJson(request, 'pong');
     });
 
     final provider = OpenAiCompatibleProvider(
@@ -43,14 +48,14 @@ void main() {
     );
     final response = await provider.send(
       const AiRequest(prompt: 'ping', history: [('user', 'hi')]),
-      apiKey: 'sk-test',
+      apiKey: apiKey: 'k'),
     );
 
     expect(response.text, 'pong');
     expect(seen, isNotNull);
     expect(seen!.requestedUri.path, '/v1/chat/completions');
     expect(seen!.headers.value(HttpHeaders.authorizationHeader),
-        'Bearer sk-test');
+        'Bearer ' + 'k');
 
     final body = jsonDecode(rawBody!) as Map<String, dynamic>;
     expect(body['model'], 'test-model');
@@ -71,7 +76,7 @@ void main() {
         OpenAiCompatibleProvider(baseUrl: 'http://127.0.0.1:${server.port}');
 
     await expectLater(
-      provider.send(const AiRequest(prompt: 'x'), apiKey: 'bad'),
+      provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k')),
       throwsA(isA<AiException>()
           .having((e) => e.message, 'message', 'invalid_key')),
     );
@@ -83,18 +88,7 @@ void main() {
     server.listen((request) async {
       seenPath = request.requestedUri.path;
       await request.drain<void>();
-      request.response.statusCode = 200;
-      request.response.headers.contentType = ContentType.json;
-      request.response.write(
-        jsonEncode({
-          'choices': [
-            {
-              'message': {'role': 'assistant', 'content': 'ok'}
-            }
-          ],
-        }),
-      );
-      await request.response.close();
+      okJson(request, 'ok');
     });
 
     // A pasted full endpoint URL with a duplicated version prefix must
@@ -104,7 +98,7 @@ void main() {
       model: 'test-model',
     );
     final response =
-        await provider.send(const AiRequest(prompt: 'x'), apiKey: 'k');
+        await provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k'));
 
     expect(response.text, 'ok');
     expect(seenPath, '/v1/chat/completions');
@@ -123,22 +117,8 @@ void main() {
     server.listen((request) async {
       await request.drain<void>();
       hits++;
-      request.response.statusCode = 200;
-      request.response.headers.contentType = ContentType.json;
       // First call: reasoning model returned nothing usable.
-      request.response.write(
-        jsonEncode({
-          'choices': [
-            {
-              'message': {
-                'role': 'assistant',
-                'content': hits == 1 ? '' : 'recovered',
-              }
-            }
-          ],
-        }),
-      );
-      await request.response.close();
+      okJson(request, hits == 1 ? '' : 'recovered');
     });
 
     final provider = OpenAiCompatibleProvider(
@@ -146,7 +126,7 @@ void main() {
       model: 'test-model',
     );
     final response =
-        await provider.send(const AiRequest(prompt: 'x'), apiKey: 'k');
+        await provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k'));
 
     expect(response.text, 'recovered');
     expect(hits, 2);
@@ -163,7 +143,8 @@ void main() {
     final provider =
         OpenAiCompatibleProvider(baseUrl: 'http://127.0.0.1:${server.port}');
     await expectLater(
-      provider.send(const AiRequest(prompt: 'x'), apiKey: *** AiException()
+      provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k')),
+      throwsA(isA<AiException>()
           .having((e) => e.message, 'message', 'server_error')
           .having((e) => e.detail, 'detail', contains('HTTP 500'))),
     );
@@ -174,7 +155,7 @@ void main() {
     const provider = OpenAiCompatibleProvider(baseUrl: 'not a url');
 
     await expectLater(
-      provider.send(const AiRequest(prompt: 'x'), apiKey: 'k'),
+      provider.send(const AiRequest(prompt: 'x'), apiKey: apiKey: 'k')),
       throwsA(isA<AiException>()
           .having((e) => e.message, 'message', 'bad_url')),
     );
@@ -189,8 +170,7 @@ void main() {
 
       await container.read(aiSettingsProvider.notifier)
           .setBaseUrl('https://openrouter.ai/api/v1');
-      await container.read(aiSettingsProvider.notifier)
-          .setModel('llama-3.3-70b');
+      await container.read(aiSettingsProvider.notifier).setModel('llama-3.3-70b');
 
       final settings = container.read(aiSettingsProvider);
       expect(settings.baseUrl, 'https://openrouter.ai/api/v1');
